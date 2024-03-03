@@ -1,0 +1,21 @@
+﻿.mainContent {
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    height: auto;
+    padding: 40px 40px;
+}
+.window-header {
+    height: auto;
+    text-justify:auto;
+}
+
+.windowContent {
+    height: auto;
+    display: flex;
+}
+p {
+    text-align: justify;
+    word-break: break-word;
+}
