@@ -30,6 +30,9 @@ body {
     height: 180px;
 }
 
+.btn-md{
+    width: 100px;
+}
 
 
 /*Janelas de login e registo*/

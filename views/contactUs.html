@@ -21,7 +21,7 @@
 
 </head>
 
-<body class="bg-img bg-cover"  >
+<body class="bg-img bg-cover">
 
 
 
@@ -32,32 +32,32 @@
 
 
 
-        <section id="sendWindow" class="contact-window bg-img bg-cover position-absolute p-3" style="background-image: url('../public/images/BackgroundWindow.png');">
-            <div class="title container-lg text-center ">
+        <section id="sendWindow" class="d-inline contact-window bg-img bg-cover position-absolute p-3" style="background-image: url('../public/images/BackgroundWindow.png');">
+            <div class=" window-title text-center">
                 <h2>Contact Us</h2>
             </div>
-            <form class="d-grid">
-                <input name="name" type="text" placeholder="Name" />
-                <input name="email" type="text" placeholder="Email" />
-                <input id="messageBox" name="message" type="text" placeholder="Message..." />
-                <input type="submit" value="Send" />
+            <div id="windowContent" class=" d-grid">
+                <form class="d-grid p-4">
+                    <input class="input-sm" name="name" type="text" placeholder="Name" />
+                    <input class="input-sm" name="email" type="text" placeholder="Email" />
+                    <textarea id="messageBox" name="message" placeholder="Message..." /></textarea>
+                    <input class="btn-md mx-auto" type="submit" value="Send" />
 
-            </form>
-        </section>
-
-        <section id="sendWindow" class="contact-window bg-img bg-cover position-absolute p-3" style="background-image: url('../public/images/BackgroundWindow.png');">
-           
-        </section>
-
-
-        <section id="confirmationWindow" class="d-none dialog-window dbg-img bg-cover position-absolute p-2" style="background-image: url('../public/images/BackgroundWindow.png');">
-            <div class="title container-lg text-center ">
-                <h3>Notification</h3>
+                </form>
             </div>
-            <form class="d-inline-box text-center ">
-                <p>Message was send successfully</p>
-                <input type="submit" value="Confirm" />
-            </form>
+        </section>
+
+
+        <section id="confirmationWindow" class="dialog-window bg-img bg-cover position-absolute p-3" style="background-image: url('../public/images/BackgroundWindowNotification.png');">
+            <div class="window-title text-center ">
+                <h2>Notification</h2>
+            </div>
+            <div id="windowContent" class=" d-grid">
+                <form class="d-grid p-4">
+                    <p id="messageText">Message was send successfully</p>
+                    <input class="btn-md mx-auto" type="submit" value="Confirm" />
+                </form>
+            </div>
         </section>
 
 
@@ -115,4 +115,4 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 </body>
 
-</html>ml>
+</html>

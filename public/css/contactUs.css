@@ -2,31 +2,39 @@
     top: 20%;
     left: auto;
     right: auto;
-    width: 600px;
-    height: 380px;
+    width: 40%;
+    height: 550px;
+    min-width: 280px;
 }
-
-    .contact-window .title {
-        height: 50px;
-    }
 
     .contact-window form * {
         margin: 5px 5px;
+        height: 40px;
     }
 
-    .contact-window form input {
-        width: 200px;
-        height: 30px;
+    .contact-window .input-sm {
+        width: 50%;
+        min-width: 170px;
     }
 
-#messageBox {
-    vertical-align: top;
-    width: auto;
-    height: 170px;
+.window-title {
+    height: 40px;
 }
 
 
-.dialog-window form{
+#messageBox {
+    width: auto;
+    height: 250px;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
+}
 
-    height: auto;
+#windowContent {
+    height: calc(100% - 40px);
+    display: flex;
+}
+
+#confirmationWindow {
+    top: 40%;
 }
