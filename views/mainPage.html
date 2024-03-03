@@ -41,7 +41,8 @@
                     <form class="d-grid p-4 ">
 
                         <div class="row">
-                            <div class="col d-grid">
+                            <!--Ingredient col-->
+                            <div class="col bg-info filterOptions">
                                 <div class="d-block">
                                     <button class="removeBtn">-</button>
                                     <input class="input-sm" name="ingredient1" type="text" placeholder="Ingredient 1" />
@@ -50,7 +51,8 @@
                                 <div class="d-block">
                                     <button class="removeBtn">-</button>
                                     <input class="input-sm" name="ingredient1" type="text" placeholder="Ingredient 2" />
-                                </div><div class="d-block">
+                                </div>
+                                <div class="d-block">
                                     <button class="removeBtn">-</button>
                                     <input class="input-sm" name="ingredient1" type="text" placeholder="Ingredient 3" />
                                 </div>
@@ -60,7 +62,8 @@
 
 
                             </div>
-                            <div class="col">
+                            <!--Method col-->
+                            <div class="col bg-warning filterOptions">
                                 <div class="d-block">
                                     <div>
                                         <button class="removeBtn">-</button>
@@ -72,34 +75,13 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="d-block">
-                                    <div>
-                                        <button class="removeBtn">-</button>
-                                        <select class="input-sm" name="cookingMethods" id="cookingMethods">
-                                            <option value="Method 1">Method 1</option>
-                                            <option value="Method 2">Method 2</option>
-                                            <option value="Method 3">Method 3</option>
-                                            <option value="Method 4">Method 4</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="d-block">
-                                    <div>
-                                        <button class="removeBtn">-</button>
-                                        <select class="input-sm" name="cookingMethods" id="cookingMethods">
-                                            <option value="Method 1">Method 1</option>
-                                            <option value="Method 2">Method 2</option>
-                                            <option value="Method 3">Method 3</option>
-                                            <option value="Method 4">Method 4</option>
-                                        </select>
-                                    </div>
-                                </div>
+
                                 <button id="moreMethod" class="addBtn">+ </button>
                             </div>
                         </div>
+                      
 
-
-                        <input class="btn-md mx-auto mt-3" type="submit" value="Filter" />
+                            <input class="btn-md mx-auto mt-3" type="submit" value="Filter" />
 
                     </form>
                 </div>
@@ -114,7 +96,7 @@
             <div class="bg-primary">
                 <!-- Recepie 1-->
                 <section class="recepieContainer bg-secondary d-flex">
-                    <img class="recepieImage" src="../public/images/PlaceholderImage.png" alt="Alternate Text" />
+                    <img class="recepieImage d-none d-lg-block" src="../public/images/PlaceholderImage.png" alt="Alternate Text" />
 
                     <div class="p-2">
                         <div class="d-flex align-items-end">
@@ -168,7 +150,7 @@
                 </section>
                 <!-- Recepie 3-->
                 <section class="recepieContainer bg-secondary d-flex">
-                    <img class="recepieImage" src="../public/images/PlaceholderImage.png" alt="Alternate Text" />
+                    <img class="recepieImage d-none d-lg-block" src="../public/images/PlaceholderImage.png" alt="Alternate Text" />
 
                     <div class="p-2">
                         <div class="d-flex align-items-end">
@@ -195,7 +177,7 @@
                 </section>
                 <!-- Recepie 4-->
                 <section class="recepieContainer bg-secondary d-flex">
-                    <img class="recepieImage" src="../public/images/PlaceholderImage.png" alt="Alternate Text" />
+                    <img class="recepieImage d-none d-lg-block" src="../public/images/PlaceholderImage.png" alt="Alternate Text" />
 
                     <div class="p-2">
                         <div class="d-flex align-items-end">
