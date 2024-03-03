@@ -1,0 +1,32 @@
+﻿.contact-window {
+    top: 20%;
+    left: auto;
+    right: auto;
+    width: 600px;
+    height: 380px;
+}
+
+    .contact-window .title {
+        height: 50px;
+    }
+
+    .contact-window form * {
+        margin: 5px 5px;
+    }
+
+    .contact-window form input {
+        width: 200px;
+        height: 30px;
+    }
+
+#messageBox {
+    vertical-align: top;
+    width: auto;
+    height: 170px;
+}
+
+
+.dialog-window form{
+
+    height: auto;
+}
