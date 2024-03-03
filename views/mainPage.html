@@ -14,74 +14,267 @@
     <!-- Styles -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../public/css/app.css">
+    <link rel="stylesheet" href="../public/css/mainPage.css">
 
 
 
 </head>
 
-<body class="bg-img bg-cover"  >
+<body class="bg-img bg-cover">
+    <!-- Logotipo-->
+    <img id="logo" class="position-absolute" src="../public/images/PretyLogo.png" alt="Logo" />
 
 
 
-    <!-- Main Body-->
-    <div class="mainContent d-flex justify-content-center">
-        <!-- Logotipo-->
-        <img id="logo" class="position-absolute" src="../public/images/PretyLogo.png" alt="Logo" />
+    <!-- Main Content-->
+    <div class="mainContent bg-img bg-cover d-grid  " style="background-image: url('../public/images/BackgroundWindow.png');">
+        <div class="d-inline ">
+            <!-- Title and Filter-->
+            <div>
+                <div class="window-header d-flex justify-content-between align-items-end">
+                    <h1> Repecie Gallery  </h1>
+                    <a href="#test"><img id="filter" src="../public/images/FilterIcon.png" alt="filter" />    </a>
+
+                </div>
+                <!--Filter Window-->
+                <div class="bg-img bg-cover" style="background-image: url('../public/images/BackgroundWindowNotification.png');">
+                    <form class="d-grid p-4 ">
+
+                        <div class="row">
+                            <div class="col d-grid">
+                                <div class="d-block">
+                                    <button class="removeBtn">-</button>
+                                    <input class="input-sm" name="ingredient1" type="text" placeholder="Ingredient 1" />
+                                </div>
+
+                                <div class="d-block">
+                                    <button class="removeBtn">-</button>
+                                    <input class="input-sm" name="ingredient1" type="text" placeholder="Ingredient 2" />
+                                </div><div class="d-block">
+                                    <button class="removeBtn">-</button>
+                                    <input class="input-sm" name="ingredient1" type="text" placeholder="Ingredient 3" />
+                                </div>
+                                <div class="d-flex ">
+                                    <button id="moreIng" class="addBtn">+ </button>
+                                </div>
 
 
+                            </div>
+                            <div class="col">
+                                <div class="d-block">
+                                    <div>
+                                        <button class="removeBtn">-</button>
+                                        <select class="input-sm" name="cookingMethods" id="cookingMethods">
+                                            <option value="Method 1">Method 1</option>
+                                            <option value="Method 2">Method 2</option>
+                                            <option value="Method 3">Method 3</option>
+                                            <option value="Method 4">Method 4</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="d-block">
+                                    <div>
+                                        <button class="removeBtn">-</button>
+                                        <select class="input-sm" name="cookingMethods" id="cookingMethods">
+                                            <option value="Method 1">Method 1</option>
+                                            <option value="Method 2">Method 2</option>
+                                            <option value="Method 3">Method 3</option>
+                                            <option value="Method 4">Method 4</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="d-block">
+                                    <div>
+                                        <button class="removeBtn">-</button>
+                                        <select class="input-sm" name="cookingMethods" id="cookingMethods">
+                                            <option value="Method 1">Method 1</option>
+                                            <option value="Method 2">Method 2</option>
+                                            <option value="Method 3">Method 3</option>
+                                            <option value="Method 4">Method 4</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button id="moreMethod" class="addBtn">+ </button>
+                            </div>
+                        </div>
 
-    </div>
 
-    <!--Nav Bar-->
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <div class="container-xxl">
-            <a href="index.html" class="navbar-brand">
-                <!--Titulo da pagina para diferentes tamanhos-->
-                <span class="fw-bol text-secondary d-none d-md-none d-lg-block ">Desenvolvimento Basiado em Web - Recepie Generator</span>
-                <span class="fw-bol text-secondary d-none d-sm-block d-lg-none ">DBW - Recepie Generator</span>
-                <span class="fw-bol text-secondary d-block d-sm-none ">DBW - RG</span>
+                        <input class="btn-md mx-auto mt-3" type="submit" value="Filter" />
 
-            </a>
-            <!-- Botão Menu-->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#main-nav" aria-controls="main-nav"
-                    aria-expanded="false" aria-label="Toggle menu">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                    </form>
+                </div>
 
-            <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link text-end" href="#PersonalGalery">Galeria Pessoal</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-end" href="#Metrics">Estatisticas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-end" href="#Settings">Opções</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-end" href="#Logout">Logout</a>
-                    </li>
-                </ul>
+            </div>
+            <!-- NEW RECEPIE BUTTON-->
+            <div class="bg-primary d-flex justify-content-center">
+                
+                <a href="recepieGenerator.html"><button id="newRecepieButton" class="m-3"><h5>Generate new recepie</h5></button></a>
+            </div>
+            <!-- Recepies container-->
+            <div class="bg-primary">
+                <!-- Recepie 1-->
+                <section class="recepieContainer bg-secondary d-flex">
+                    <img class="recepieImage" src="../public/images/PlaceholderImage.png" alt="Alternate Text" />
+
+                    <div class="p-2">
+                        <div class="d-flex align-items-end">
+                            <h3>Recepie name </h3>
+                            <h5> - creator name</h5>
+                        </div>
+                        <div class="d-flex ">
+                            <img class="rating" src="../public/images/Rating.png" alt="rating" />
+                            <p> - 500 ratings</p>
+                        </div>
+                        <div class="d-block  ">
+                            <h5> Description -</h5>
+                            <p> Assurance advantage belonging happiness departure so of. Now improving and one sincerity intention allowance commanded not. Oh an am frankness be necessary earnestly advantage estimable extensive.</p>
+                        </div>
+                        <div class="d-block  ">
+                            <h5> Ingredients -</h5>
+                            <p> Assurance, advantage, belonging, happiness, departure, sincerity, intention, allowance.</p>
+                        </div>
+                        <div class="d-block ">
+                            <h5> tags -</h5>
+                            <p> Assurance, advantage, belonging.</p>
+                        </div>
+                    </div>
+                </section>
+                <!-- Recepie 2-->
+                <section class="recepieContainer bg-secondary d-flex">
+                    <img class="recepieImage" src="../public/images/PlaceholderImage.png" alt="Alternate Text" />
+
+                    <div class="p-2">
+                        <div class="d-flex align-items-end">
+                            <h3>Recepie name </h3>
+                            <h5> - creator name</h5>
+                        </div>
+                        <div class="d-flex ">
+                            <img class="rating" src="../public/images/Rating.png" alt="rating" />
+                            <p> - 500 ratings</p>
+                        </div>
+                        <div class="d-block  ">
+                            <h5> Description -</h5>
+                            <p> Assurance advantage belonging happiness departure so of. Now improving and one sincerity intention allowance commanded not. Oh an am frankness be necessary earnestly advantage estimable extensive.</p>
+                        </div>
+                        <div class="d-block  ">
+                            <h5> Ingredients -</h5>
+                            <p> Assurance, advantage, belonging, happiness, departure, sincerity, intention, allowance.</p>
+                        </div>
+                        <div class="d-block ">
+                            <h5> tags -</h5>
+                            <p> Assurance, advantage, belonging.</p>
+                        </div>
+                    </div>
+                </section>
+                <!-- Recepie 3-->
+                <section class="recepieContainer bg-secondary d-flex">
+                    <img class="recepieImage" src="../public/images/PlaceholderImage.png" alt="Alternate Text" />
+
+                    <div class="p-2">
+                        <div class="d-flex align-items-end">
+                            <h3>Recepie name </h3>
+                            <h5> - creator name</h5>
+                        </div>
+                        <div class="d-flex ">
+                            <img class="rating" src="../public/images/Rating.png" alt="rating" />
+                            <p> - 500 ratings</p>
+                        </div>
+                        <div class="d-block  ">
+                            <h5> Description -</h5>
+                            <p> Assurance advantage belonging happiness departure so of. Now improving and one sincerity intention allowance commanded not. Oh an am frankness be necessary earnestly advantage estimable extensive.</p>
+                        </div>
+                        <div class="d-block  ">
+                            <h5> Ingredients -</h5>
+                            <p> Assurance, advantage, belonging, happiness, departure, sincerity, intention, allowance.</p>
+                        </div>
+                        <div class="d-block ">
+                            <h5> tags -</h5>
+                            <p> Assurance, advantage, belonging.</p>
+                        </div>
+                    </div>
+                </section>
+                <!-- Recepie 4-->
+                <section class="recepieContainer bg-secondary d-flex">
+                    <img class="recepieImage" src="../public/images/PlaceholderImage.png" alt="Alternate Text" />
+
+                    <div class="p-2">
+                        <div class="d-flex align-items-end">
+                            <h3>Recepie name </h3>
+                            <h5> - creator name</h5>
+                        </div>
+                        <div class="d-flex ">
+                            <img class="rating" src="../public/images/Rating.png" alt="rating" />
+                            <p> - 500 ratings</p>
+                        </div>
+                        <div class="d-block  ">
+                            <h5> Description -</h5>
+                            <p> Assurance advantage belonging happiness departure so of. Now improving and one sincerity intention allowance commanded not. Oh an am frankness be necessary earnestly advantage estimable extensive.</p>
+                        </div>
+                        <div class="d-block  ">
+                            <h5> Ingredients -</h5>
+                            <p> Assurance, advantage, belonging, happiness, departure, sincerity, intention, allowance.</p>
+                        </div>
+                        <div class="d-block ">
+                            <h5> tags -</h5>
+                            <p> Assurance, advantage, belonging.</p>
+                        </div>
+                    </div>
+                </section>
+
             </div>
         </div>
-    </nav>
-
-    <!-- footer-->
-    <nav id="footer" class="navbar fixed-bottom navbar-expand-md navbar-dark bg-dark ">
-        <div class="container-xxl nav-item navbar-nav w-45 p-0 ">
-            <a class="nav-link" href="about.html">About</a>
-            <a class="nav-link" href="siteMap.html">Site Map</a>
-            <a class="nav-link " href="faq.html">FAQ</a>
-        </div>
-    </nav>
 
 
-    <!-- Scripts -->
+        <!--Nav Bar-->
+        <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+            <div class="container-xxl">
+                <a href="index.html" class="navbar-brand">
+                    <!--Titulo da pagina para diferentes tamanhos-->
+                    <span class="fw-bol text-secondary d-none d-md-none d-lg-block ">Desenvolvimento Basiado em Web - Recepie Generator</span>
+                    <span class="fw-bol text-secondary d-none d-sm-block d-lg-none ">DBW - Recepie Generator</span>
+                    <span class="fw-bol text-secondary d-block d-sm-none ">DBW - RG</span>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+                </a>
+                <!-- Botão Menu-->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#main-nav" aria-controls="main-nav"
+                        aria-expanded="false" aria-label="Toggle menu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse justify-content-end align-center" id="main-nav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link text-end" href="#PersonalGalery">Galeria Pessoal</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-end" href="#Metrics">Estatisticas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-end" href="#Settings">Opções</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-end" href="#Logout">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- footer-->
+        <nav id="footer" class="navbar fixed-bottom navbar-expand-md navbar-dark bg-dark ">
+            <div class="container-xxl nav-item navbar-nav w-45 p-0 ">
+                <a class="nav-link" href="about.html">About</a>
+                <a class="nav-link" href="siteMap.html">Site Map</a>
+                <a class="nav-link " href="faq.html">FAQ</a>
+            </div>
+        </nav>
+
+
+        <!-- Scripts -->
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 </body>
 
-</html>Sml>
+</html>
