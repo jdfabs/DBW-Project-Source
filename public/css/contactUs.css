@@ -1,4 +1,5 @@
-﻿.contact-window {
+﻿/*Contact window Specific*/
+.contact-window {
     top: 20%;
     left: auto;
     right: auto;
@@ -17,11 +18,6 @@
         min-width: 170px;
     }
 
-.window-title {
-    height: 40px;
-}
-
-
 #messageBox {
     width: auto;
     height: 250px;
@@ -29,12 +25,19 @@
     word-wrap: break-word;
     hyphens: auto;
 }
+ /*Confirmation window*/
+#confirmationWindow {
+    top: 40%;
+}
+
+
+/*Common*/
+.window-title {
+    height: 40px;
+}
 
 #windowContent {
     height: calc(100% - 40px);
     display: flex;
 }
 
-#confirmationWindow {
-    top: 40%;
-}
