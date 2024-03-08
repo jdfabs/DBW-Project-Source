@@ -3,14 +3,12 @@
 
 .filterOptions {
     margin-top: 10px;
-    min-width: 330px;
+    min-width: 150px;
 }
 
 .recepieContainer {
     margin: 10px 10px;
     padding: 10px 10px;
-    width: auto;
-    height: auto;
     
 }
     .recepieContainer .recepieImage {
@@ -21,7 +19,6 @@
 /*Rating img - to be implemented*/
 .rating{
     height: 20px;
-    width: auto;
 }
 /*filter Img*/
 #filter{
@@ -31,7 +28,7 @@
 
 .input-sm {
     margin: 3px 3px;
-    min-width: 170px;
+    min-width: 80px;
     height: 30px;
     width: 80%;
 }
