@@ -1,31 +1,30 @@
 ﻿/*Contact window Specific*/
 .contact-window {
-    top: 20%;
-    left: auto;
-    right: auto;
-    width: 40%;
-    height: 550px;
+    width: 100%;
+    margin-top: 10%;
     min-width: 280px;
 }
 
-    .contact-window form * {
-        margin: 5px 5px;
-        height: 40px;
-    }
+.contact-window form * {
+    margin: 5px 5px;
+    height: 40px;
+}
 
-    .contact-window .input-sm {
-        width: 50%;
-        min-width: 170px;
-    }
+.contact-window .input-sm {
+    width: 50%;
+    min-width: 150px;
+}
 
 #messageBox {
-    width: auto;
+width: auto;
     height: 250px;
     overflow-wrap: break-word;
     word-wrap: break-word;
     hyphens: auto;
+    min-width: 180px;
 }
- /*Confirmation window*/
+
+/*Confirmation window*/
 #confirmationWindow {
     top: 40%;
 }
@@ -38,6 +37,5 @@
 
 #windowContent {
     height: calc(100% - 40px);
-    display: flex;
+    
 }
-

@@ -37,6 +37,10 @@ app.get("/", (req, res) => {
 app.get("/about", (req, res) => {
     res.render("about" , {title: "About"});
 });
+
+app.get("/contactUs", (req, res) => {
+    res.render("contactUs" , {title: "Contact Us"});
+});
 //Redirect example
 app.get("/about-us", (req, res) => {
     res.status(301).redirect("about");
