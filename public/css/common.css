@@ -1,0 +1,40 @@
+body {
+    background: url('../images/Background.png') no-repeat center center fixed;
+    background-size: cover;    
+}
+
+
+
+
+.dialog-window {
+    top: 30%;
+    left: auto;
+    right: auto;
+    width: 300px;
+    height: 180px;
+}
+
+.btn-md{
+    width: 100px;
+}
+
+
+
+
+
+
+
+/*Aux ao bootstrap /Custom */
+.w-45 {
+    width: 45%;
+}
+
+.p-0 {
+    padding: 0px 0px;
+}
+
+.btn-lg {
+    height: 60px;
+    width: 160px;
+    border: 50px;
+}

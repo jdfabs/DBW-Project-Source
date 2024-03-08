@@ -1,0 +1,235 @@
+﻿<!doctype html>
+<html lang="pt-PT">
+
+<head>
+  <%- include("./partials/head.ejs")  %>
+</head>
+
+<body class="bg-img bg-cover">
+
+  <%- include("./partials/logo.ejs")  %>
+  <%- include("./partials/nav.ejs")  %>
+  <%- include("./partials/footer.ejs")  %>
+
+
+  <!-- Main Content-->
+  <div class="mainContent bg-img bg-cover d-grid  " style="background-image: url('/images/BackgroundWindow.png');">
+    <div class="d-inline ">
+      <!-- Title and Filter-->
+      <div>
+        <div class="window-header d-flex justify-content-between align-items-end">
+          <h1> Repecie Generator </h1>
+
+
+        </div>
+        <!--Filter Window-->
+        <div class="bg-primary">
+          <form class="d-grid p-4 ">
+
+            <div class="row">
+              <!--Ingredient col-->
+              <div class="col bg-info filterOptions">
+                <div class="d-block">
+                  <button class="removeBtn">-</button>
+                  <input class="input-sm" name="ingredient1" type="text" placeholder="Ingredient 1" />
+                </div>
+
+                <div class="d-block">
+                  <button class="removeBtn">-</button>
+                  <input class="input-sm" name="ingredient1" type="text" placeholder="Ingredient 2" />
+                </div>
+                <div class="d-block">
+                  <button class="removeBtn">-</button>
+                  <input class="input-sm" name="ingredient1" type="text" placeholder="Ingredient 3" />
+                </div>
+                <div class="d-flex ">
+                  <button id="moreIng" class="addBtn">+ </button>
+                </div>
+
+
+              </div>
+              <!--Method col-->
+              <div class="col bg-warning filterOptions">
+                <div class="d-block">
+                  <div>
+                    <button class="removeBtn">-</button>
+                    <select class="input-sm" name="cookingMethods" id="cookingMethods">
+                      <option value="Method 1">Method 1</option>
+                      <option value="Method 2">Method 2</option>
+                      <option value="Method 3">Method 3</option>
+                      <option value="Method 4">Method 4</option>
+                    </select>
+                  </div>
+                </div>
+
+                <button id="moreMethod" class="addBtn">+ </button>
+              </div>
+            </div>
+            <!--Random Filters-->
+            <div class="bg-secondary row ">
+              <div class="col filterOptions">
+                <div class="bg-warning row d-flex align-items-center m-1">
+                  <h6>Restrictions</h6>
+                  <span class="col-6 text-end">Vegetarian <input type="checkbox"></span>
+                  <span class="col-6 text-end">Gluten-free <input type="checkbox"></span>
+                  <span class="col-6 text-end">Dairy-free <input type="checkbox"></span>
+                  <span class="col-6 text-end">Nut-free <input type="checkbox"></span>
+                  <span class="col-6 text-end">Keto <input type="checkbox"></span>
+                  <span class="col-6 text-end">Paleo <input type="checkbox"></span>
+                  <span class="col-6 text-end">Allergen-free <input type="checkbox"></span>
+                  <span class="col-6 text-end">High-protein <input type="checkbox"></span>
+                </div>
+                <div class="bg-warning row d-flex align-items-center m-1">
+                  <h6>Dish Type</h6>
+                  <span class="col-6 text-end">Breakfast <input type="checkbox"></span>
+                  <span class="col-6 text-end">Lunch <input type="checkbox"></span>
+                  <span class="col-6 text-end">Dinner <input type="checkbox"></span>
+                  <span class="col-6 text-end">Snacks <input type="checkbox"></span>
+                  <span class="col-6 text-end">Appetizers <input type="checkbox"></span>
+                  <span class="col-6 text-end">Desserts <input type="checkbox"></span>
+                </div>
+              </div>
+              <!--MISC-->
+              <div id="miscOptions" class="col filterOptions">
+                <div class="bg-info row d-flex align-items-center ">
+                  <h6 class="text-end">Misc.</h6>
+                  <span class=" text-end m-1">Minimum number of ingredients <input type="text"></span>
+                  <span class=" text-end m-1">Maximum number of new ingredients <input type="text"></span>
+                  <span class=" text-end m-1">Number of recepies to generate <input type="text" placeholder="3"></span>
+
+                  <span class=" text-end m-1">Maximum cooking time <input type="text"></span>
+                  <span class=" text-end m-1">
+                    Dificulty rating
+                    <select class="input-num" name="dificultyRating" id="cookingMethods">
+                      <option value="1"> 1</option>
+                      <option value="2"> 2</option>
+                      <option value="3"> 3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </select>
+
+                  </span>
+                  <span class=" text-end m-1">
+                    Spice level
+                    <select class="input-num" name="dificultyRating" id="cookingMethods">
+                      <option value="1"> 1</option>
+                      <option value="2"> 2</option>
+                      <option value="3"> 3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </select>
+                  </span>
+                </div>
+              </div>
+
+            </div>
+
+            <input class="btn-md mx-auto mt-3" type="submit" value="Generate" />
+
+          </form>
+        </div>
+
+      </div>
+      <!-- Recepies container-->
+      <div class="bg-primary">
+        <!-- Recepie 1-->
+        <section class="recepieContainer bg-secondary d-flex">
+          <img class="recepieImage d-none d-lg-block" src="/images/PlaceholderImage.png" alt="Alternate Text" />
+
+          <div class="p-2">
+            <div class="d-flex align-items-end">
+              <h3>Recepie name </h3>
+              <h5> - creator name</h5>
+            </div>
+            <div class="d-flex ">
+              <img class="rating" src="/images/Rating.png" alt="rating" />
+              <p> - 500 ratings</p>
+            </div>
+            <div class="d-block  ">
+              <h5> Description -</h5>
+              <p> Assurance advantage belonging happiness departure so of. Now improving and one sincerity intention allowance commanded not. Oh an am frankness be necessary earnestly advantage estimable extensive.</p>
+            </div>
+            <div class="d-block  ">
+              <h5> Ingredients -</h5>
+              <p> Assurance, advantage, belonging, happiness, departure, sincerity, intention, allowance.</p>
+            </div>
+            <div class="d-block ">
+              <h5> tags -</h5>
+              <p> Assurance, advantage, belonging.</p>
+            </div>
+          </div>
+        </section>
+        <!-- Recepie 2-->
+        <section class="recepieContainer bg-secondary d-flex">
+          <img class="recepieImage d-none d-lg-block" src="/images/PlaceholderImage.png" alt="Alternate Text" />
+
+          <div class="p-2">
+            <div class="d-flex align-items-end">
+              <h3>Recepie name </h3>
+              <h5> - creator name</h5>
+            </div>
+            <div class="d-flex ">
+              <img class="rating" src="/images/Rating.png" alt="rating" />
+              <p> - 500 ratings</p>
+            </div>
+            <div class="d-block  ">
+              <h5> Description -</h5>
+              <p> Assurance advantage belonging happiness departure so of. Now improving and one sincerity intention allowance commanded not. Oh an am frankness be necessary earnestly advantage estimable extensive.</p>
+            </div>
+            <div class="d-block  ">
+              <h5> Ingredients -</h5>
+              <p> Assurance, advantage, belonging, happiness, departure, sincerity, intention, allowance.</p>
+            </div>
+            <div class="d-block ">
+              <h5> tags -</h5>
+              <p> Assurance, advantage, belonging.</p>
+            </div>
+          </div>
+        </section>
+        <!-- Recepie 3-->
+        <section class="recepieContainer bg-secondary d-flex">
+          <img class="recepieImage d-none d-lg-block" src="/images/PlaceholderImage.png" alt="Alternate Text" />
+
+          <div class="p-2">
+            <div class="d-flex align-items-end">
+              <h3>Recepie name </h3>
+              <h5> - creator name</h5>
+            </div>
+            <div class="d-flex ">
+              <img class="rating" src="/images/Rating.png" alt="rating" />
+              <p> - 500 ratings</p>
+            </div>
+            <div class="d-block  ">
+              <h5> Description -</h5>
+              <p> Assurance advantage belonging happiness departure so of. Now improving and one sincerity intention allowance commanded not. Oh an am frankness be necessary earnestly advantage estimable extensive.</p>
+            </div>
+            <div class="d-block  ">
+              <h5> Ingredients -</h5>
+              <p> Assurance, advantage, belonging, happiness, departure, sincerity, intention, allowance.</p>
+            </div>
+            <div class="d-block ">
+              <h5> tags -</h5>
+              <p> Assurance, advantage, belonging.</p>
+            </div>
+          </div>
+        </section>
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <%- include("./partials/logo.ejs")  %>
+  <%- include("./partials/nav.ejs")  %>
+  <%- include("./partials/footer.ejs")  %>
+
+
+  <!-- Scripts -->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+</body>
+
+</html>

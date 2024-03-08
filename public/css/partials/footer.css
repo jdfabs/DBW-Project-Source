@@ -1,0 +1,19 @@
+.footer-content {
+    max-width: 500px;
+    min-width: 300px;
+    height: 30px;
+    margin-top: 5px;
+    padding-right: 10px;
+    padding-left: 10px;
+    
+}
+.social-media-link {
+    margin-right: 10px;
+    margin-left: 10px;
+    font-size: 1.5rem;
+    color: cornflowerblue;
+}
+
+.social-media-link:hover{
+    color: red;
+}
