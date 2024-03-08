@@ -11,7 +11,8 @@ body {
     margin-bottom: 100px;
     height: auto;
     padding: 50px 50px;
-    min-width: 360px;
+    min-width: 280px;
+    width: 70%;
 }
 
 
@@ -28,11 +29,6 @@ body {
 }
 
 
-.btn-lg {
-    min-width: 120px;
-    margin-left: 10px;
-    margin-right: 10px;
-}
 
 
 
