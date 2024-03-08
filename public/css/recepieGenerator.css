@@ -1,40 +1,21 @@
 ﻿
-/*Page main content*/
-
-.input-sm {
-    margin: 3px 3px;
-    min-width: 170px;
-    height: 30px;
-    width: 80%;
-}
-
-.addBtn {
-    margin: 3px 3px;
-    height: 30px;
-    width: 30px;
-}
-
-.removeBtn {
-    margin: 3px 3px;
-    height: 30px;
-    width: 30px;
-}
 
 #miscOptions input {
-    width:30px;    
+    width:25px; 
+    height: 25px;   
 }
 
 
 .filterOptions {
     margin-top: 10px;
-    min-width: 330px;
+    min-width: 150px;
 }
+
 
 .recepieContainer {
     margin: 10px 10px;
     padding: 10px 10px;
-    width: auto;
-    height: auto;
+   
 }
 
     .recepieContainer .recepieImage {
@@ -43,12 +24,24 @@
     }
 
 /*Rating img - to be implemented*/
-.rating {
+.rating{
     height: 20px;
-    width: auto;
 }
-/*filter Img*/
-#filter {
-    width: 30px;
+
+.input-sm {
+    margin: 3px 3px;
+    min-width: 80px;
     height: 30px;
+    width: 80%;
+}
+
+.addBtn {
+    margin: 3px 3px;
+    height: 25px;
+    width: 25px;
+}
+.removeBtn {
+    margin-top: 4px;
+    height: 30px;
+    width: 30px;
 }

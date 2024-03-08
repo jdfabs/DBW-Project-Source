@@ -75,7 +75,13 @@ app.get("/recepie", (req, res) => {
     res.render("recepie", {title: "Recepie"});
 });
 app.get("/recepieGenerator", (req, res) => {
-    res.render("recepieGenerator", {title: "Recepie Generator"});
+    const recepies =  [
+        {title: "Recepie 1", description: "Lorem ipsum dolor sit amet consectetur"},
+        {title: "Recepie 2", description: "Lorem ipsum dolor sit amet consectetur"},
+        {title: "Recepie 3", description: "Lorem ipsum dolor sit amet consectetur"},
+        {title: "Recepie 4", description: "Lorem ipsum dolor sit amet consectetur"}
+    ]
+    res.render("recepieGenerator", {title: "Recepie Generator" , recepies});
 });
 app.get("/settings", (req, res) => {
     res.render("settings", {title: "Settings"});
