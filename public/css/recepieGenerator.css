@@ -1,14 +1,6 @@
 ﻿
 /*Page main content*/
-.mainContent {
-    margin-left: calc(25% - 100px);
-    margin-right: calc(25% - 100px);
-    margin-top: 100px;
-    margin-bottom: 100px;
-    height: auto;
-    padding: 40px 40px;
-    min-width: 480px;
-}
+
 .input-sm {
     margin: 3px 3px;
     min-width: 170px;
