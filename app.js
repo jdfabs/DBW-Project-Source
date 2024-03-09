@@ -1,19 +1,40 @@
 const express = require("express");
 const morgan = require("morgan");
-
+const  OpenAIApi  = require('openai');
 const app = express(); //Instance of the app
+
+
+const openai = new OpenAIApi({
+  api_key: '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'
+});
+
+
 
 //register view engine
 app.set("view engine", "ejs");
 
 //listen for requests
-app.listen(3000);
+app.listen(3001);
+
+app.use(express.json());
+app.use(express.static("public"));
+app.use(morgan("dev"));
 
 // middleware & static files
 
-app.use(express.static("public"));
 
-app.use(morgan("dev"));
+
+
+app.get("/getResponse", async (req, res) =>{
+  const response = await openai.chat.completions.create({
+      model:"gpt-3.5-turbo",
+      messages:[{"role":"user","content":"essay on global warming"}],
+      max_tokens:100
+  })  
+  console.log(response.choices[0]);
+})
+
+
 
 /* 
 app.use((req, res, next) =>{
@@ -29,67 +50,91 @@ app.use((req, res, next) =>{
     next();
 });*/
 
-//#region 
+//#region
 app.get("/", (req, res) => {
-    res.render("index", {title: "Home"});
+  res.render("index", { title: "Home" });
 });
 
 app.get("/about", (req, res) => {
-    res.render("about" , {title: "About"});
+  res.render("about", { title: "About" });
 });
 
 app.get("/contactUs", (req, res) => {
-    res.render("contactUs" , {title: "Contact Us"});
+  res.render("contactUs", { title: "Contact Us" });
 });
 //Redirect example
 app.get("/about-us", (req, res) => {
-    res.status(301).redirect("about");
+  res.status(301).redirect("about");
 });
 
 app.get("/faq", (req, res) => {
-    res.render("faq", {title: "FAQ"});
+  res.render("faq", { title: "FAQ" });
 });
 
 app.get("/sitemap", (req, res) => {
-    res.render("siteMap", {title: "Site Map"});
+  res.render("siteMap", { title: "Site Map" });
 });
 
 app.get("/mainPage", (req, res) => {
-    const recepies =  [
-        {title: "Recepie 1", description: "Lorem ipsum dolor sit amet consectetur"},
-        {title: "Recepie 2", description: "Lorem ipsum dolor sit amet consectetur"},
-        {title: "Recepie 3", description: "Lorem ipsum dolor sit amet consectetur"},
-        {title: "Recepie 4", description: "Lorem ipsum dolor sit amet consectetur"}
-    ]
-    res.status(404).render("mainPage", {title: "Main Page", recepies});
+  const recepies = [
+    {
+      title: "Recepie 1",
+      description: "Lorem ipsum dolor sit amet consectetur",
+    },
+    {
+      title: "Recepie 2",
+      description: "Lorem ipsum dolor sit amet consectetur",
+    },
+    {
+      title: "Recepie 3",
+      description: "Lorem ipsum dolor sit amet consectetur",
+    },
+    {
+      title: "Recepie 4",
+      description: "Lorem ipsum dolor sit amet consectetur",
+    },
+  ];
+  res.status(404).render("mainPage", { title: "Main Page", recepies });
 });
 
 app.get("/metrics", (req, res) => {
-    res.render("metrics", {title: "Metrics"});
+  res.render("metrics", { title: "Metrics" });
 });
 
 app.get("/personalGalery", (req, res) => {
-    res.render("personalGalery", {title: "Personal Galery"});
+  res.render("personalGalery", { title: "Personal Galery" });
 });
 app.get("/recepie", (req, res) => {
-    res.render("recepie", {title: "Recepie"});
+  res.render("recepie", { title: "Recepie" });
 });
 app.get("/recepieGenerator", (req, res) => {
-    const recepies =  [
-        {title: "Recepie 1", description: "Lorem ipsum dolor sit amet consectetur"},
-        {title: "Recepie 2", description: "Lorem ipsum dolor sit amet consectetur"},
-        {title: "Recepie 3", description: "Lorem ipsum dolor sit amet consectetur"},
-        {title: "Recepie 4", description: "Lorem ipsum dolor sit amet consectetur"}
-    ]
-    res.render("recepieGenerator", {title: "Recepie Generator" , recepies});
+  const recepies = [
+    {
+      title: "Recepie 1",
+      description: "Lorem ipsum dolor sit amet consectetur",
+    },
+    {
+      title: "Recepie 2",
+      description: "Lorem ipsum dolor sit amet consectetur",
+    },
+    {
+      title: "Recepie 3",
+      description: "Lorem ipsum dolor sit amet consectetur",
+    },
+    {
+      title: "Recepie 4",
+      description: "Lorem ipsum dolor sit amet consectetur",
+    },
+  ];
+  res.render("recepieGenerator", { title: "Recepie Generator", recepies });
 });
 app.get("/settings", (req, res) => {
-    res.render("settings", {title: "Settings"});
+  res.render("settings", { title: "Settings" });
 });
 
 //#endregion
 
 //If unknown route
 app.use((req, res) => {
-    res.render("404", {title: "404"});
+  res.render("404", { title: "404" });
 });
