@@ -8,9 +8,7 @@ const publicRouter = require("./subRouters/public");
 
 const indexRoute = require("./public/index");
 
-
-console.log(999);
-//router.get("/",indexRoute);
+router.get("/",indexRoute);
 
 router.use(devRouter);//Sub router for Dev
 router.use(authenticatedRouter); //Sub router for authenticated users
