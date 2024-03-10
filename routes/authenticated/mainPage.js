@@ -19,5 +19,5 @@ module.exports = (req, res) => {
           description: "Lorem ipsum dolor sit amet consectetur",
         },
       ];
-      res.status(404).render("mainPage", { title: "Main Page", recepies });
+      res.render("mainPage", { title: "Main Page", recepies });
 };

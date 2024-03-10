@@ -1,15 +1,11 @@
 "use strict"
 const express = require("express"); //View engine
 const morgan = require("morgan"); //Debug Tool
-const OpenAIApi = require("openai"); //Api OpenAi
 
 const config = require("./config"); //App Config File
 const router = require("./routes/router");
 
 const app = express(); //Instance of the app
-const openai = new OpenAIApi({
-  api_key: config.openAI_API_Key,
-});//Instance of OpenAI API
 
 //Setup
 app.listen(config.port, () => {
