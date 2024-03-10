@@ -23,21 +23,21 @@
                     <input class="input-sm" name="name" type="text" placeholder="Name" />
                     <input class="input-sm" name="email" type="text" placeholder="Email" />
                     <textarea id="messageBox" name="message" placeholder="Message..." ></textarea>
-                    <input class="btn-md mx-auto" type="submit" value="Send" />
+                    <input id="sendButton" class="btn-md mx-auto" type="submit" value="Send" />
 
                 </form>
             </div>
         </section>
 
         <!-- Notification Window-->
-        <section id="confirmationWindow" class="dialog-window bg-img bg-cover position-absolute p-3" style="background-image: url('/images/BackgroundWindowNotification.png');">
+        <section id="confirmationWindow" class="d-none dialog-window bg-img bg-cover position-absolute p-3" style="background-image: url('/images/BackgroundWindowNotification.png');">
             <div class="window-title text-center ">
                 <h2>Notification</h2>
             </div>
             <div id="windowContent" class=" d-grid">
                 <form class="d-grid p-4">
                     <p id="messageText">Message was send successfully</p>
-                    <input class="btn-md mx-auto" type="submit" value="Confirm" />
+                    <input id="confirmButton" class="btn-md mx-auto" type="submit" value="Confirm" />
                 </form>
             </div>
         </section>
@@ -50,6 +50,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="/js/contactUs.js"></script>
 </body>
 
 </html>
