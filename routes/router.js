@@ -4,7 +4,7 @@ const router = express.Router(); //Instance of the router
 
 const devRouter = require("./subRouters/dev");
 const authenticatedRouter = require("./subRouters/authenticated");
-const publicRouter = require("./public");
+const publicRouter = require("./subRouters/public");
 
 const indexRoute = require("./public/index");
 

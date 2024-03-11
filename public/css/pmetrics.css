@@ -1,0 +1,17 @@
+.graph{
+    width:100px;
+    height:100px;
+    transition: width 2s, height 2s
+}
+
+.graph:hover{
+    width:200px;
+    height:200px;
+
+}
+
+#showcase{
+    background-color: aqua;
+    width:60%;
+    margin: 0px 300px 300px 300px;
+}
