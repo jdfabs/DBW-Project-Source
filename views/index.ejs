@@ -22,13 +22,13 @@
         <h2>Login</h2>
       </div>
       <form class="d-grid justify-content-center ">
-        <button id="loginWihGoogle" type="button" class="btn btn-light">Login with google</button>
+        <button id="loginWithGoogle" type="button" class="btn btn-light">Login with google</button>
         <p class="text-center align-middle">Or</p>
         <input name="username" type="text" placeholder="username" />
         <input name="password" type="text" placeholder="password" />
         <div class="d-flex justify-content-between">
-          <input class="w-45" type="submit" value="Login" />
-          <input class="w-45" type="submit" value="Back" />
+          <input id="LoginAttempt"  class="w-45" type="submit" value="Login" />
+          <input id="LoginBackButton" class="w-45" type="submit" value="Back" />
         </div>
       </form>
     </section>
@@ -39,14 +39,14 @@
         <h2>Register</h2>
       </div>
       <form class="d-grid justify-content-center ">
-        <button id="loginWihGoogle" type="button" class="btn btn-light">Login with google</button>
+        <button id="registerWithGoogle" type="button" class="btn btn-light">Register with google</button>
         <p class="text-center align-middle">Or</p>
         <input name="email" type="text" placeholder="e-mail" />
         <input name="username" type="text" placeholder="username" />
         <input name="password" type="text" placeholder="password" />
         <div class="d-flex justify-content-between">
-          <input class="w-45" type="submit" value="Register" />
-          <input class="w-45" type="submit" value="Back" />
+          <input id="RegiserAttempt" class="w-45" type="submit" value="Register" />
+          <input id="RegisterBackButton" class="w-45" type="submit" value="Back" />
         </div>
       </form>
     </section>
@@ -58,7 +58,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-
+  <script src="/js/index.js"></script>
 </body>
 
 </html>

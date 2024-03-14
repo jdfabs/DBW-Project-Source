@@ -1,0 +1,24 @@
+    Recipe Name, Ingredients, Instructions, Difficulty Level, Preparation Time, Cooking Time, Total Time, Servings, Cuisine, Dietary Information, Nutritional Information, Image/Video, Tags/Keywords:, Author/Chef, Source, Notes, Rating/Reviews, Favorite/Bookmark, Related Recipes, Seasonal Variation, Allergen Information, Substitutions, Equipment Needed, Storage Instructions, Meal Type, Occasion, Regional Variations, History/Background, Ingredient Origin,  Step-by-Step Images, Video Tutorial, Interactive Features, Printable Version, Conversion Tools, Sharing Options
+
+'Name: Bacon Wrapped Chicken Stuffed Bell Peppers\n' +
+'\n' +
+'Description Short: A delicious and savory dish featuring chicken and cream cheese stuffed bell peppers, wrapped in crispy bacon.\n' +
+'\n' +
+'Ingredients: colored bell peppers, chicken, cream cheese, cheddar cheese, bacon, garlic powder, paprika\n' +
+'\n' +
+'Preparation time: 20 minutes\n' +
+'Cooking time: 40 minutes\n' +
+'Difficulty: 3 out of 10\n' +
+'Portions: 6 servings\n' +
+'\n' +
+'PREPARATION:\n' +
+'1 - Preheat the oven to 375°F (190°C).\n' +
+'2 - Cut the tops off the bell peppers and remove the seeds.\n' +
+'3 - In a bowl, mix together cream cheese, cheddar cheese, garlic powder, and paprika.\n' +
+'4 - Stuff the bell peppers with the cream cheese mixture.\n' +
+'5 - Cut the chicken into strips and wrap each strip with a slice of bacon.\n' +
+'6 - Place the bacon-wrapped chicken strips on top of the stuffed bell peppers.\n' +
+'7 - Place the stuffed bell peppers on a baking sheet.\n' +
+'8 - Cover the baking sheet with foil and bake in the preheated oven for 30 minutes.\n' +
+'9 - Remove the foil and bake for an additional 10 minutes or until the bacon is crispy.\n' +
+'10 - Serve hot and enjoy!';

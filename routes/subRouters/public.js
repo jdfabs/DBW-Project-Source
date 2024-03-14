@@ -11,14 +11,11 @@ const notFound = require("../public/404");
 router.get("/contactUs", contactUs);
 
 router.get("/about", about);
-
-//Redirect example
 router.get("/about-us", (req, res) => {
   res.status(301).redirect("about");
-});
+});//Redirect example
 
 router.get("/faq", faq);
-
 router.get("/sitemap", siteMap);
 
 router.use(notFound);
