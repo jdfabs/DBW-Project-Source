@@ -11,7 +11,8 @@ body {
     margin-bottom: 100px;    
     padding: 5% 5%;
     min-width: 280px;
-    width: 70%;
+    width: 90%;
+    min-height: 70vh;
 }
 
 /*
@@ -23,9 +24,6 @@ body {
     height: 180px;
 }*/
 
-.btn-md {
-    width: 100px;
-}
 
 
 
