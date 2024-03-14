@@ -1,5 +1,6 @@
 ﻿.mainContent{
-    background-image: url('/images/BackgroundWindow.png');
+    background-color: #c9a561;
+    border-radius: 50px;
 }
 
 .window-header {
