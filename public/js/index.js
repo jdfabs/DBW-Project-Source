@@ -1,29 +1,19 @@
-const loginWindowButton = document.getElementById("loginButton");
-const registerWindowButton = document.getElementById("registerButton");
 
-const loginWindow = document.getElementById("loginWindow");
-const loginButton = document.getElementById("LoginAttempt");
-const loginBackButton = document.getElementById("LoginBackButton");
-const loginWithGoogle = document.getElementById("loginWithGoogle");
+const registerWindowButton = document.getElementById("signup-button");
 
-const registerWindow = document.getElementById("registerWindow");
-const registerButton = document.getElementById("RegiserAttempt");
-const registerBackButton = document.getElementById("RegisterBackButton");
-const registerWithGoogle = document.getElementById("registerWithGoogle");
+const loginWindow = document.getElementById("login-window");
+const loginButton = document.getElementById("login-button");
+const loginWithGoogle = document.getElementById("login-with-google");
 
-loginWindowButton.addEventListener("click", (event) => {
-  event.preventDefault();
-  loginWindow.classList.remove("d-none");
-  loginWindowButton.classList.add("d-none");
-  registerWindowButton.classList.add("d-none");
-});
+const registerWindow = document.getElementById("register-window");
+const registerButton = document.getElementById("register-button");
+const registerBackButton = document.getElementById("back-button");
+
 
 registerWindowButton.addEventListener("click", (event) => {
   event.preventDefault();
   registerWindow.classList.remove("d-none");
-
-  loginWindowButton.classList.add("d-none");
-  registerWindowButton.classList.add("d-none");
+  loginWindow.classList.add("d-none");
 });
 
 loginButton.addEventListener("click", (event) => {
@@ -36,18 +26,12 @@ registerButton.addEventListener("click", (event) => {
   document.location.href = "/mainPage";
 });
 
-loginBackButton.addEventListener("click", (event) => {
-  event.preventDefault();
-  loginWindow.classList.add("d-none");
-  loginWindowButton.classList.remove("d-none");
-  registerWindowButton.classList.remove("d-none");
-});
+
 
 registerBackButton.addEventListener("click", (event) => {
   event.preventDefault();
   registerWindow.classList.add("d-none");
-  loginWindowButton.classList.remove("d-none");
-  registerWindowButton.classList.remove("d-none");
+  loginWindow.classList.remove("d-none");
 });
 
 loginWithGoogle.addEventListener("click", (event) => {
@@ -55,7 +39,3 @@ loginWithGoogle.addEventListener("click", (event) => {
   document.location.href = "/mainPage";
 });
 
-registerWithGoogle.addEventListener("click", (event) => {    
-  event.preventDefault();
-  document.location.href = "/mainPage";
-});
