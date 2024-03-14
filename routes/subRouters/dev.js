@@ -5,15 +5,16 @@ const OpenAIApi = require("openai"); //Api OpenAi
 const config = require("../../config");
 
 const router = express.Router(); //Instance of the router
-
+/*
 const openai = new OpenAIApi({
   api_key: config.openAI_API_Key,
 }); //Instance of OpenAI API
+*/
 
 if (config.devMode) {
   //only work if in dev mode in config file
   console.log("@@@@@ Development Routes are Open @@@@@");
-
+  /* 
   router.route("/getOpenAIResponse").get(async (req, res) => {
     const response = await openai.chat.completions.create({
       model: "gpt-3.5-turbo",
@@ -33,7 +34,7 @@ if (config.devMode) {
         {
           role: "user",
           content:
-            "generate me a recepie using these ingredients:/n colored bell peppers, chicken, cream cheese, dry ranch dressing,  cheddar cheese, bacon /n You may remove up to two of the previous ingredients then add two more new ingredients./n Using an oven, maximum 1h30m, easy dificulty",
+            "generate me a recepie using these ingredients:/n potato,carrot, beef, onions, olive oil, cheese, broccoli, cinnamon, lemon /n You may remove up to two of the previous ingredients then add two more new ingredients./n maximum 45min, easy dificulty",
         },
       ],
       max_tokens: 1000,// out of 5 stars 
@@ -140,6 +141,6 @@ router.get("/test001", (req, res) => {
   ];
 
   res.render("recepieGenerator", { title: "Recepie Generator", recepies });
-});
+*/};
 
 module.exports = router;
