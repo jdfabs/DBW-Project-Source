@@ -9,11 +9,14 @@
 .recepieContainer {
     margin: 10px 10px;
     padding: 10px 10px;
+    border-radius: 20px;
+    background-color: #c9a561;
     
 }
     .recepieContainer .recepieImage {
         height: 200px;
         width: 200px;
+        border-radius: 20px;
     }
 
 /*Rating img - to be implemented*/
@@ -21,26 +24,78 @@
     height: 20px;
 }
 /*filter Img*/
-#filter{
-    width: 30px;
-    height: 30px;
+
+.input-icon {
+    margin: 0px 0px;
+    padding: 0px 0px;
+    font-size: 28px;
+    color: #023047;
+    position: absolute;
+    
+
+}
+.input-icon:hover{
+    color: #4592AF;
 }
 
-.input-sm {
-    margin: 3px 3px;
-    min-width: 80px;
-    height: 30px;
-    width: 80%;
-}
+
 
 .addBtn {
     margin: 3px 3px;
-    height: 30px;
-    width: 30px;
+    height: 35px;
+    width: 35px;
+    border: 1px solid #4592AF;
+    border-radius: 20px;
+    background-color: #126782;
+    color: #F6F5F5;
 }
+
+.sumbit_btn {
+    width: 300px;
+    height: 40px;
+    border-radius: 20px;
+    color: #F6F5F5;
+    border: 1px solid #4592AF;
+    background-color: #126782;
+}
+.ui-text {
+    color: #F6F5F5;
+    -webkit-text-stroke: 1px #023047;
+}
+
+
 .removeBtn {
     margin: 3px 3px;
-    height: 30px;
-    width: 30px;
+    height: 35px;
+    width: 35px;
+    border: 1px solid #4592AF;
+    border-radius: 20px;
+    background-color: #126782;
+    color: #F6F5F5;
+}
+
+
+input{    
+    margin: 3px 3px;
+    min-width: 80px;
+    height: 40px;
+    width: 80%;
+    padding: 10px;    
+    border: 1px solid #4592AF;
+    border-radius: 20px;
+    background-color: #126782;
+    color: #F6F5F5;
+}
+
+select{
+    margin: 3px 3px;
+    min-width: 80px;
+    height: 40px;
+    width: 80%;
+    padding: 10px;    
+    border: 1px solid #4592AF;
+    border-radius: 20px;
+    background-color: #126782;
+    color: #F6F5F5;
 }
 
