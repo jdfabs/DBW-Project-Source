@@ -44,7 +44,7 @@ addMethodButton.addEventListener("click", (event) => {
 </select>
 <button class="removeBtn">-</button>`;
     methodList.append(newMethod);
-    addEventListener(newIngredient.querySelector(".removeBtn"));
+    addEventListener(newMethod.querySelector(".removeBtn"));
 
 });
 
