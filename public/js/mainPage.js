@@ -1,9 +1,20 @@
-const filterButton = document.getElementById("filterButton");
 const filterWindow = document.getElementById("filterWindow");
 const methodList = document.getElementById("methodList");
 const ingredientList = document.getElementById("ingredientList");
 
-filterButton.addEventListener("click", (event) => {
+const addMethodButton = document.getElementById("moreMethod");
+const addIngredientButton = document.getElementById("moreIng");
+
+//setup event listeners for remove buttons
+Array.from(document.getElementsByClassName("removeBtn")).forEach((button) => {
+  button.addEventListener("click", (event) => {
+    event.preventDefault();
+    button.parentElement.remove();
+  });
+});
+
+//setup event listeners for add buttons
+document.getElementById("filterButton").addEventListener("click", (event) => {
   console.log("filterButton clicked");
   event.preventDefault();
   if (filterWindow.classList.contains("d-none"))
@@ -11,11 +22,15 @@ filterButton.addEventListener("click", (event) => {
   else filterWindow.classList.add("d-none");
 });
 
-const addMethodButton = document.getElementById("moreMethod");
-const addIngredientButton = document.getElementById("moreIng");
+document.getElementById("search-filter").addEventListener("click", (event) => {
+  console.log("search-filter clicked");
+  event.preventDefault();
+  
+});
 
 
 
+//setup event listeners for add buttons
 addMethodButton.addEventListener("click", (event) => {
   event.preventDefault();
   const newMethod = document.createElement("div");
@@ -29,6 +44,7 @@ addMethodButton.addEventListener("click", (event) => {
 </select>
 <button class="removeBtn">-</button>`;
     methodList.append(newMethod);
+    addEventListener(newIngredient.querySelector(".removeBtn"));
 
 });
 
@@ -39,16 +55,16 @@ addIngredientButton.addEventListener("click", (event) => {
   newIngredient.innerHTML = `<input class="col-10" name="Ingredient" type="text" placeholder="Ingredient" />
   <button class="removeBtn col-2">-</button>`;
   ingredientList.append(newIngredient);
+
+  addEventListener(newIngredient.querySelector(".removeBtn"));
+
 });
 
-
-const removeButtons = document.getElementsByClassName("removeBtn");
-console.log(removeButtons);
-
-Array.from(removeButtons).forEach((button) => {
+const addEventListener = function addEventListenerToButtons(button) {
   button.addEventListener("click", (event) => {
     event.preventDefault();
     button.parentElement.remove();
   });
-});
+}
+
 
