@@ -14,6 +14,8 @@ filterButton.addEventListener("click", (event) => {
 const addMethodButton = document.getElementById("moreMethod");
 const addIngredientButton = document.getElementById("moreIng");
 
+
+
 addMethodButton.addEventListener("click", (event) => {
   event.preventDefault();
   const newMethod = document.createElement("div");
@@ -38,3 +40,15 @@ addIngredientButton.addEventListener("click", (event) => {
   <button class="removeBtn col-2">-</button>`;
   ingredientList.append(newIngredient);
 });
+
+
+const removeButtons = document.getElementsByClassName("removeBtn");
+console.log(removeButtons);
+
+Array.from(removeButtons).forEach((button) => {
+  button.addEventListener("click", (event) => {
+    event.preventDefault();
+    button.parentElement.remove();
+  });
+});
+
