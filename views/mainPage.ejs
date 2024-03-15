@@ -35,20 +35,22 @@
             <div class="row">
               <!--Ingredient col-->
               <div class="col-md-6 filterOptions">
-                <div class="row">
-                  <input class="col-10" name="Ingredient" type="text" placeholder="Ingredient" />
-                  <button class="removeBtn col-2">-</button>
+                <div id="ingredientList" >
+                  <div class="row">
+                    <input class="col-10" name="Ingredient" type="text" placeholder="Ingredient" />
+                    <button class="removeBtn col-2">-</button>
+                  </div>
                 </div>
+
                 <div class="row">
                   <button id="moreIng" class="addBtn">+ </button>
                 </div>
               </div>
               <!--Method col-->
               <div class="col-md-6 filterOptions">
-                <div>
+                <div id="methodList">
                   <div class="row">
-
-                    <select itemid="methodList" class="col-10" name="cookingMethods" id="cookingMethods">
+                    <select itemid="methods" class="col-10" name="cookingMethods" id="cookingMethods">
                       <option value="Method 1">Method 1</option>
                       <option value="Method 2">Method 2</option>
                       <option value="Method 3">Method 3</option>
