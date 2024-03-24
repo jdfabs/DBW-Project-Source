@@ -1,8 +1,18 @@
-.mainContent{
-    
+.box{
     background-color: #c9a561;
+    padding: 20px;
+    margin-bottom: 20px; /* Espaçamento entre as caixas */
+    border-radius: 10px;
+    /*border-radius: 50px;
+    border: 5px solid #023047;*/
     
 }
+
+#fqa{
+    border-radius: 50px;
+    border: 5px solid #023047;
+}
+
 .h1 {
     text-align: left;
 }
