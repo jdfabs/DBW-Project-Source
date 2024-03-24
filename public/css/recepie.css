@@ -5,6 +5,9 @@
     height: 500px;
     transition: transform 0.5s;
 }
+.ingredient{
+    line-height: 1.2;
+}
 
 .paper {
     
