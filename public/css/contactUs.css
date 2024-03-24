@@ -1,8 +1,9 @@
 ﻿/*Contact window Specific*/
 .contact-window {
     width: 100%;
-    margin-top: 10%;
     min-width: 280px;
+
+
 }
 
 .contact-window form * {
@@ -16,7 +17,7 @@
 }
 
 #messageBox {
-width: auto;
+    width: auto;
     height: 250px;
     overflow-wrap: break-word;
     word-wrap: break-word;
@@ -27,6 +28,7 @@ width: auto;
 /*Confirmation window*/
 #confirmationWindow {
     top: 40%;
+    border-radius: 50px;
 }
 
 
@@ -37,5 +39,5 @@ width: auto;
 
 #windowContent {
     height: calc(100% - 40px);
-    
+
 }
