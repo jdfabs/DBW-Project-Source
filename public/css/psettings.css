@@ -1,3 +1,53 @@
+.ui-text {
+    color: #F6F5F5;
+    -webkit-text-stroke: 1px #023047;
+    text-align: center;
+}
+
+.settingContainer {
+    margin: 10px 10px;
+    padding: 10px 10px;
+    border-radius: 20px;
+    background-color: #c9a561;
+    padding-left: 5vw;
+    padding-right: 5vw;
+
+}
+
+.settingContainer .avatarImage {
+    height: 80px;
+    width: 80px;
+    border-radius: 20px;
+}
+
+
+.removeBtn {
+    margin: 3px 3px;
+    height: 35px;
+    width: 35px;
+    border: 1px solid #4592AF;
+    border-radius: 20px;
+    background-color: #126782;
+    color: #F6F5F5;
+}
+
+.addBtn {
+    margin: 3px 3px;
+    height: 35px;
+    width: 35px;
+    border: 1px solid #4592AF;
+    border-radius: 20px;
+    background-color: #126782;
+    color: #F6F5F5;
+}
+
+
+
+
+
+
+
+
 .toggle {
     position: relative;
     display: inline-block;
@@ -35,44 +85,45 @@
     transition: .4s;
 }
 
-input:checked + .slider {
+input:checked+.slider {
     background-color: #2196F3;
- 
+
 }
-  
-input:focus + .slider {
+
+input:focus+.slider {
     box-shadow: 0 0 1px #2196F3;
 
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
     -webkit-transform: translateX(21px);
     -ms-transform: translateX(21px);
     transform: translateX(21px);
 }
 
 
-#option1{
-    width:50%;
+
+#option1 {
+    width: 50%;
     background-color: aqua;
-    position:absolute;
+    position: absolute;
     margin: 100px 100px 100px 300px;
 
 }
 
 
 
-#option2{
-    width:50%;
+#option2 {
+    width: 50%;
     background-color: aqua;
-    position:absolute;
+    position: absolute;
     margin: 140px 100px 100px 300px;
 
 }
 
 
 
-#accsettings{
+#accsettings {
     width: 20%;
     background-color: aqua;
     margin: 300px 100px 100px 600px;

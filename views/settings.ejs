@@ -14,52 +14,148 @@
 
 <body class="bg-img bg-cover">
 
-
-  <%- include("./partials/logo.ejs")  %>
   <%- include("./partials/nav.ejs")  %>
   <%- include("./partials/footer.ejs")  %>
 
 
   <!-- Main Body-->
-  <div class="mainContent d-flex justify-content-center">
-    <div class="container" id="maindiv">
-      <div class="row" id="option1">
+  <div class="mainContent bg-img bg-cover d-grid " style="background-image: url('/images/ui_background.png');">
 
-        <div class=col>
-          <h2>Measuring Units</h2>
+    <h1 class="ui-text ">Settings</h1>
+    <div class="d-grid ">
+      <div class="row">
+        <div class="col settingContainer ">
+          <h3 class="ui-text">Account Settings</h3>
+          <div class="d-flex align-items-center justify-content-between">
+            <h6 class="m-3">Change Profile Picture</h6>
+            <img class="avatarImage d-none d-lg-block" src="/images/PlaceholderImage.png" alt="Alternate Text" />
+          </div>
+          <h6 class="m-3">Change Username</h6>
+          <h6 class="m-3">Change Email</h6>
+          <h6 class="m-3">Change Password</h6>
+        </div>
+        <div class="col settingContainer ">
+          <h3 class="ui-text">General Preferences</h3>
+          <h6 class="m-3">Change language</h6>
+          <h6 class="m-3">Weight units</h6>
+          <h6 class="m-3"> Volume units</h6>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col settingContainer ">
+          <h3 class="ui-text">Recepie Preferences</h3>
+          <div id="dietaryPreferencesList">
+            <h6 class="">Dietary Preferences</h6>
+            <div class="row">
+              <select itemid="preferences" class="col-10" name="dietaryPreferences" id="dietaryPreferences">
+                <option value="Vegetarian">Vegetarian</option>
+                <option value="Vegan">Vegan</option>
+                <option value="Gluten-free">Gluten-free</option>
+                <option value="etc">etc</option>
+              </select>
+              <button class="removeBtn">-</button>
+            </div>
+            <button id="moreMethod" class="addBtn">+ </button>
+          </div>
+          <div id="alergiesList ">
+            <h6 class="">Alergies</h6>
+            <div class="row">
+              <select itemid="alergie" class="col-10" name="alergies" id="alergies">
+                <option value="alergie">Vegetarian</option>
+                <option value="alergie">Vegan</option>
+                <option value="alergie">Gluten-free</option>
+                <option value="alergie">etc</option>
+              </select>
+              <button class="removeBtn">-</button>
+            </div>
+            <button id="moreMethod" class="addBtn">+ </button>
+          </div>
+          <div id="cousinePreferenceList ">
+            <h6 class="">Alergies</h6>
+            <div class="row">
+              <select itemid="cousinePreference" class="col-10" name="cousine" id="cousine">
+                <option value="European">European</option>
+                <option value="Asiatic">Asiatic</option>
+                <option value="North American">North American</option>
+                <option value="South American">South American</option>
+              </select>
+              <button class="removeBtn">-</button>
+            </div>
+            <button id="moreMethod" class="addBtn">+ </button>
+          </div>
+        </div>
+        <div class="col settingContainer ">
+          <h3 class="ui-text">Notification Settings</h3>
+          <div class="row m-3">
+            <h6 class="col-10">Email Notifications</h6>
+            <label class="toggle ">
+              <input type="checkbox">
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="row m-3">
+            <h6 class="col-10">Push Notifications</h6>
+            <label class="toggle ">
+              <input type="checkbox">
+              <span class="slider"></span>
+            </label>
+          </div>
+
         </div>
 
-        <div class=col>
-          <!-- Toggle da 1a Setting -->
-          <label class="toggle">
-            <input type="checkbox">
-            <span class="slider"></span>
-          </label>
+      </div>
+
+      <div class="row">
+        <div class="col settingContainer ">
+          <h3 class="ui-text">Privacy Settings</h3>
+          <div class="row m-3">
+            <h6 class="col-10">Public Profile</h6>
+            <label class="toggle ">
+              <input type="checkbox">
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="row m-3">
+            <h6 class="col-10">Data Sharing</h6>
+            <label class="toggle ">
+              <input type="checkbox">
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+        <div class="col settingContainer ">
+          <h3 class="ui-text">Data Management</h3>
+          <h6 class="m-3">Export Data</h6>
+          <h6 class="m-3">Import Data</h6>
+          <h6 class="m-3">Delete Account</h6>
         </div>
       </div>
 
-      <div class="row" id="option2">
-
-        <div class=col>
-          <h2>Chat On/Off</h2>
-        </div>
-
-        <div class=col>
-          <!-- Toggle da 2a Setting -->
-          <label class="toggle">
-            <input type="checkbox">
-            <span class="slider"></span>
-          </label>
-        </div>
-      </div>
     </div>
 
-    <div class="row" id="accsettings">
-      <div class=col>
-        <!--Botao de M.A.S-->
-        <button>Manage Account Settings</button>
-      </div>
+    <div class=col>
+      <!-- Toggle da 1a Setting -->
+      <label class="toggle">
+        <input type="checkbox">
+        <span class="slider"></span>
+      </label>
     </div>
+
+
+    <div class=col>
+      <h2>Chat On/Off</h2>
+    </div>
+
+    <div class=col>
+      <!-- Toggle da 2a Setting -->
+      <label class="toggle">
+        <input type="checkbox">
+        <span class="slider"></span>
+      </label>
+    </div>
+  </div>
+  </div>
 
   </div>
 
