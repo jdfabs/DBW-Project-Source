@@ -18,20 +18,21 @@
     <div id="recepie">
       <div id="p1" class="paper  ">
         <div class="front ">
-          <div id="f1" class="front-content d-flex text-center" style="background-color: #4592AF;">
+          <div id="f1" class="front-content d-flex text-center p-4" style="background-color: #4592AF;">
             <div class="align-self-center d-grid ">
-              <h1><%=recepie.recipeName %></h1>
-              <h3><%=recepie.creator%></h3>
-              <h3><%=recepie.creationDate%></h3>
+              <h3><%=recepie.recipeName %></h3>
+              <h5><%=recepie.creator%></h5>
+              <h5><%=recepie.creationDate%></h5>
               <img class="recepieImage d-none d-lg-block " src="/images/PlaceholderImage.png" alt="Alternate Text" />
             </div>
           </div>
         </div>
         <div class="back bg-white">
-          <div id="b1" class="back-content d-inline-block p-5">
+          <div id="b1" class="back-content d-inline-block p-4 text-justify">
             <h3><%=recepie.recipeName %></h3>
             <h5>Description</h5>
-            <p><%=recepie.description %></p>
+            <p class="ingredient"><%const cutString = recepie.description.substring(0,500) ;%>
+                <%=cutString.substr(0, Math.min(cutString.length, cutString.lastIndexOf(".")+1));%></p>
           </div>
         </div>
       </div>
@@ -39,7 +40,7 @@
 
       <div id="p2" class="paper ">
         <div class="front bg-white">
-          <div id="f2" class="front-content d-inline-block p-5">
+          <div id="f2" class="front-content d-inline-block p-4 ">
             <h6>Ingredients:</h6>
             <%
                 recepie.ingredients.forEach(ingredient => { %>
@@ -51,14 +52,14 @@
 
             <p></p>
             <div class="row d-flex justify-content-between ">
-              <i class="bi bi-stopwatch col text-beggining"> 30 min</i>
-              <i class="bi bi-clipboard-data text-center col"> Easy</i>
-              <i class="bi bi-person col text-end">4</i>
+              <i class="bi bi-stopwatch col text-beggining"><%=recepie.totalTime %> </i>
+              <i class="bi bi-clipboard-data text-center col"> <%=recepie.difficultyLevel %></i>
+              <i class="bi bi-person col text-end"><%=recepie.servings %></i>
             </div>
           </div>
         </div>
         <div class="back bg-white">
-          <div id="b2" class="back-content d-inline-block p-5">
+          <div id="b2" class="back-content d-inline-block p-4">
             <h6>Per Dose:</h6>
             <div class=" d-flex justify-content-between">
               <div>Calories</div>
@@ -103,38 +104,39 @@
 
       <div id="p3" class="paper">
         <div class="front bg-white">
-          <div id="f3" class="front-content d-grid p-5 justify-content-start">
+          <div id="f3" class="front-content d-grid p-4 justify-content-start align-content-start">
             <h6>Preparation:</h6>
-            <%
-                let counter = 0;
+            <%let counter = 0;
                 recepie.instructions.forEach(instruction => { 
-                    if (counter < 8){
-                    %>
+                    if (counter < 8){%>
+                    
 
-            <i class="bi bi-dot ingredient"><%=instruction %></i>
+            <i class="bi bi-dot ingredient m-1"><%=instruction %></i>
 
-            <% 
-        
-            counter++;}} );%>
+            <% counter++;}} );%>
        
 
           </div>
         </div>
         <div class="back bg-white">
-          <div id="b3" class="back-content d-grid p-5 justify-content-start">
-            <%recepie.instructions.forEach(instruction => { 
+          <div id="b3" class="back-content d-grid p-4 justify-content-start align-content-start">
+            <% let auxCounter = 0;
+            recepie.instructions.forEach(instruction => { 
+                if(auxCounter >= counter){
                     if (counter < 16){
-                    %>
-            <i class="bi bi-dot ingredient"><%=instruction %></i>
-
-            <% counter++;}} );%>
+                    %>               
+                    
+            <i class="bi bi-dot ingredient  m-1"><%=instruction %></i>
+      
+            <% counter++;}} 
+            auxCounter++} );%>
           </div>
         </div>
       </div>
 
       <div id="p4" class="paper">
         <div class="front bg-white ">
-          <div id="f4" class="front-content d-grid p-5 justify-content-start">
+          <div id="f4" class="front-content d-grid p-4 justify-content-start">
             <h1>Comments:</h1>
             <p>Comment 1</p>
             <p>Comment 2</p>
@@ -144,7 +146,7 @@
           </div>
         </div>
         <div class="back" style="background-color: #4592AF;">
-          <div id="b4" class="back-content d-inline-block p-5">
+          <div id="b4" class="back-content d-inline-block p-4">
 
           </div>
         </div>

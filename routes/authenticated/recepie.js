@@ -3,65 +3,66 @@
 module.exports = (req, res) => {
     const recepie = 
     {
-        "recipeName": "Chef's Special Seafood Paella",
+        "recipeName": "Mediterranean Cod with Vegetable Medley",
+        "creator": "Skipper",
+        "creationDate" : "01-01-2024",
         "ingredients": [
-          {"name": "Shrimp", "quantity": "500g"},
-          {"name": "Olive oil", "quantity": "3 tablespoons"},
-          {"name": "Laurel", "quantity": "2 leaves"},
-          {"name": "Onion", "quantity": "1 large, chopped"},
-          {"name": "Garlic", "quantity": "4 cloves, minced"},
-          {"name": "Red pepper", "quantity": "1 large, diced"},
-          {"name": "Tomato", "quantity": "2 medium, chopped"},
-          {"name": "Tomato pulp", "quantity": "1 cup"},
-          {"name": "Bacon", "quantity": "100g, diced"},
-          {"name": "Sausage", "quantity": "200g, sliced"},
-          {"name": "White wine", "quantity": "1/2 cup"},
-          {"name": "Bell pepper", "quantity": "1 large, sliced"},
-          {"name": "Peas", "quantity": "1 cup"},
-          {"name": "Chicken broth", "quantity": "2 cups"},
-          {"name": "Saffron threads", "quantity": "1 pinch"},
-          {"name": "Lemon", "quantity": "1, sliced for garnish"}
+          {"name": "Broccoli", "quantity": "300g"},
+          {"name": "Potatoes", "quantity": "400g"},
+          {"name": "Carrot", "quantity": "200g"},
+          {"name": "Olive Oil", "quantity": "3 tbsp"},
+          {"name": "Salt", "quantity": "to taste"},
+          {"name": "Garlic", "quantity": "3 cloves"},
+          {"name": "Cod Fish", "quantity": "500g"},
+          {"name": "Tomatoes", "quantity": "2 large"},
+          {"name": "Red Bell Pepper", "quantity": "1"},
+          {"name": "Zucchini", "quantity": "1"},
+          {"name": "Onion", "quantity": "1"},
+          {"name": "Lemon", "quantity": "1"}
         ],
         "instructions": [
-          "In a large paella pan, heat olive oil over medium heat.",
-          "Add bacon and sausage, cook until browned.",
-          "Add onion, garlic, red pepper, and bell pepper. Sauté until vegetables are tender.",
-          "Stir in tomato and tomato pulp. Cook until tomatoes start to break down.",
-          "Pour in white wine, let it simmer for 2-3 minutes.",
-          "Add rice, stirring to coat it with the mixture.",
-          "Sprinkle saffron threads and pour in chicken broth. Bring to a simmer.",
-          "Arrange shrimp and peas over the rice mixture.",
-          "Place laurel leaves on top, cover, and let it cook for about 20-25 minutes or until rice is tender and liquid is absorbed.",
-          "Once done, remove from heat and let it rest for 5 minutes.",
-          "Garnish with lemon slices before serving."
+          "Preheat oven to 200°C.",
+          "Chop potatoes, carrots, broccoli, tomatoes, bell pepper, zucchini, and onion.",
+          "Crush garlic cloves and slice lemon.",
+          "In a baking dish, arrange chopped vegetables evenly.",
+          "Drizzle olive oil over the vegetables, season with salt, and toss to coat.",
+          "Place cod fish fillets on top of the vegetables.",
+          "Season fish with salt, crushed garlic, and a squeeze of lemon juice.",
+          "Cover the dish with foil and bake for 25-30 minutes.",
+          "Remove foil and bake for an additional 10-15 minutes until fish is cooked through and vegetables are tender.",
+          "Serve hot, garnished with fresh herbs if desired."
         ],
-        "description": "Indulge in the rich flavors of this Chef's Special Seafood Paella. This iconic Spanish dish combines succulent shrimp, savory sausage, and crispy bacon with the sweetness of tomatoes and bell peppers. Saffron-infused rice absorbs all the delicious flavors, creating a mouthwatering medley of tastes and textures. Perfect for a special occasion or a delightful family dinner, this paella is a true culinary masterpiece.",
-        "difficultyLevel": "chef",
-        "preparationTime": "30 minutes",
-        "cookingTime": "45 minutes",
-        "totalTime": "1 hour 15 minutes",
+        "description": "Indulge in a tantalizing Mediterranean experience with this Chef's special cod dish. Succulent cod fish perfectly complemented by a vibrant medley of roasted vegetables. It's a symphony of flavors bound to delight your palate.",
+        "difficultyLevel": "Chef",
+        "preparationTime": "20 minutes",
+        "cookingTime": "35-45 minutes",
+        "totalTime": "55-65 minutes",
         "servings": "4",
-        "cuisine": "Spanish",
-        "dietaryInformation": [],
+        "cuisine": "Mediterranean",
+        "dietaryInformation": ["Healthy", "Gluten-free"],
         "nutritionalInformation": {
-          "calories": "480",
-          "proteins": "24g",
-          "saturatedFats": "6g",
-          "unSaturatedFats": "8g",
-          "cholesterol": "130mg",
-          "carbohydrates": "40g",
-          "sugar": "4g",
+          "calories": "320",
+          "proteins": "28g",
+          "saturatedFats": "2g",
+          "unsaturatedFats": "10g",
+          "cholesterol": "60mg",
+          "carbohydrates": "25g",
+          "sugar": "6g",
           "vitamins": "A, C",
           "minerals": "Iron, Calcium"
         },
-        "notes": "For a vegetarian option, omit the bacon and sausage and add more vegetables like artichokes and mushrooms. Adjust seasoning according to taste preferences.",
+        "notes": "Ensure the fish is fresh for the best taste. You can customize the vegetable selection according to your preference.",
         "allergenInformation": ["None"],
-        "substitutions": [],
-        "equipmentNeeded": ["Paella pan", "Lid or foil"],
+        "substitutions": [
+          {"name": "Salmon", "substituteFor": "Cod Fish"},
+          {"name": "Green Beans", "substituteFor": "Broccoli"},
+          {"name": "Sweet Potato", "substituteFor": "Potatoes"}
+        ],
+        "equipmentNeeded": ["Baking dish", "Aluminum foil", "Knife", "Chopping board", "Oven"],
         "mealType": ["Dinner"]
       }
       
-      ;
+      
       
     res.render("recepie", { title: "Recepie", recepie });
 };
