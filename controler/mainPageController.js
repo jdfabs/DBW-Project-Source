@@ -3,20 +3,21 @@ const recepieModel = require("../model/recepieModel");
 const dataValidation = require("../middlewares/dbValidation");
 const debug = require("../debugTools");
 
-const indexView = async function (req, res) {
-  debug.log(1,"Main Page Controller - indexView");
-
+const getRecipes = async function () {
+  debug.log(1, "Main Page Controller - getRecipes");
   //addMockData(); //-- Só para adicionar receitas á mão!!!!!! deve estar sempre comentado
 
   const recepies = await getTopTenRecepies();
+
   for (let recipe of recepies) {
     recipe = await dataValidation.forceValidRecipe(recipe);
-  };
+  }
 
-  res.render("mainPage", { title: "Main Page", recepies: recepies });
+  return recepies;
 };
 
 const getTopTenRecepies = async function () {
+  debug.log(1, "Main Page Controller - getTopTenRecepies");
   const recepies = await recepieModel.find({}).limit(10);
   //console.log(recepie);
 
@@ -24,6 +25,7 @@ const getTopTenRecepies = async function () {
 };
 
 const addMockData = async function () {
+  debug.log(0, "@@@@@ Main Page Controller - addMockData");
   try {
     const recipeMock = new recepieModel({
       recipeName: "Mediterranean Grilled Chicken with Lemon Herb Marinade",
@@ -104,4 +106,4 @@ const addMockData = async function () {
   console.log("Mock data added to DB");
 };
 
-module.exports = { indexView };
+module.exports = { getRecipes };

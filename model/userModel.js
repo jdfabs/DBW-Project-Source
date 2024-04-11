@@ -1,13 +1,10 @@
 const mongoose = require("mongoose");
 
-
-
 const UserSchema = new mongoose.Schema({
     username: {
       type: String,
       required: true,
       unique: true,
-      trim: true,
       lowercase: true,
     },
     email: {
@@ -27,14 +24,10 @@ const UserSchema = new mongoose.Schema({
       required: true,
     },
     firstName: {
-      type: String,
-      required: true,
-      trim: true,
+      type: String,          
     },
     lastName: {
       type: String,
-      required: true,
-      trim: true,
     },
     profilePicture: {
       type: Buffer,
@@ -67,7 +60,7 @@ const UserSchema = new mongoose.Schema({
     },
     preferredLanguage: {
       type: String,
-      enum: ['en', 'es', 'fr', ...], // add as many options as needed
+      enum: ['en', 'es', 'fr'] // add as many options as needed
     },
   },
   {

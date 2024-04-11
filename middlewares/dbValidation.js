@@ -1,12 +1,12 @@
 "use strict";
 const recepieModel = require("../model/recepieModel");
+const userModel = require ("../model/userModel");
 
 
 const debug = require("../debugTools");
 
-const validateRecipe = async function (base) {    
-    debug.log(1,"validateRecipe:");
-    
+const isRecepieValid = async function (base) {    
+    debug.log(1,"validateRecipe:");    
     try {
         await recepieModel.validate(base);
         debug.log(2,true);
@@ -21,9 +21,23 @@ const validateRecipe = async function (base) {
  
 };
 
+const isUserValid = async function (user) {
+    debug.log(1,"isUserValid:"); 
+    try {
+        await userModel.validate(user);
+        debug.log(2,true);
+        return true;
+    }
+    catch (error){        
+        const missingParams = Object.keys(error["errors"]);
+        debug.log(3,missingParams);
+        debug.log(2,false);
+        return false;
+    }
+}
+
 const forceValidRecipe = async function (base) {
     debug.log(1,"forceValidRecipe:");
-
     const validRecipe = base;
 
     try {
@@ -36,10 +50,6 @@ const forceValidRecipe = async function (base) {
         debug.log(3,"Missing params:");
         debug.log(3,missingParams);
         debug.log(2,false);
-
-
-        debug.log(2,"000");
-
 
         missingParams.forEach(param => {
             //A Ideia é por cada um juntar para pedir ao OpenAI para gerar 
@@ -83,9 +93,7 @@ const forceValidRecipe = async function (base) {
                     break;
             }
     });}
-    debug.log(2,"001");
-    if(await validateRecipe(validRecipe)){
-        debug.log(2,"002");
+    if(await isRecepieValid(validRecipe)){
         debug.log(3,JSON.stringify(validRecipe));
         return validRecipe;
     }
@@ -96,4 +104,4 @@ const forceValidRecipe = async function (base) {
     
 };
 
-module.exports = { validateRecipe, forceValidRecipe };
+module.exports = { isRecepieValid, isUserValid ,forceValidRecipe };
