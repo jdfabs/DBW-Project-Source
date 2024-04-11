@@ -1,9 +1,13 @@
 "use strict";
 const recepieModel = require("../model/recepieModel");
+const DEBUG = require("../middlewares/dbValidation");
 
 const indexView = async function (req, res) {
   //addMockData(); //-- Só para adicionar receitas á mão!!!!!! deve estar sempre comentado
+  
+  
   const recepies = await getRecepies();
+  DEBUG.validateRecipe(recepies[0]);  
   res.render("mainPage", { title: "Main Page", recepies: recepies });
 };
 

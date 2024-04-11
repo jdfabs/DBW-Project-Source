@@ -4,12 +4,15 @@ const recepieSchema = mongoose.Schema(
   {    
     
     recipeName: { type: String, required: true },
-    ingredients: [
+    
+      ingredients: [
       {
         name: { type: String, required: true },
         quantity: { type: String, required: true },
-      },
+        
+      }
     ],
+    
     instructions: [{ instruction: { type: String, required: true } }],
     description: { type: String, required: true },
     difficultyLevel: { type: String, required: true },
