@@ -10,7 +10,7 @@
   <!-- Logotipo-->
 
   <%- include("./partials/nav.ejs")  %>
-  <%- include("./partials/footer.ejs")  %>
+  <%- include("./partials/footer.ejs"); %>
 
   <!-- Main Content-->
   <div class="mainContent bg-img bg-cover d-grid" style="background-image: url('/images/ui_background.png');">
@@ -31,7 +31,7 @@
             <div class="row">
               <!--Ingredient col-->
               <div class="col-md-6 filterOptions">
-                <div id="ingredientList" >
+                <div id="ingredientList">
                   <div class="row">
                     <input class="col-10" name="Ingredient" type="text" placeholder="Ingredient" />
                     <button class="removeBtn col-2">-</button>
@@ -79,15 +79,18 @@
       <!-- Recepies container -->
       <div>
         <% if (recepies.length > 0) { 
-                    recepies.forEach(recepie => { %>
+                    
+                    recepies.forEach(recepie => {
+                      
+                      %>
 
         <section class="recepieContainer  d-flex">
           <img class="recepieImage d-none d-lg-block" src="/images/PlaceholderImage.png" alt="Alternate Text" />
 
           <div class="p-2">
             <div class="d-block d-sm-flex  align-items-end">
-              <h3><%=recepie.title %></h3>
-              <h5> - creator name</h5>
+              <h3><%=recepie.recipeName %></h3>
+              <h5> - by LLM</h5>
             </div>
             <div class="d-flex ">
               <img class="rating " src="/images/Rating.png" alt="rating" />
@@ -96,16 +99,21 @@
             <p class="d-sm-none"></p>
             <div class="d-block  ">
               <h5> Description -</h5>
-              <p class="d-none d-sm-block"> Assurance advantage belonging happiness departure so of. Now improving and one sincerity intention allowance commanded not. Oh an am frankness be necessary earnestly advantage estimable extensive.</p>
-              <p class="d-sm-none"> SHORT VERSION Assurance advantage belonging happiness departure so of. Now improving and one sincerity intention allowance commanded not.</p>
+              <p class="d-none d-sm-block"> <%=recepie.description %></p>
+              <p class="d-sm-none"> SHORT VERSION <%=recepie.description %></p>
             </div>
             <div class="d-block ">
               <h5> Ingredients -</h5>
-              <p> Assurance, advantage, belonging, happiness, departure, sincerity, intention, allowance.</p>
+              <p>                
+                <% if (recepie.ingredients.length > 0) { %>                  
+                <% recepie.ingredients.forEach(ingredient => { %>                  
+                <%=ingredient.name%>,
+                <%});};%>
+              </p>
             </div>
             <div class="d-none d-sm-block ">
               <h5> tags -</h5>
-              <p> Assurance, advantage, belonging.</p>
+              <p> Assurance, advantage, belonging</p>
             </div>
           </div>
         </section>

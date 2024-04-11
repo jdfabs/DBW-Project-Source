@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 
 const recepieSchema = mongoose.Schema(
-  {
+  {    
+    
     recipeName: { type: String, required: true },
     ingredients: [
       {
