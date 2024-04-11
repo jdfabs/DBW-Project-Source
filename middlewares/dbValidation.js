@@ -1,49 +1,45 @@
 "use strict";
-
-const Ajv = require("ajv");
 const recepieModel = require("../model/recepieModel");
 
-const ajv = new Ajv();
+
+const debug = require("../debugTools");
 
 const validateRecipe = async function (base) {    
+    debug.log(1,"validateRecipe:");
+    
     try {
         await recepieModel.validate(base);
-        console.log(true);
+        debug.log(2,true);
+        return true;
     }
     catch (error){        
         const missingParams = Object.keys(error["errors"]);
-        console.log(missingParams);
-        console.log(false);
+        debug.log(3,missingParams);
+        debug.log(2,false);
+        return false;
     }
  
 };
 
 const forceValidRecipe = async function (base) {
+    debug.log(1,"forceValidRecipe:");
 
-    base.recipeName = null;
-    base.ingredients = null;
-    base.instructions = null;
-    base.description = null;
-    base.difficultyLevel = null;
-    base.preparationTime = null;
-    base.cookingTime = null;
-    base.totalTime = null;
-    base.servings = null;
-    base.cuisine = null;
-    base.dietaryInformation = null;
-    base.notes = null;
-    base.allergenInformation = null;
-    base.substitutions = null;
-    base.equipmentNeeded = null;
+    const validRecipe = base;
 
     try {
-        await recepieModel.validate(base);
-        console.log(true);
+        await recepieModel.validate(validRecipe);        
+        debug.log(2,true);
+        return validRecipe;
     }
     catch (error){        
         const missingParams = Object.keys(error["errors"]);
-        console.log(missingParams);
-        console.log(false);
+        debug.log(3,"Missing params:");
+        debug.log(3,missingParams);
+        debug.log(2,false);
+
+
+        debug.log(2,"000");
+
 
         missingParams.forEach(param => {
             //A Ideia é por cada um juntar para pedir ao OpenAI para gerar 
@@ -87,8 +83,17 @@ const forceValidRecipe = async function (base) {
                     break;
             }
     });}
+    debug.log(2,"001");
+    if(await validateRecipe(validRecipe)){
+        debug.log(2,"002");
+        debug.log(3,JSON.stringify(validRecipe));
+        return validRecipe;
+    }
+    else {
+        debug.log(0,"FATAL ERROR - UNABLE TO FORCE VALID RECEPIE");
+    }
 
-
+    
 };
 
 module.exports = { validateRecipe, forceValidRecipe };
