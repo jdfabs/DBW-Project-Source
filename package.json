@@ -14,7 +14,13 @@
     "ejs": "^3.1.9",
     "express": "^4.18.3",
     "lodash": "^4.17.21",
+<<<<<<< Updated upstream
     "mongoose": "^8.2.1",
+=======
+    "method-override": "^3.0.0",
+    "mongodb": "^6.5.0",
+    "mongoose": "^8.3.1",
+>>>>>>> Stashed changes
     "morgan": "^1.10.0",
     "openai": "^4.28.4"
   }
