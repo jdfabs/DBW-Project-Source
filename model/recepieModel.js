@@ -41,7 +41,7 @@ const recepieSchema = mongoose.Schema(
       },
       proteins: {
         value: { type: Number, required: true },
-        unit: { type: String, required: true },
+        unit: { type: String, required: true }
       },
       saturatedFats: {
         value: { type: Number, required: true },

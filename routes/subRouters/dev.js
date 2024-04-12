@@ -5,6 +5,8 @@ const debug = require("../../debugTools");
 const config = require("../../config");
 const recepieModel = require("../../model/recepieModel");
 const router = express.Router(); //Instance of the router
+const recepieGenerator = require("../../middlewares/recipeGenerator");
+
 /*
 const openai = new OpenAIApi({
   api_key: config.openAI_API_Key,
@@ -143,97 +145,83 @@ router.get("/test001", (req, res) => {
   res.render("recepieGenerator", { title: "Recepie Generator", recepies });
 */
 }
-router.get(
-  "/test001",
-  async (req, res) => {
-    debug.log(1, "forceValidRecipe:");
-    let validRecipe = base;
+router.get("/test001", async (req, res) => {
+  debug.log(1, "forceValidRecipe:");
+  let validRecipe = {
+    nutritionalInformation: {
+      
+      calories: { value: 10, unit: "sim" },
+    },
+  };
 
-    let isFixed = false;
-    const limit = 5;
-    let counter = 0;
+  let isFixed = false;
+  const limit = 5;
+  let counter = 0;
 
-    while (!isFixed && counter < limit) {
-      try {
-        await recepieModel.validate(validRecipe);
-        isFixed = true;
-      } catch (error) {
-        console.log(error);
-        const missingParams = Object.keys(error.errors);
-
-        console.log(missingParams);
-        console.log(validRecipe);
-
-        for (let param of missingParams) {
-
-          let grandParent = "";
+  while (!isFixed && counter < limit) {
+    try {
+      await recepieModel.validate(validRecipe);
+      isFixed = true;
+    } catch (error) {
+      const missingParams = Object.keys(error.errors);
+      
+      for (let param of missingParams) {
+        let grandParent = "";
         let parent = "";
-
+        //Separa a hierarquia
+        if (param.indexOf(".") != -1) {
+          parent = param.substring(0, param.indexOf("."));
+          param = param.substring(param.indexOf(".") + 1, param.Length);
           if (param.indexOf(".") != -1) {
+            grandParent = parent;
             parent = param.substring(0, param.indexOf("."));
             param = param.substring(param.indexOf(".") + 1, param.Length);
-            if (param.indexOf(".") != -1) {
-              grandParent = parent;
-              parent = param.substring(0, param.indexOf("."));
-              param = param.substring(param.indexOf(".") + 1, param.Length);
-            }
           }
-
+        }
+        //Verificar se todos os objectos da hierarquia existes, caso n existam gera um novo
+        if (grandParent != "") {
+          if (validRecipe[grandParent] === undefined) {
+            validRecipe[grandParent] = {}; // Initialize the object if it doesn't exist
+          }
+        }
+        if (parent != "") {
           if (grandParent != "") {
-            if (validRecipe[grandParent] === undefined) {
-              validRecipe[grandParent] = {}; // Initialize the object if it doesn't exist
+            if (validRecipe[grandParent][parent] === undefined) {
+              validRecipe[grandParent][parent] = {};
             }
+          } else if (validRecipe[parent] === undefined) {
+            validRecipe[parent] = {};
           }
-          if (parent != "") {
-            if (grandParent != "") {
-              if (validRecipe[grandParent][parent] === undefined) {
-                validRecipe[grandParent][parent] = {};
-              }
-            } else if (validRecipe[parent] === undefined) {
-              validRecipe[parent] = {};
+        }
+        //Gerar campo em falta final a vazio
+        if (parent != "") {
+          if (grandParent != "") {
+            if (validRecipe[grandParent][parent][param] === undefined) {
+              validRecipe[grandParent][parent][param] = 0;              
             }
+          } else if (validRecipe[parent][param] === undefined) {
+            validRecipe[parent][param] = 0;
           }
-  
-          if (parent != "") {
-            if (grandParent != "") {
-              if (validRecipe[grandParent][parent][param] === undefined) {
-                validRecipe[grandParent][parent][param] = await generateField(validRecipe);
-              }
-            } else if (validRecipe[parent][param] === undefined) {
-              validRecipe[parent][param] = await generateField(validRecipe);
-            }
-          } else {
-            if (validRecipe[param] === undefined) {
-              validRecipe[param] = await generateField(validRecipe);
-            }
+        } else {
+          if (validRecipe[param] === undefined) {
+            validRecipe[param] = 0;
           }
         }
       }
-      counter++;
-    }
-    if (!isFixed) {
-      console.log("@@@@@@@@@ FATAL ERROR - FAILED TO FORCE RECIPE VALIDATION");
-    }
-    return validRecipe;    
-  }
-);
+      //Manda o Gerador de Receitas criar os restantes
+      validRecipe = await recepieGenerator.generateMissingFields(
+        missingParams,
+        validRecipe,
+        validRecipe
+      );
 
-const generateField = async function (base) {
-  //TO-DO
-  return 10;
-};
-
-const isRecepieValid = async function (base) {
-  debug.log(1, "validateRecipe:");
-  try {
-    await recepieModel.validate(base);
-    debug.log(2, true);
-    return true;
-  } catch (error) {
-    const missingParams = Object.keys(error);
-    debug.log(3, missingParams);
-    debug.log(2, false);
-    return false;
+    }
+    counter++;
   }
-};
+  if (!isFixed) {
+    console.log("@@@@@@@@@ FATAL ERROR - FAILED TO FORCE RECIPE VALIDATION");
+  }
+  return validRecipe;
+});
+
 module.exports = router;
