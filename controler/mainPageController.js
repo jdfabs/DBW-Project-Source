@@ -1,11 +1,20 @@
+
+
 "use strict";
 const recepieModel = require("../model/recepieModel");
 const dataValidation = require("../middlewares/dbValidation");
 const debug = require("../debugTools");
 
+
+
+
 const getRecipes = async function () {
   debug.log(1, "Main Page Controller - getRecipes");
   //addMockData(); //-- Só para adicionar receitas á mão!!!!!! deve estar sempre comentado
+
+ 
+
+
 
   const recepies = await getTopTenRecepies();
 
@@ -18,7 +27,7 @@ const getRecipes = async function () {
 
 const getTopTenRecepies = async function () {
   debug.log(1, "Main Page Controller - getTopTenRecepies");
-  const recepies = await recepieModel.find({}).limit(10);
+  const recepies = await recepieModel.find({}).limit(3);
   //console.log(recepie);
 
   return recepies;
@@ -107,3 +116,6 @@ const addMockData = async function () {
 };
 
 module.exports = { getRecipes };
+
+
+

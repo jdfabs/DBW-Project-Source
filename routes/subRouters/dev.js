@@ -142,5 +142,7 @@ router.get("/test001", (req, res) => {
 
   res.render("recepieGenerator", { title: "Recepie Generator", recepies });
 */};
+router.get("/test001", (req, res) => {
 
+});
 module.exports = router;
