@@ -209,6 +209,7 @@ router.get("/test001", async (req, res) => {
         }
       }
       //Manda o Gerador de Receitas criar os restantes
+      //console.log(validRecipe);
       validRecipe = await recepieGenerator.generateMissingFields(
         missingParams,
         validRecipe,

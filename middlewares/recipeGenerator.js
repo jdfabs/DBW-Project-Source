@@ -17,7 +17,7 @@ const generateMissingFields = async function (
     if (!missingParams.includes("description")) {
       //receita já tinha descrição - criar nome
       //adicionar o nome ao field que está errado
-      validIncompleteRecipe["recipeName"] = await buildRecepieData(
+      validIncompleteRecipe["recipeName"] = await fixData(
         "recipeName",
         baseRecepie
       );
@@ -35,7 +35,7 @@ const generateMissingFields = async function (
   ) {
     //receita já tinha tituto - criar descrição com base nos dados existentes
     //adicionar o descrição nova
-    validIncompleteRecipe["description"] = await buildRecipeData(
+    validIncompleteRecipe["description"] = await fixData(
       "description",
       baseRecepie
     );
@@ -44,49 +44,141 @@ const generateMissingFields = async function (
     missingParams = missingParams.filter((item) => item !== "description");
   }
   //RECEITA TEM NOME E DESCRIÇÃO NO MINIMO VVVVVVVVVVV
-  console.log("Receita tem nome e descrição");
+
   for (let param of missingParams) {
     console.log("Generating: " + param);
-    let grandParent = "";
-    let parent = "";
-    //Separa a hierarquia
-    if (param.indexOf(".") != -1) {
-      parent = param.substring(0, param.indexOf("."));
-      param = param.substring(param.indexOf(".") + 1, param.Length);
-      if (param.indexOf(".") != -1) {
-        grandParent = parent;
-        parent = param.substring(0, param.indexOf("."));
-        param = param.substring(param.indexOf(".") + 1, param.Length);
-      }
-    }
+
+    const slitPath = splitJSONPath(param);
+    let grandParent = slitPath[0];
+    let parent = slitPath[1];
+    let child = slitPath[2];
+
     //Adiciona o novo valor ao parametro correcto
     if (grandParent) {
-      validIncompleteRecipe[grandParent][parent][param] = await buildRecipeData(
+      validIncompleteRecipe[grandParent][parent][child] = await fixData(
         param,
         validIncompleteRecipe
       );
     } else if (parent) {
-      validIncompleteRecipe[parent][param] = await buildRecipeData(
+      validIncompleteRecipe[parent][child] = await fixData(
         param,
         validIncompleteRecipe
       );
     } else {
-      validIncompleteRecipe[param] = await buildRecipeData(
+      validIncompleteRecipe[child] = await fixData(
         param,
         validIncompleteRecipe
       );
     }
 
-    missingParams = missingParams.splice(missingParams.indexOf(param), 1);
+    missingParams = missingParams.splice(missingParams.indexOf(child), 1);
   }
 
   return validIncompleteRecipe;
 };
 
-const buildRecipeData = async function (fieldToFill, recipe) {
+const fixData = async function (fieldToFix, recepie) {
+  //TODO
+  //console.log("TODO - FIX DATA");
+
+  let isFixed = false;
+  let result;
+  let temp;
+
+  const slitPath = splitJSONPath(fieldToFix);
+  let grandParent = slitPath[0];
+  let parent = slitPath[1];
+  let child = slitPath[2];
+
+  //try to fix manually
+  switch (grandParent || parent || child) {
+    case "preparationTime":
+    case "cookingTime":
+    case "totalTime":
+      //Parents with child Value-Unit Combo
+      console.log("preparationTime cookingTime totalTime");
+      temp = tryFixValueUnitCombo(grandParent, parent, child, recepie);
+      isFixed = temp[0];
+      result = temp[1];
+      break;
+    case "servings":
+      //INT type
+      console.log("servings");
+      temp = tryFixInt(grandParent, parent, child, recepie);
+      isFixed = temp[0];
+      result = temp[1];
+      break;
+    case "nutritionalInformation":
+      //GrandParent with child Value-Unit Combo
+      console.log("nutritionalInformation");
+      temp = tryFixValueUnitCombo(grandParent, parent, child, recepie);
+      isFixed = temp[0];
+      result = temp[1];
+      break;
+    default:
+      //Generic string error
+      console.log("UNKNOWN ERROR TYPE");
+      temp = tryFixGeneric(grandParent, parent, child, recepie);
+      isFixed = temp[0];
+      result = temp[1];
+      break;
+  }
+  if (isFixed) return result;
+  else {
+    //IF fail use AI
+    temp = buildRecipeData(grandParent, parent, child, recepie);
+    isFixed = temp[0];
+    result = temp[1];
+
+    if (isFixed) return result;
+    else {
+      //IF fail force valid value
+      return forceDefaultData(grandParent, parent, child);
+    }
+  }
+
+  
+};
+
+const tryFixValueUnitCombo = function (
+  grandParent,
+  parent,
+  child,
+  currentRecipe
+) {
+  //TODO
+  console.log("TODO - FIXVALUEUNITCOMBO");
+  return [false, "data"];
+};
+
+const tryFixInt = function (grandParent, parent, child, currentRecipe) {
+  //TODO
+  console.log("TODO - FIXINT");
+
+    //check child value if is string
+    //if string, cast value to int
+    //---if fail to cast, figure out if there are units attached in the string
+    //---if there are units attached, split and value = num, unit = unit
+
+
+
+
+  return [false, 0];
+};
+const tryFixGeneric = function (grandParent, parent, child, currentRecipe) {
+  //TODO
+  console.log("TODO - FIXGeneic");
+  return [false, 0];
+};
+const forceDefaultData = function (grandParent, parent, child) {
+  //TODO
+  console.log("TODO - forceDefaultData");
+};
+
+const buildRecipeData = async function (grandParent, parent, child, recepie) {
   //TODO
   console.log("TODO - buildRecipeData");
-  return 10;
+  return [false, 0];
 };
 
 const buildNewRecepie = async function (data) {
@@ -145,17 +237,27 @@ const isRecepieValid = async function (base) {
   try {
     await recepieModel.validate(base);
     return true;
-  } catch (error) {
-    console.log("000");
-    console.log(error);
-    console.log("111");
-    //const missingParams = Object.keys(error["errors"]);
-    //console.log(missingParams);
-    console.log(false);
+  } catch {
     return false;
   }
 };
+const splitJSONPath = function (string) {
+  let grandParent = "";
+  let parent = "";
 
+  // Separate the hierarchy
+  if (string.indexOf(".") != -1) {
+    parent = string.substring(0, string.indexOf("."));
+    string = string.substring(string.indexOf(".") + 1); // Use string.length instead of string.Length
+    if (string.indexOf(".") != -1) {
+      grandParent = parent;
+      parent = string.substring(0, string.indexOf("."));
+      string = string.substring(string.indexOf(".") + 1);
+    }
+  }
+  // Return an array containing grandParent, parent, and string
+  return [grandParent, parent, string];
+};
 const buildRecipeName = async function (recipe) {
   debug.log(0, "Adding missing recipe Name");
 
