@@ -1,8 +1,7 @@
 "use strict";
 const recepieModel = require("../model/recepieModel");
 const userModel = require("../model/userModel");
-
-
+const generator = require("./recipeGenerator");
 
 const debug = require("../debugTools");
 
@@ -36,94 +35,75 @@ const isUserValid = async function (user) {
 
 const forceValidRecipe = async function (base) {
   debug.log(1, "forceValidRecipe:");
-  let validRecipe = base;
-  validRecipe.recipeName = null;
+    let validRecipe = base;
 
-  try {
-    await recepieModel.validate(validRecipe);
-    debug.log(2, true);
-    return validRecipe;
-  } catch (error) {
-    const missingParams = Object.keys(error["errors"]);
-    debug.log(3, "Missing params:");
-    debug.log(3, missingParams);
-    debug.log(2, false);
-    for (let param of missingParams) {
-      //A Ideia é por cada um juntar para pedir ao OpenAI para gerar
-      //estes parametros e juntar á base para retornar uma recipe valida.
-      switch (param) {
-        case "recipeName":
-          validRecipe = await buildRecipeName(validRecipe);
-          // Handle missing recipeName
-          break;
-        case "description":
-          // Handle missing description
-          break;
-        case "difficultyLevel":
-          // Handle missing difficultyLevel
-          break;
-        case "preparationTime.value":
-          // Handle missing preparationTime value
-          break;
-        case "preparationTime.unit":
-          // Handle missing preparationTime unit
-          break;
-        case "cookingTime.value":
-          // Handle missing cookingTime value
-          break;
-        case "cookingTime.unit":
-          // Handle missing cookingTime unit
-          break;
-        case "totalTime.value":
-          // Handle missing totalTime value
-          break;
-        case "totalTime.unit":
-          // Handle missing totalTime unit
-          break;
-        case "servings":
-          // Handle missing servings
-          break;
-        case "cuisine":
-          // Handle missing cuisine
-          break;
-        default:
-          // Handle any other missing parameter
-          break;
+    let isFixed = false;
+    const limit = 5;
+    let counter = 0;
+
+    while (!isFixed && counter < limit) {
+      try {
+        await recepieModel.validate(validRecipe);
+        isFixed = true;
+      } catch (error) {
+        console.log(error);
+        const missingParams = Object.keys(error.errors);
+
+        console.log(missingParams);
+        console.log(validRecipe);
+
+        for (let param of missingParams) {
+
+          let grandParent = "";
+        let parent = "";
+
+          if (param.indexOf(".") != -1) {
+            parent = param.substring(0, param.indexOf("."));
+            param = param.substring(param.indexOf(".") + 1, param.Length);
+            if (param.indexOf(".") != -1) {
+              grandParent = parent;
+              parent = param.substring(0, param.indexOf("."));
+              param = param.substring(param.indexOf(".") + 1, param.Length);
+            }
+          }
+
+          if (grandParent != "") {
+            if (validRecipe[grandParent] === undefined) {
+              validRecipe[grandParent] = {}; // Initialize the object if it doesn't exist
+            }
+          }
+          if (parent != "") {
+            if (grandParent != "") {
+              if (validRecipe[grandParent][parent] === undefined) {
+                validRecipe[grandParent][parent] = {};
+              }
+            } else if (validRecipe[parent] === undefined) {
+              validRecipe[parent] = {};
+            }
+          }
+  
+          if (parent != "") {
+            if (grandParent != "") {
+              if (validRecipe[grandParent][parent][param] === undefined) {
+                validRecipe[grandParent][parent][param] = await generateField(validRecipe);
+              }
+            } else if (validRecipe[parent][param] === undefined) {
+              validRecipe[parent][param] = await generateField(validRecipe);
+            }
+          } else {
+            if (validRecipe[param] === undefined) {
+              validRecipe[param] = await generateField(validRecipe);
+            }
+          }
+        }
       }
+      counter++;
     }
-  }
-  if (await isRecepieValid(validRecipe)) {
-    debug.log(3, JSON.stringify(validRecipe));
+    if (!isFixed) {
+      console.log("@@@@@@@@@ FATAL ERROR - FAILED TO FORCE RECIPE VALIDATION");
+    }
     return validRecipe;
-  } else {
-    debug.log(0, "FATAL ERROR - UNABLE TO FORCE VALID RECEPIE");
-  }
 };
 
-const buildRecipeName = async function (recipe) {
-  debug.log(0, "Adding missing recipe Name");
-  let response = await fetch("http://localhost:11434/api/generate", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    "model": "gemma:2b",
-    "prompt": "Generate, with creativity,  a 'recipeName' for this recipe: A classic Italian pasta dish made with eggs, bacon, and cheese. ```json ",
-    "format": "json",
-    "stream": false ,
-    "options" : {
-      "num_gpu" : 40
-    }   
-  })
-});
 
-const responseData = await response.json(); // Parse response body as JSON
-recipe.recipeName = JSON.parse(responseData.response).recipeName;
-  return recipe;
-};
-
-const print = async (word) => {
-  process.stdout.write(word);
-};
 module.exports = { isRecepieValid, isUserValid, forceValidRecipe };
