@@ -104,7 +104,7 @@ const fixData = async function (fieldToFix, recepie) {
     case "servings":
       //INT type
       console.log("servings");
-      temp = tryFixInt(grandParent, parent, child, recepie);
+      temp = fixInt(grandParent, parent, child, recepie);
       isFixed = temp[0];
       result = temp[1];
       break;
@@ -136,8 +136,6 @@ const fixData = async function (fieldToFix, recepie) {
       return forceDefaultData(grandParent, parent, child);
     }
   }
-
-  
 };
 
 const tryFixValueUnitCombo = function (
@@ -151,20 +149,75 @@ const tryFixValueUnitCombo = function (
   return [false, "data"];
 };
 
-const tryFixInt = function (grandParent, parent, child, currentRecipe) {
-  //TODO
-  console.log("TODO - FIXINT");
+const fixInt = function (grandParent, parent, child, currentRecipe) {
+  let value;
+ 
+  // Function to create nested structure if it doesn't exist
+  const createNestedStructure = (obj, keys) => {
+    console.log("checking structure");
+    for (let key of keys) {
+      if (!obj[key]) {
+        obj[key] = {};
+        console.log("creating key");
+      }
+      obj = obj[key];
+    }
+  };
 
-    //check child value if is string
-    //if string, cast value to int
-    //---if fail to cast, figure out if there are units attached in the string
-    //---if there are units attached, split and value = num, unit = unit
+  // Determine which value to retrieve from currentRecipe
+  if (
+    grandParent &&
+    currentRecipe[grandParent] &&
+    currentRecipe[grandParent][parent]
+  ) {
+    value = currentRecipe[grandParent][parent][child];
+  } else if (parent && currentRecipe[parent]) {
+    value = currentRecipe[parent][child];
+  } else if (currentRecipe[child]) {
+    value = currentRecipe[child];
+  } else {
+    console.log("000");
+    //structure doesn't exist -create it and applying default value *shrugs*
+    const defaultValue = 4;
 
+    if (grandParent) {
+      createNestedStructure(currentRecipe, [grandParent, parent, child]);
+      currentRecipe[grandParent][parent][child] = defaultValue;
+      console.log("001");
+    } else if (parent) {
+      createNestedStructure(currentRecipe, [parent, child]);
+      currentRecipe[parent][child] = defaultValue;
+      console.log("002");
+    } else {
+      currentRecipe[child] = defaultValue;
+      console.log("003");
+    }
+    
+    return currentRecipe;
+  }
+  try {
+    // Try to parse the value as an integer
+    const intValue = parseInt(value);
+    // If parsing failed or value was NaN, apply default value
 
+    if (!isNaN(intValue)) {
+      // Value was successfully parsed and is not NaN
+      if (grandParent) {
+        currentRecipe[grandParent][parent][child] = intValue;
+      } else if (parent) {
+        currentRecipe[parent][child] = intValue;
+      } else {
+        currentRecipe[child] = intValue;
+      }
+    }
+  } catch (error) {
+    console.error("Error parsing integer:", error);
+    console.log("UNHANDLED ERROR CAUGHT - fixInt");
+  }  
 
-
-  return [false, 0];
+  return currentRecipe;
 };
+
 const tryFixGeneric = function (grandParent, parent, child, currentRecipe) {
   //TODO
   console.log("TODO - FIXGeneic");
@@ -287,4 +340,4 @@ const buildRecipeName = async function (recipe) {
   return JSON.parse(responseData.response);
 };
 
-module.exports = { generateMissingFields };
+module.exports = { generateMissingFields, tryFixInt: fixInt };
