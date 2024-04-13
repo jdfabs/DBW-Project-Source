@@ -2,7 +2,9 @@
 const config = require("../config");
 const recepieModel = require("../model/recepieModel");
 
-const generateMissingFields = async function (
+
+//Modificar --- ???
+/*const generateMissingFields = async function (
   missingParams,
   validIncompleteRecipe,
   baseRecepie
@@ -17,7 +19,7 @@ const generateMissingFields = async function (
     if (!missingParams.includes("description")) {
       //receita já tinha descrição - criar nome
       //adicionar o nome ao field que está errado
-      validIncompleteRecipe["recipeName"] = await fixData(
+      validIncompleteRecipe["recipeName"] = await fixer.fixData(
         "recipeName",
         baseRecepie
       );
@@ -26,7 +28,7 @@ const generateMissingFields = async function (
     } else {
       //sem nome nem descrição -- SEM INFO SUFECIENTE - receita nova com base nos dados existentes
 
-      return await buildNewRecepie(baseRecepie);
+      return await buildNewRecipe(baseRecepie);
       //Retorna a nova receita gerada a partir dos dados previamente existentes
     }
   } else if (
@@ -35,7 +37,7 @@ const generateMissingFields = async function (
   ) {
     //receita já tinha tituto - criar descrição com base nos dados existentes
     //adicionar o descrição nova
-    validIncompleteRecipe["description"] = await fixData(
+    validIncompleteRecipe["description"] = await fixer.fixData(
       "description",
       baseRecepie
     );
@@ -55,17 +57,17 @@ const generateMissingFields = async function (
 
     //Adiciona o novo valor ao parametro correcto
     if (grandParent) {
-      validIncompleteRecipe[grandParent][parent][child] = await fixData(
+      validIncompleteRecipe[grandParent][parent][child] = await fixer.fixData(
         param,
         validIncompleteRecipe
       );
     } else if (parent) {
-      validIncompleteRecipe[parent][child] = await fixData(
+      validIncompleteRecipe[parent][child] = await fixer.fixData(
         param,
         validIncompleteRecipe
       );
     } else {
-      validIncompleteRecipe[child] = await fixData(
+      validIncompleteRecipe[child] = await fixer.fixData(
         param,
         validIncompleteRecipe
       );
@@ -75,166 +77,10 @@ const generateMissingFields = async function (
   }
 
   return validIncompleteRecipe;
-};
+};*/
 
-const fixData = async function (fieldToFix, recepie) {
-  //TODO
-  //console.log("TODO - FIX DATA");
-
-  let isFixed = false;
-  let result;
-  let temp;
-
-  const slitPath = splitJSONPath(fieldToFix);
-  let grandParent = slitPath[0];
-  let parent = slitPath[1];
-  let child = slitPath[2];
-
-  //try to fix manually
-  switch (grandParent || parent || child) {
-    case "preparationTime":
-    case "cookingTime":
-    case "totalTime":
-      //Parents with child Value-Unit Combo
-      console.log("preparationTime cookingTime totalTime");
-      temp = tryFixValueUnitCombo(grandParent, parent, child, recepie);
-      isFixed = temp[0];
-      result = temp[1];
-      break;
-    case "servings":
-      //INT type
-      console.log("servings");
-      temp = fixInt(grandParent, parent, child, recepie);
-      isFixed = temp[0];
-      result = temp[1];
-      break;
-    case "nutritionalInformation":
-      //GrandParent with child Value-Unit Combo
-      console.log("nutritionalInformation");
-      temp = tryFixValueUnitCombo(grandParent, parent, child, recepie);
-      isFixed = temp[0];
-      result = temp[1];
-      break;
-    default:
-      //Generic string error
-      console.log("UNKNOWN ERROR TYPE");
-      temp = tryFixGeneric(grandParent, parent, child, recepie);
-      isFixed = temp[0];
-      result = temp[1];
-      break;
-  }
-  if (isFixed) return result;
-  else {
-    //IF fail use AI
-    temp = buildRecipeData(grandParent, parent, child, recepie);
-    isFixed = temp[0];
-    result = temp[1];
-
-    if (isFixed) return result;
-    else {
-      //IF fail force valid value
-      return forceDefaultData(grandParent, parent, child);
-    }
-  }
-};
-
-const tryFixValueUnitCombo = function (
-  grandParent,
-  parent,
-  child,
-  currentRecipe
-) {
-  //TODO
-  console.log("TODO - FIXVALUEUNITCOMBO");
-  return [false, "data"];
-};
-
-const fixInt = function (grandParent, parent, child, currentRecipe) {
-  let value;
- 
-  // Function to create nested structure if it doesn't exist
-  const createNestedStructure = (obj, keys) => {
-    console.log("checking structure");
-    for (let key of keys) {
-      if (!obj[key]) {
-        obj[key] = {};
-        console.log("creating key");
-      }
-      obj = obj[key];
-    }
-  };
-
-  // Determine which value to retrieve from currentRecipe
-  if (
-    grandParent &&
-    currentRecipe[grandParent] &&
-    currentRecipe[grandParent][parent]
-  ) {
-    value = currentRecipe[grandParent][parent][child];
-  } else if (parent && currentRecipe[parent]) {
-    value = currentRecipe[parent][child];
-  } else if (currentRecipe[child]) {
-    value = currentRecipe[child];
-  } else {
-    console.log("000");
-    //structure doesn't exist -create it and applying default value *shrugs*
-    const defaultValue = 4;
-
-    if (grandParent) {
-      createNestedStructure(currentRecipe, [grandParent, parent, child]);
-      currentRecipe[grandParent][parent][child] = defaultValue;
-      console.log("001");
-    } else if (parent) {
-      createNestedStructure(currentRecipe, [parent, child]);
-      currentRecipe[parent][child] = defaultValue;
-      console.log("002");
-    } else {
-      currentRecipe[child] = defaultValue;
-      console.log("003");
-    }
-    
-    return currentRecipe;
-  }
-  try {
-    // Try to parse the value as an integer
-    const intValue = parseInt(value);
-    // If parsing failed or value was NaN, apply default value
-
-    if (!isNaN(intValue)) {
-      // Value was successfully parsed and is not NaN
-      if (grandParent) {
-        currentRecipe[grandParent][parent][child] = intValue;
-      } else if (parent) {
-        currentRecipe[parent][child] = intValue;
-      } else {
-        currentRecipe[child] = intValue;
-      }
-    }
-  } catch (error) {
-    console.error("Error parsing integer:", error);
-    console.log("UNHANDLED ERROR CAUGHT - fixInt");
-  }  
-
-  return currentRecipe;
-};
-
-const tryFixGeneric = function (grandParent, parent, child, currentRecipe) {
-  //TODO
-  console.log("TODO - FIXGeneic");
-  return [false, 0];
-};
-const forceDefaultData = function (grandParent, parent, child) {
-  //TODO
-  console.log("TODO - forceDefaultData");
-};
-
-const buildRecipeData = async function (grandParent, parent, child, recepie) {
-  //TODO
-  console.log("TODO - buildRecipeData");
-  return [false, 0];
-};
-
-const buildNewRecepie = async function (data) {
+//Completar
+const buildNewRecipe = async function (data) {
   console.log("Generating new recipe -- not enough info");
   let newRecipe = null;
   if (!config.mockData) {
@@ -283,61 +129,10 @@ const buildNewRecepie = async function (data) {
   console.log(isRecepieValid(newRecipe));
   return newRecipe;
 };
-
-const isRecepieValid = async function (base) {
-  console.log("validateRecipe:");
-
-  try {
-    await recepieModel.validate(base);
-    return true;
-  } catch {
-    return false;
-  }
-};
-const splitJSONPath = function (string) {
-  let grandParent = "";
-  let parent = "";
-
-  // Separate the hierarchy
-  if (string.indexOf(".") != -1) {
-    parent = string.substring(0, string.indexOf("."));
-    string = string.substring(string.indexOf(".") + 1); // Use string.length instead of string.Length
-    if (string.indexOf(".") != -1) {
-      grandParent = parent;
-      parent = string.substring(0, string.indexOf("."));
-      string = string.substring(string.indexOf(".") + 1);
-    }
-  }
-  // Return an array containing grandParent, parent, and string
-  return [grandParent, parent, string];
-};
-const buildRecipeName = async function (recipe) {
-  debug.log(0, "Adding missing recipe Name");
-
-  console.log("Generating new recipe -- not enough info");
-
-  let response = await fetch("http://localhost:11434/api/generate", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      model: "gemma:2b",
-
-      prompt:
-        "description: A classic Italian pasta dish made with eggs, bacon, and cheese. You will create a 'recipieName' for the given recipe",
-      format: "json",
-      stream: false,
-      options: {
-        num_gpu: 40,
-      },
-    }),
-  });
-  const responseData = await response.json(); //mensagem
-  console.log("000");
-  console.log(responseData.response);
-  console.log("001");
-  return JSON.parse(responseData.response);
+const buildRecipeData = async function (grandParent, parent, child, recepie) {
+  //TODO
+  console.log("TODO - buildRecipeData");
+  return [false, 0];
 };
 
-module.exports = { generateMissingFields, tryFixInt: fixInt };
+module.exports = { /*generateMissingFields,*/ buildRecipeData };

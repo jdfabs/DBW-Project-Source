@@ -9,14 +9,11 @@ const isRecepieValid = async function (base) {
   debug.log(1, "validateRecipe:");
   try {
     await recepieModel.validate(base);
-    debug.log(2, true);
     return true;
-  } catch (error) {
-    const missingParams = Object.keys(error["errors"]);
-    debug.log(3, missingParams);
-    debug.log(2, false);
+  } catch  {
     return false;
-  }
+  }    
+  
 };
 
 const isUserValid = async function (user) {
@@ -104,73 +101,6 @@ const forceValidRecipe = async function (base) {
     console.log("@@@@@@@@@ FATAL ERROR - FAILED TO FORCE RECIPE VALIDATION");
   }
   return validRecipe;
-  /*
-    let isFixed = false;
-    const limit = 5;
-    let counter = 0;
-
-    while (!isFixed && counter < limit) {
-      try {
-        await recepieModel.validate(validRecipe);
-        isFixed = true;
-      } catch (error) {
-        console.log(error);
-        const missingParams = Object.keys(error.errors);
-
-        console.log(missingParams);
-        console.log(validRecipe);
-
-        for (let param of missingParams) {
-
-          let grandParent = "";
-        let parent = "";
-
-          if (param.indexOf(".") != -1) {
-            parent = param.substring(0, param.indexOf("."));
-            param = param.substring(param.indexOf(".") + 1, param.Length);
-            if (param.indexOf(".") != -1) {
-              grandParent = parent;
-              parent = param.substring(0, param.indexOf("."));
-              param = param.substring(param.indexOf(".") + 1, param.Length);
-            }
-          }
-
-          if (grandParent != "") {
-            if (validRecipe[grandParent] === undefined) {
-              validRecipe[grandParent] = {}; // Initialize the object if it doesn't exist
-            }
-          }
-          if (parent != "") {
-            if (grandParent != "") {
-              if (validRecipe[grandParent][parent] === undefined) {
-                validRecipe[grandParent][parent] = {};
-              }
-            } else if (validRecipe[parent] === undefined) {
-              validRecipe[parent] = {};
-            }
-          }
-  
-          if (parent != "") {
-            if (grandParent != "") {
-              if (validRecipe[grandParent][parent][param] === undefined) {
-                validRecipe[grandParent][parent][param] = await generateField(validRecipe);
-              }
-            } else if (validRecipe[parent][param] === undefined) {
-              validRecipe[parent][param] = await generateField(validRecipe);
-            }
-          } else {
-            if (validRecipe[param] === undefined) {
-              validRecipe[param] = await generateField(validRecipe);
-            }
-          }
-        }
-      }
-      counter++;
-    }
-    if (!isFixed) {
-      console.log("@@@@@@@@@ FATAL ERROR - FAILED TO FORCE RECIPE VALIDATION");
-    }
-    return validRecipe;*/
 };
 
 module.exports = { isRecepieValid, isUserValid, forceValidRecipe };

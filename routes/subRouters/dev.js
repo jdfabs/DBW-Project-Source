@@ -6,6 +6,7 @@ const config = require("../../config");
 const recepieModel = require("../../model/recepieModel");
 const router = express.Router(); //Instance of the router
 const recepieGenerator = require("../../middlewares/recipeGenerator");
+const fixer = require("../../middlewares/dataFixer");
 
 /*
 const openai = new OpenAIApi({
@@ -146,88 +147,12 @@ router.get("/test001", (req, res) => {
 */
 }
 router.get("/test001", async (req, res) => {
-  debug.log(1, "forceValidRecipe:");
-  let validRecipe = {
-    nutritionalInformation: {
-      
-      calories: { value: 10, unit: "sim" },
-    },
-  };
-
-  let isFixed = false;
-  const limit = 5;
-  let counter = 0;
-
-  while (!isFixed && counter < limit) {
-    try {
-      await recepieModel.validate(validRecipe);
-      isFixed = true;
-    } catch (error) {
-      const missingParams = Object.keys(error.errors);
-      
-      for (let param of missingParams) {
-        let grandParent = "";
-        let parent = "";
-        //Separa a hierarquia
-        if (param.indexOf(".") != -1) {
-          parent = param.substring(0, param.indexOf("."));
-          param = param.substring(param.indexOf(".") + 1, param.Length);
-          if (param.indexOf(".") != -1) {
-            grandParent = parent;
-            parent = param.substring(0, param.indexOf("."));
-            param = param.substring(param.indexOf(".") + 1, param.Length);
-          }
-        }
-        //Verificar se todos os objectos da hierarquia existes, caso n existam gera um novo
-        if (grandParent != "") {
-          if (validRecipe[grandParent] === undefined) {
-            validRecipe[grandParent] = {}; // Initialize the object if it doesn't exist
-          }
-        }
-        if (parent != "") {
-          if (grandParent != "") {
-            if (validRecipe[grandParent][parent] === undefined) {
-              validRecipe[grandParent][parent] = {};
-            }
-          } else if (validRecipe[parent] === undefined) {
-            validRecipe[parent] = {};
-          }
-        }
-        //Gerar campo em falta final a vazio
-        if (parent != "") {
-          if (grandParent != "") {
-            if (validRecipe[grandParent][parent][param] === undefined) {
-              validRecipe[grandParent][parent][param] = 0;              
-            }
-          } else if (validRecipe[parent][param] === undefined) {
-            validRecipe[parent][param] = 0;
-          }
-        } else {
-          if (validRecipe[param] === undefined) {
-            validRecipe[param] = 0;
-          }
-        }
-      }
-      //Manda o Gerador de Receitas criar os restantes
-      //console.log(validRecipe);
-      validRecipe = await recepieGenerator.generateMissingFields(
-        missingParams,
-        validRecipe,
-        validRecipe
-      );
-
-    }
-    counter++;
-  }
-  if (!isFixed) {
-    console.log("@@@@@@@@@ FATAL ERROR - FAILED TO FORCE RECIPE VALIDATION");
-  }
-  return validRecipe;
+ 
 });
 
 router.get("/test002", async (req, res) => {
   
-  recepieGenerator.tryFixInt("","","servings",JSON.parse(
+  fixer.fixData("servings",JSON.parse(
     '{"recipeName": "Easy Beef and Vegetable Stir-Fry","ingredients": [{ "name": "potato", "quantity": "1", "unit": "" },{ "name": "carrot", "quantity": "2", "unit": "" },{ "name": "beef", "quantity": "1/4 pound", "unit": "" },{ "name": "onions", "quantity": "3", "unit": "" },{ "name": "olive oil", "quantity": "2 tablespoons", "unit": "" },{ "name": "cheese", "quantity": "1/4 cup shredded", "unit": "" },{ "name": "broccoli", "quantity": "1 cup chopped", "unit": "" },{ "name": "cinnamon", "quantity": "2 teaspoons ground", "unit": "" },{ "name": "lemon", "quantity": "1/4", "unit": "" }],"instructions": [{ "instruction": "Peel and chop the potato and carrot into small pieces." },{ "instruction": "Heat 1 tablespoon of olive oil in a large skillet over medium-high heat. Add the beef, onions, broccoli, cinnamon, and lemon juice to the skillet and cook until the beef is browned and the vegetables are tender.", "step": 1, "startTime": 1609459200 },{ "instruction": "Add 1/4 cup of water to the skillet and bring to a boil. Reduce the heat to low and simmer for 3-5 minutes, or until all the liquid is absorbed." },{ "instruction": "Season with salt and pepper to taste. Remove from heat.", "step": 2, "startTime": 1609472800 },{ "instruction": "Serve the stir-fry over rice or noodles." }],"description": "A simple and healthy meal made with potatoes, carrots, beef, onions, olive oil, cheese, broccoli, cinnamon, lemon. Perfect for a quick dinner.","difficultyLevel": "easy","preparationTime": { "value": 20, "unit": "" },"cookingTime": { "value": 10, "unit": "" },"totalTime": {"value": 30, "unit": ""},"cuisine": "Asian","dietaryInformation": [{"name": "Gluten-free", "info": "The ingredients do not contain any gluten."}],"nutritionalInformation": {"calories": { "value": 250, "unit": "" },"proteins": {"value": 12, "unit": ""},"saturatedFats": {"value": 15, "unit": ""},"unSaturatedFats": {"value": 3, "unit": ""},"cholesterol": {"value": 10, "unit": ""},"carbohydrates": {"value": 50, "unit": ""},"sugar": {"value": 5, "unit": ""},"vitamins": [{"name": "Vitamin C", "info": "100% of the recommended daily value."}],"minerals": [{"name": "Iron", "info": "10% of the recommended daily value."}]},"notes": { "type": "string", "required": true }}'
   ));
 });
