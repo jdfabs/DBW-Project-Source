@@ -2,7 +2,6 @@
 const config = require("../config");
 const recepieModel = require("../model/recepieModel");
 
-
 //Modificar --- ???
 /*const generateMissingFields = async function (
   missingParams,
@@ -136,3 +135,137 @@ const buildRecipeData = async function (grandParent, parent, child, recepie) {
 };
 
 module.exports = { /*generateMissingFields,*/ buildRecipeData };
+
+const newRecipe = async function (data) {
+  //TODO
+  let recipe = recepieModel.newDefaultRecipe();
+
+  recipe = buildBase(data, recipe);
+  recipe = buildMainInfo(data, recipe);
+  recipe = buildSecondaryInfo(data, recipe);
+  recipe = buildTags(data, recipe);
+};
+
+const buildBase = async function (data, base) {
+  //TODO
+  const request = await openai.chat.completions.create({
+    model: "gpt-3.5-turbo",
+    response_format: { type: "json_object" },
+
+    messages: [
+      {
+        role: "system",
+        content:
+          'You are a helpful assistant designed to output JSON. jsonTemplate = {"recipeName": &RECEPIENAME&, "ingredients": [ &INGREDIENT_ONE&, &INGREDIENT_TWO&, &INGREDIENT_THREE&, (...) ], description": &DESCRIPTION&, //minimum 200 words "difficultyLevel": &DIFICULTY&, //easy, medium, hard, chef ,"servings": &NUM_SERVINGS&, //number of servings "cuisine": &CUISINE_TYPE&, //american, mexican, etc };',
+      },
+      {
+        role: "user",
+        content:
+          "in any recepie you may freely include any basic spice./n Be extremely shot and precise on each section of the answer",
+      },
+      {
+        role: "user",
+        content:
+          "generate me a recepie using these ingredients:/n potato,carrot, beef, onions, olive oil, cheese, broccoli, cinnamon, lemon /n You may remove up to two of the previous ingredients then add two more new ingredients./n maximum 45min, easy dificulty",
+      },
+    ],
+    max_tokens: 1000,
+  });
+
+  const response = JSON.parse(request.choices[0].message.content);
+
+  base.recipeName = response.recipeName;
+  base.ingredients = response.ingredients;
+  base.description = response.description;
+  base.difficultyLevel = response.dificultyLevel;
+  base.servings = response.servings;
+  base.cuisine = response.cuisine;
+
+  return base;
+};
+
+const buildMainInfo = async function (data, base) {
+  //TODO
+  //Request -- TODO promp engeneering
+  const request = await openai.chat.completions.create({
+    model: "gpt-3.5-turbo",
+    response_format: { type: "json_object" },
+
+    messages: [
+      {
+        role: "system",
+        content:
+          'You are a helpful assistant designed to output JSON. jsonTemplate = {}',
+      },
+      {
+        role: "user",
+        content:
+          "in any recepie you may freely include any basic spice./n Be extremely shot and precise on each section of the answer",
+      },
+      {
+        role: "user",
+        content:
+          "",
+      },
+    ],
+    max_tokens: 1000,
+  });
+
+  //Response
+  const response = JSON.parse(request.choices[0].message.content);
+
+  //Set new values
+  base.instructions = response.instructions;
+  base.nutritionalInformation = response.nutritionalInformation;
+  base.notes = response.notes;
+  base.mealType = response.mealType;
+  return base;
+};
+
+const buildSecondaryInfo = async function (data, base) {
+  //TODO
+  //Request -- TODO promp engeneering
+  const request = await openai.chat.completions.create({
+    model: "gpt-3.5-turbo",
+    response_format: { type: "json_object" },
+
+    messages: [
+      {
+        role: "system",
+        content:
+          'You are a helpful assistant designed to output JSON. jsonTemplate = {}',
+      },
+      {
+        role: "user",
+        content:
+          "in any recepie you may freely include any basic spice./n Be extremely shot and precise on each section of the answer",
+      },
+      {
+        role: "user",
+        content:
+          "",
+      },
+    ],
+    max_tokens: 1000,
+  });
+
+  //Response
+  const response = JSON.parse(request.choices[0].message.content);
+
+  //Set new values 
+  base.preparationTime = response.preparationTime;
+  base.cookingTime = response.prepationTime;  
+  base.allergenInformation = response.allergenInformation;
+  base.substitutions = response.substitutions;
+  base.equipmentNeeded = response.equipmentNeeded;
+
+  return base;
+};
+
+const buildTags = async function (data, base) {
+  //TODO
+  //From complete recipe pick up every important value,
+  //Mealtype, cuisinetype, ingredients
+  //add those as tags   
+  return base;
+};

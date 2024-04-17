@@ -2,8 +2,7 @@
 const generator = require("./recipeGenerator");
 
 const fixData = async function (fieldToFix, recepie) {
-  console.log("000");
-  console.log(fieldToFix);
+  console.log("Field to fix: " + fieldToFix);
   //console.log("TODO - FIX DATA");
   const slitPath = splitJSONPath(fieldToFix);
   let grandParent = slitPath[0];
@@ -26,9 +25,12 @@ const fixData = async function (fieldToFix, recepie) {
       //GrandParent with child Value-Unit Combo
       console.log("nutritionalInformation");
       return await fixValueUnitCombo(grandParent, parent, child, recepie);
+    case "nutritionalInformation.calories":
+      console.log("calories ffs");
+      return await fixCalories(grandParent, parent, child, recepie);
+
     default:
       //Generic string error
-      console.log("UNKNOWN ERROR TYPE");
       return await fixGeneric(grandParent, parent, child, recepie);
   }
 };
@@ -36,7 +38,8 @@ const fixData = async function (fieldToFix, recepie) {
 const fixValueUnitCombo = function (grandParent, parent, child, currentRecipe) {
   //TODO
   console.log("TODO - FIXVALUEUNITCOMBO");
-  return [false, "data"];
+  currentRecipe[grandParent][parent]["unit"] = "kcal";
+  return currentRecipe;
 };
 
 const fixInt = async function (grandParent, parent, child, currentRecipe) {
@@ -66,23 +69,19 @@ const fixInt = async function (grandParent, parent, child, currentRecipe) {
   } else if (currentRecipe[child]) {
     value = currentRecipe[child];
   } else {
-    console.log("000");
     //structure doesn't exist -create it and applying default value *shrugs*
     const defaultValue = 4;
 
     if (grandParent) {
       createNestedStructure(currentRecipe, [grandParent, parent, child]);
       currentRecipe[grandParent][parent][child] = defaultValue;
-      console.log("001");
     } else if (parent) {
       createNestedStructure(currentRecipe, [parent, child]);
       currentRecipe[parent][child] = defaultValue;
-      console.log("002");
     } else {
       currentRecipe[child] = defaultValue;
-      console.log("003");
     }
-
+    console.log("Fixed");
     return currentRecipe;
   }
   try {
@@ -100,6 +99,7 @@ const fixInt = async function (grandParent, parent, child, currentRecipe) {
         currentRecipe[child] = intValue;
       }
     }
+    console.log("Fixed");
   } catch (error) {
     console.error("Error parsing integer:", error);
     console.log("UNHANDLED ERROR CAUGHT - fixInt");
@@ -110,7 +110,7 @@ const fixInt = async function (grandParent, parent, child, currentRecipe) {
 
 const fixGeneric = function (grandParent, parent, child, currentRecipe) {
   //Value should be a single string
-  console.log("TODO - FIXGeneic");
+  console.log("Generic fix");
 
   let value;
 
@@ -138,9 +138,8 @@ const fixGeneric = function (grandParent, parent, child, currentRecipe) {
   } else if (currentRecipe[child]) {
     value = currentRecipe[child];
   } else {
-    console.log("structure doesn't exist");
     //structure doesn't exist -create it and applying default value *shrugs*
-    const defaultValue = "";
+    const defaultValue = "kcal";
 
     if (grandParent) {
       createNestedStructure(currentRecipe, [grandParent, parent, child]);
@@ -151,14 +150,13 @@ const fixGeneric = function (grandParent, parent, child, currentRecipe) {
     } else {
       currentRecipe[child] = defaultValue;
     }
+    console.log("Fixed");
     return currentRecipe;
   }
-  
 
   if (typeof value !== "string") {
     //ver se tem mais estrutura que o experado
     if (Object.keys(value).length > 1) {
-      console.log("Should be a single string, has multiple objects");
       for (let grandChild of Object.keys(value)) {
         if (
           grandChild != "type" &&
@@ -173,7 +171,8 @@ const fixGeneric = function (grandParent, parent, child, currentRecipe) {
           } else {
             currentRecipe[child] = grandChild;
           }
-          console.log("one of the grandchildren was a string and valid");
+
+          console.log("Fixed");
           return currentRecipe;
         }
       }
@@ -190,6 +189,7 @@ const fixGeneric = function (grandParent, parent, child, currentRecipe) {
       } else {
         currentRecipe[child] = String(value);
       }
+      console.log("Fixed");
     } catch (error) {
       //fail...?
       console.log(error);
@@ -197,11 +197,32 @@ const fixGeneric = function (grandParent, parent, child, currentRecipe) {
       console.log(
         "It's not a collection and also can't parse to string *thinking*"
       );
+      if (grandParent) {
+        currentRecipe[grandParent][parent][child] = "";
+      } else if (parent) {
+        currentRecipe[parent][child] = "";
+      } else {
+        currentRecipe[child] = "";
+      }
     }
   }
 
   return currentRecipe;
 };
+
+
+const fixCalories = async function(grandParent, parent, child, currentRecipe){
+//TODO
+console.log("TODO - fixCalories");
+
+currentRecipe["nutritionalInformation"] ={}
+currentRecipe["nutritionalInformation"]["calories"]={}
+currentRecipe["nutritionalInformation"]["calories"]["unit"] = "kcal";
+return currentRecipe;
+
+}
+
+
 
 //AUX
 const splitJSONPath = function (string) {
