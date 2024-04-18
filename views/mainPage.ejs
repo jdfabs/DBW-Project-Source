@@ -10,7 +10,7 @@
   <!-- Logotipo-->
 
   <%- include("./partials/nav.ejs")  %>
-  <%- include("./partials/footer.ejs")  %>
+  <%- include("./partials/footer.ejs"); %>
 
   <!-- Main Content-->
   <div class="mainContent bg-img bg-cover d-grid" style="background-image: url('/images/ui_background.png');">
@@ -20,7 +20,7 @@
         <div class="window-header d-flex justify-content-between align-items-end">
           <h1 class="ui-text"> Repecie Gallery </h1>
           <div class="w-50 d-flex justify-content-center">
-            <input id="searchBox" class="input-sm " name="Search for recepies" type="text" placeholder="Search" />
+            <input id="searchBox" class="input-sm " name="Search for recipes" type="text" placeholder="Search" />
             <a id="filterButton" type="button"><i class="bi bi-funnel input-icon"></i></a>
           </div>
         </div>
@@ -31,7 +31,7 @@
             <div class="row">
               <!--Ingredient col-->
               <div class="col-md-6 filterOptions">
-                <div id="ingredientList" >
+                <div id="ingredientList">
                   <div class="row">
                     <input class="col-10" name="Ingredient" type="text" placeholder="Ingredient" />
                     <button class="removeBtn col-2">-</button>
@@ -68,26 +68,29 @@
         </div>
 
       </div>
-      <!-- NEW RECEPIE BUTTON-->
+      <!-- NEW recipe BUTTON-->
       <div class="d-flex justify-content-center">
 
-        <a href="/recepieGenerator"><button id="newRecepieButton" class="m-3 sumbit_btn btn btn-light">
-            <h5>Generate new recepie</h5>
+        <a href="/recipeGenerator"><button id="newrecipeButton" class="m-3 sumbit_btn btn btn-light">
+            <h5>Generate new recipe</h5>
           </button></a>
       </div>
 
-      <!-- Recepies container -->
+      <!-- recipes container -->
       <div>
-        <% if (recepies.length > 0) { 
-                    recepies.forEach(recepie => { %>
+        <% if (recipes.length > 0) { 
+                    
+                    recipes.forEach(recipe => {
+                      
+                      %>
 
-        <section class="recepieContainer  d-flex">
-          <img class="recepieImage d-none d-lg-block" src="/images/PlaceholderImage.png" alt="Alternate Text" />
+        <section class="recipeContainer  d-flex">
+          <img class="recipeImage d-none d-lg-block" src="/images/PlaceholderImage.png" alt="Alternate Text" />
 
           <div class="p-2">
             <div class="d-block d-sm-flex  align-items-end">
-              <h3><%=recepie.title %></h3>
-              <h5> - creator name</h5>
+              <h3><%=recipe.recipeName %></h3>
+              <h5> - by LLM</h5>
             </div>
             <div class="d-flex ">
               <img class="rating " src="/images/Rating.png" alt="rating" />
@@ -96,22 +99,27 @@
             <p class="d-sm-none"></p>
             <div class="d-block  ">
               <h5> Description -</h5>
-              <p class="d-none d-sm-block"> Assurance advantage belonging happiness departure so of. Now improving and one sincerity intention allowance commanded not. Oh an am frankness be necessary earnestly advantage estimable extensive.</p>
-              <p class="d-sm-none"> SHORT VERSION Assurance advantage belonging happiness departure so of. Now improving and one sincerity intention allowance commanded not.</p>
+              <p class="d-none d-sm-block"> <%=recipe.description %></p>
+              <p class="d-sm-none"> SHORT VERSION <%=recipe.description %></p>
             </div>
             <div class="d-block ">
               <h5> Ingredients -</h5>
-              <p> Assurance, advantage, belonging, happiness, departure, sincerity, intention, allowance.</p>
+              <p>                
+                <% if (recipe.ingredients.length > 0) { %>                  
+                <% recipe.ingredients.forEach(ingredient => { %>                  
+                <%=ingredient.name%>,
+                <%});};%>
+              </p>
             </div>
             <div class="d-none d-sm-block ">
               <h5> tags -</h5>
-              <p> Assurance, advantage, belonging.</p>
+              <p> Assurance, advantage, belonging</p>
             </div>
           </div>
         </section>
         <%  });}
         else{%>
-        <h3>No Recepies to be displayed</h3>
+        <h3>No recipes to be displayed</h3>
         <% }%>
 
       </div>

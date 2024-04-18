@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = (req, res) => {
-    const recepie = 
+    const recipe = 
     {
         "recipeName": "Mediterranean Cod with Vegetable Medley",
         "creator": "Skipper",
@@ -64,5 +64,5 @@ module.exports = (req, res) => {
       
       
       
-    res.render("recepie", { title: "Recepie", recepie });
+    res.render("recipe", { title: "recipe", recipe });
 };

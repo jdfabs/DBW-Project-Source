@@ -32,11 +32,11 @@ mongoose
       config.dbUser +
       ":" +
       config.dbPassword +
-      "@dbwrecepiegenerator.1gag8xs.mongodb.net/?retryWrites=true&w=majority&appName=DBWRecepieGenerator",
+      "@dbwrecipegenerator.1gag8xs.mongodb.net/?retryWrites=true&w=majority&appName=DBWrecipeGenerator",
     { useUnifiedTopology: true, useNewUrlParser: true }
   )
   .then(() => {
-    console.log("Connected");
+    console.log("Connected to DB");
   })
   .catch((err) => {
     console.log(err);

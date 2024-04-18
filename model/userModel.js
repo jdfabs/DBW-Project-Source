@@ -1,13 +1,10 @@
 const mongoose = require("mongoose");
 
-
-
 const UserSchema = new mongoose.Schema({
     username: {
       type: String,
       required: true,
       unique: true,
-      trim: true,
       lowercase: true,
     },
     email: {
@@ -25,20 +22,16 @@ const UserSchema = new mongoose.Schema({
     password: {
       type: String,
       required: true,
-    },
+    },// optional
     firstName: {
-      type: String,
-      required: true,
-      trim: true,
-    },
+      type: String,          
+    },// optional
     lastName: {
       type: String,
-      required: true,
-      trim: true,
-    },
+    },// optional
     profilePicture: {
-      type: Buffer,
-    }, // or use a URL instead
+      type: String,
+    }, // path para imagem
     dateOfBirth: Date, // optional
     gender: {
       type: String,
@@ -59,15 +52,12 @@ const UserSchema = new mongoose.Schema({
     lastLogin: Date,
     role: {
       type: Number, // use an enum or string for specific roles
+      default: 0, // 0- User , 1 - Mod , 2 - Admin , 3 - debug
       required: true,
     },
     twoFactorAuthentication: {
       type: Boolean,
       default: false,
-    },
-    preferredLanguage: {
-      type: String,
-      enum: ['en', 'es', 'fr', ...], // add as many options as needed
     },
   },
   {

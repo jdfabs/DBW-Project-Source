@@ -7,14 +7,14 @@
 }
 
 
-.recepieContainer {
+.recipeContainer {
     margin: 10px 10px;
     padding: 10px 10px;
     border-radius: 20px;
     background-color: #c9a561;
     
 }
-    .recepieContainer .recepieImage {
+    .recipeContainer .recipeImage {
         height: 200px;
         width: 200px;
         border-radius: 20px;

@@ -19,6 +19,7 @@
     "mongodb": "^6.5.0",
     "mongoose": "^8.2.1",
     "morgan": "^1.10.0",
-    "openai": "^4.28.4"
+    "ollama-node": "^0.1.28",
+    "openai": "^4.37.1"
   }
 }

@@ -1,23 +1,9 @@
 "use strict";
+const debug = require("../../debugTools");
+const controller = require("./../../controler/mainPageController");
 
-module.exports = (req, res) => {
-    const recepies = [
-        {
-          title: "Recepie 1",
-          description: "Lorem ipsum dolor sit amet consectetur",
-        },
-        {
-          title: "Recepie 2",
-          description: "Lorem ipsum dolor sit amet consectetur",
-        },
-        {
-          title: "Recepie 3",
-          description: "Lorem ipsum dolor sit amet consectetur",
-        },
-        {
-          title: "Recepie 4",
-          description: "Lorem ipsum dolor sit amet consectetur",
-        },
-      ];
-      res.render("mainPage", { title: "Main Page", recepies });
+module.exports = async (req, res) => {
+  debug.log(1, "Main Page Router - indexView");  
+  res.render("mainPage", { title: "Main Page", recipes: await controller.getRecipes()  });
+
 };
