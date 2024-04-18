@@ -1,7 +1,7 @@
 
 
 "use strict";
-const recepieModel = require("../model/recepieModel").RecipeModel;
+const recipeModel = require("../model/recipeModel").RecipeModel;
 const dataValidation = require("../middlewares/dbValidation");
 const debug = require("../debugTools");
 
@@ -16,27 +16,24 @@ const getRecipes = async function () {
 
 
 
-  const recepies = await getTopTenRecepies();
+  const recipes = await getTopTenrecipes();
 
-  for (let recipe of recepies) {
-    recipe = await dataValidation.forceValidRecipe(recipe);
-  }
-
-  return recepies;
+  return recipes;
 };
 
-const getTopTenRecepies = async function () {
-  debug.log(1, "Main Page Controller - getTopTenRecepies");
-  const recepies = await recepieModel.find({}).limit(3);
-  //console.log(recepie);
+const getTopTenrecipes = async function () {
+  debug.log(1, "Main Page Controller - getTopTenrecipes");
+  const recipes = await recipeModel.find({}).limit(10);
+  //console.log(recipe);
 
-  return recepies;
+  return recipes;
 };
 
+/*
 const addMockData = async function () {
   debug.log(0, "@@@@@ Main Page Controller - addMockData");
   try {
-    const recipeMock = new recepieModel({
+    const recipeMock = new recipeModel({
       recipeName: "Mediterranean Grilled Chicken with Lemon Herb Marinade",
       ingredients: [
         { name: "Chicken breasts", quantity: "4" },
@@ -113,7 +110,7 @@ const addMockData = async function () {
     console.error(error);
   }
   console.log("Mock data added to DB");
-};
+};*/
 
 module.exports = { getRecipes };
 

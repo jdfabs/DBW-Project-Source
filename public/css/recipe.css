@@ -1,4 +1,4 @@
-#recepie {
+#recipe {
     position: relative;
     max-width: 350px;
     width: 100%;
@@ -93,7 +93,7 @@
 }
 
 
-.recepieImage {
+.recipeImage {
     height: 200px;
     width: 200px;
     border-radius: 20px;

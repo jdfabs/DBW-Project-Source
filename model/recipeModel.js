@@ -164,6 +164,6 @@ const newDefaultRecipe = function () {
 
 
 module.exports = {
-  RecipeModel: mongoose.model("recepie", recipeSchema),
+  RecipeModel: mongoose.model("recipe", recipeSchema),
   newDefaultRecipe: newDefaultRecipe,
 }

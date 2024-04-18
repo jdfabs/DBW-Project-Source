@@ -3,11 +3,10 @@ const express = require("express"); //View engine
 const OpenAIApi = require("openai"); //Api OpenAi
 const debug = require("../../debugTools");
 const config = require("../../config");
-const recipeModel = require("../../model/recepieModel");
+const recipeModel = require("../../model/recipeModel");
 const router = express.Router(); //Instance of the router
 const recipeGenerator = require("../../middlewares/recipeGenerator");
-const fixer = require("../../middlewares/dataFixer");
-const validator = require("../../middlewares/dbValidation");
+
 
 /*
 const openai = new OpenAIApi({
@@ -28,17 +27,17 @@ if (config.devMode) {
         {
           role: "system",
           content:
-            'You are a helpful assistant designed to output JSON. jsonTemplate = {"recipeName": &RECEPIENAME&, "ingredients": [ &INGREDIENT_ONE&, &INGREDIENT_TWO&, &INGREDIENT_THREE&, (...) ], "instructions": [ &INSTRUCTION_ONE&, &INSTRUCTION_TWO&, &INSTRUCTION_THREE&, (...) ],"description": &DESCRIPTION&, //minimum 200 words "difficultyLevel": &DIFICULTY&, //easy, medium, hard, chef "preparationTime": &PREPARATION_TIME&, "cookingTime": &COOKING_TIME&, "totalTime": &TOTAL_TIME&, //preparation time + cooking time "servings": &NUM_SERVINGS&, //number of servings "cuisine": &CUISINE_TYPE&, //american, mexican, etc "dietaryInformation": [ //keto, vegan, etc &DIETARY_INFO_ONE&, &DIETARY_INFO_TWO&, &DIETARY_INFO_THREE&, (...) ], "nutritionalInformation": { "calories": &CALORIES&, "fat": &FAT_GRAMS&, "carbohydrates": &CARBOHYDRATES_GRAMS&, "protein": &PROTEIN_GRAMS& }, "notes": &NOTES&, "allergenInformation": [ //dairy, nuts, etc   &ALLERGEN_ONE&, &ALLERGEN_TWO&, &ALLERGEN_THREE&, (...) ], "substitutions": [ //ingredient substitution &SUBSTITUTION_ONE&, &SUBSTITUTION_TWO&, &SUBSTITUTION_THREE&, (...) ], "equipmentNeeded": [ //baking dish, foil, etc   &EQUIPMENT_ONE&, &EQUIPMENT_TWO&, &EQUIPMENT_THREE&, (...) ], "mealType": [ //lunch, dinner, breakfast, dessert, snack, appetizer, drink &MEAL_TYPE_ONE&, &MEAL_TYPE_TWO&, &MEAL_TYPE_THREE&, (...) ] };',
+            'You are a helpful assistant designed to output JSON. jsonTemplate = {"recipeName": &recipeNAME&, "ingredients": [ &INGREDIENT_ONE&, &INGREDIENT_TWO&, &INGREDIENT_THREE&, (...) ], "instructions": [ &INSTRUCTION_ONE&, &INSTRUCTION_TWO&, &INSTRUCTION_THREE&, (...) ],"description": &DESCRIPTION&, //minimum 200 words "difficultyLevel": &DIFICULTY&, //easy, medium, hard, chef "preparationTime": &PREPARATION_TIME&, "cookingTime": &COOKING_TIME&, "totalTime": &TOTAL_TIME&, //preparation time + cooking time "servings": &NUM_SERVINGS&, //number of servings "cuisine": &CUISINE_TYPE&, //american, mexican, etc "dietaryInformation": [ //keto, vegan, etc &DIETARY_INFO_ONE&, &DIETARY_INFO_TWO&, &DIETARY_INFO_THREE&, (...) ], "nutritionalInformation": { "calories": &CALORIES&, "fat": &FAT_GRAMS&, "carbohydrates": &CARBOHYDRATES_GRAMS&, "protein": &PROTEIN_GRAMS& }, "notes": &NOTES&, "allergenInformation": [ //dairy, nuts, etc   &ALLERGEN_ONE&, &ALLERGEN_TWO&, &ALLERGEN_THREE&, (...) ], "substitutions": [ //ingredient substitution &SUBSTITUTION_ONE&, &SUBSTITUTION_TWO&, &SUBSTITUTION_THREE&, (...) ], "equipmentNeeded": [ //baking dish, foil, etc   &EQUIPMENT_ONE&, &EQUIPMENT_TWO&, &EQUIPMENT_THREE&, (...) ], "mealType": [ //lunch, dinner, breakfast, dessert, snack, appetizer, drink &MEAL_TYPE_ONE&, &MEAL_TYPE_TWO&, &MEAL_TYPE_THREE&, (...) ] };',
         },
         {
           role: "user",
           content:
-            "in any recepie you may freely include any basic spice./n Be extremely shot and precise on each section of the answer",
+            "in any recipe you may freely include any basic spice./n Be extremely shot and precise on each section of the answer",
         },
         {
           role: "user",
           content:
-            "generate me a recepie using these ingredients:/n potato,carrot, beef, onions, olive oil, cheese, broccoli, cinnamon, lemon /n You may remove up to two of the previous ingredients then add two more new ingredients./n maximum 45min, easy dificulty",
+            "generate me a recipe using these ingredients:/n potato,carrot, beef, onions, olive oil, cheese, broccoli, cinnamon, lemon /n You may remove up to two of the previous ingredients then add two more new ingredients./n maximum 45min, easy dificulty",
         },
       ],
       max_tokens: 1000,// out of 5 stars 
@@ -47,7 +46,7 @@ if (config.devMode) {
 
     const json = JSON.parse(response.choices[0].message.content);
 
-    const recepies = [
+    const recipes = [
       {
         title: json.recipeName,
         description: json.description,
@@ -56,7 +55,7 @@ if (config.devMode) {
       },
     ];
 
-    res.render("recepieGenerator", { title: "Recepie Generator", recepies });
+    res.render("recipeGenerator", { title: "recipe Generator", recipes });
   });
 }
 
@@ -135,7 +134,7 @@ router.get("/test001", (req, res) => {
   };
   //console.log(json);
 
-  const recepies = [
+  const recipes = [
     {
       title: json.RecipeName,
       description: json.Description,
@@ -144,7 +143,7 @@ router.get("/test001", (req, res) => {
     },
   ];
 
-  res.render("recepieGenerator", { title: "Recepie Generator", recepies });
+  res.render("recipeGenerator", { title: "recipe Generator", recipes });
 */
 
   router.get("/test001", async (req, res) => {
