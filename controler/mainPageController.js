@@ -1,7 +1,7 @@
 
 
 "use strict";
-const recepieModel = require("../model/recepieModel");
+const recepieModel = require("../model/recepieModel").RecipeModel;
 const dataValidation = require("../middlewares/dbValidation");
 const debug = require("../debugTools");
 

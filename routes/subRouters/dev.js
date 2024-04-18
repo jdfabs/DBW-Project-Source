@@ -3,11 +3,11 @@ const express = require("express"); //View engine
 const OpenAIApi = require("openai"); //Api OpenAi
 const debug = require("../../debugTools");
 const config = require("../../config");
-const recepieModel = require("../../model/recepieModel");
+const recipeModel = require("../../model/recepieModel");
 const router = express.Router(); //Instance of the router
-const recepieGenerator = require("../../middlewares/recipeGenerator");
+const recipeGenerator = require("../../middlewares/recipeGenerator");
 const fixer = require("../../middlewares/dataFixer");
-const validator = require("../../middlewares/dbValidation")
+const validator = require("../../middlewares/dbValidation");
 
 /*
 const openai = new OpenAIApi({
@@ -147,15 +147,380 @@ router.get("/test001", (req, res) => {
   res.render("recepieGenerator", { title: "Recepie Generator", recepies });
 */
 
-router.get("/test001", async (req, res) => {
- 
+  router.get("/test001", async (req, res) => {
+    const mockData = {
+      ingredients: [
+        "potato",
+        "carrot",
+        "beef",
+        "onions",
+        "olive oil",
+        "cheese",
+        "broccoli",
+        "cinnamon",
+        "lemon",
+      ],
+      methods: ["Oven"],
+      restrictions: [],
+      type: [],
+      minNumIng: 6,
+      maxNumNewIng: 3,
+      maxCookTime: 120,
+      dificultyLevel: "easy",
+      spice: "1",
+    };
+    /*Data deve incluir:
+     *Ingredients
+     *Methods
+     *Restrictions
+     *Dish Types
+     *Minimum num of ing
+     *Maximum number of new ingredients
+     *Maximum cooking time
+     *Dificulty
+     *Spice
+     */
+    recipeGenerator.buildBase(mockData, recipeModel.newDefaultRecipe());
+  });
+
+  router.get("/test002", async (req, res) => {
+    const mockBase = {
+      recipeName: "Hearty Beef and Vegetable Bake",
+      ingredients: [
+        "potato",
+        "carrot",
+        "beef",
+        "onions",
+        "olive oil",
+        "cheese",
+        "broccoli",
+        "cinnamon",
+        "lemon",
+        "basil",
+      ],
+      instructions: [],
+      description:
+        "Create a delicious and nutritious meal with this Hearty Beef and Vegetable Bake recipe. This dish combines tender beef with a variety of colorful vegetables including potatoes, carrots, broccoli, and onions. The addition of cheese adds a rich and creamy texture, while a hint of cinnamon and a squeeze of lemon lift the flavors to new heights. To add an extra layer of aroma and taste, basil can be included as a basic spice. Perfect for a cozy meal with family or friends, this easy recipe is sure to become a favorite in your kitchen.",
+      difficultyLevel: "easy",
+      preparationTime: -1,
+      cookingTime: -1,
+      servings: 4,
+      cuisine: "american",
+      nutritionalInformation: {
+        calories: -1,
+        proteins: -1,
+        saturated: -1,
+        unsaturated: -1,
+        cholesterol: -1,
+        carbohydrates: -1,
+        sugar: -1,
+        vitamins: [],
+        minerals: [],
+      },
+      notes: "Default Notes",
+      allergenInformation: [],
+      substitutions: [],
+      equipmentNeeded: [],
+      mealType: "Lunch",
+      tags: [],
+      isFeatured: false,
+      visibility: "private",
+      createTime: 1713459376118,
+      creator: "Default User",
+      isPublic: false,
+      status: "draft",
+      userRatings: [],
+      likes: 0,
+      dislikes: 0,
+      comments: [],
+    };
+    const mockData = {
+      ingredients: [
+        "potato",
+        "carrot",
+        "beef",
+        "onions",
+        "olive oil",
+        "cheese",
+        "broccoli",
+        "cinnamon",
+        "lemon",
+      ],
+      methods: ["Oven"],
+      restrictions: [],
+      type: [],
+      minNumIng: 6,
+      maxNumNewIng: 3,
+      maxCookTime: 120,
+      dificultyLevel: "easy",
+      spice: "1",
+      description:
+        "Create a delicious and nutritious meal with this Hearty Beef and Vegetable Bake recipe. This dish combines tender beef with a variety of colorful vegetables including potatoes, carrots, broccoli, and onions. The addition of cheese adds a rich and creamy texture, while a hint of cinnamon and a squeeze of lemon lift the flavors to new heights. To add an extra layer of aroma and taste, basil can be included as a basic spice. Perfect for a cozy meal with family or friends, this easy recipe is sure to become a favorite in your kitchen.",
+      recipeName: "Hearty Beef and Vegetable Bake",
+    };
+    recipeGenerator.buildMainInfo(mockData, mockBase);
+  });
+}
+
+router.get("/test003", async (req, res) => {
+  const mockBase = {
+    recipeName: "Hearty Beef and Vegetable Bake",
+    ingredients: [
+      "potato",
+      "carrot",
+      "beef",
+      "onions",
+      "olive oil",
+      "cheese",
+      "broccoli",
+      "cinnamon",
+      "lemon",
+      "basil",
+    ],
+    instructions: [
+      { instruction: "Preheat the oven to 375°F (190°C)." },
+      {
+        instruction:
+          "Peel and chop the potatoes, carrots, and onions into bite-sized pieces.",
+      },
+      {
+        instruction:
+          "Cut the beef into cubes and season with salt, pepper, and a pinch of cinnamon.",
+      },
+      {
+        instruction: "Heat olive oil in a pan and brown the beef cubes.",
+      },
+      {
+        instruction:
+          "In a baking dish, layer the chopped vegetables and beef cubes.",
+      },
+      {
+        instruction:
+          "Top the mixture with grated cheese and drizzle with lemon juice.",
+      },
+      {
+        instruction:
+          "Cover the dish with foil and bake in the preheated oven for 45 minutes.",
+      },
+      {
+        instruction:
+          "Remove the foil and bake for an additional 15 minutes until the cheese is golden and bubbly.",
+      },
+      { instruction: "Serve hot and enjoy!" },
+    ],
+    description:
+      "Create a delicious and nutritious meal with this Hearty Beef and Vegetable Bake recipe. This dish combines tender beef with a variety of colorful vegetables including potatoes, carrots, broccoli, and onions. The addition of cheese adds a rich and creamy texture, while a hint of cinnamon and a squeeze of lemon lift the flavors to new heights. To add an extra layer of aroma and taste, basil can be included as a basic spice. Perfect for a cozy meal with family or friends, this easy recipe is sure to become a favorite in your kitchen.",
+    difficultyLevel: "easy",
+    preparationTime: -1,
+    cookingTime: -1,
+    servings: 4,
+    cuisine: "american",
+    nutritionalInformation: {
+      calories: 450,
+      proteins: 25,
+      saturated: 8,
+      unsaturated: 12,
+      cholesterol: 80,
+      carbohydrates: 30,
+      sugar: 8,
+      vitamins: [[Object], [Object]],
+      minerals: [[Object], [Object]],
+    },
+    notes:
+      "This hearty beef and vegetable bake is a comforting and satisfying meal that is perfect for cozy evenings. The addition of lemon and cinnamon adds a delightful twist to the traditional flavors.",
+    allergenInformation: [],
+    substitutions: [],
+    equipmentNeeded: [],
+    mealType: "Dinner",
+    tags: [],
+    isFeatured: false,
+    visibility: "private",
+    createTime: 1713459376118,
+    creator: "Default User",
+    isPublic: false,
+    status: "draft",
+    userRatings: [],
+    likes: 0,
+    dislikes: 0,
+    comments: [],
+  };
+
+  const mockData = {
+    ingredients: [
+      "potato",
+      "carrot",
+      "beef",
+      "onions",
+      "olive oil",
+      "cheese",
+      "broccoli",
+      "cinnamon",
+      "lemon",
+    ],
+    methods: ["Oven"],
+    restrictions: [],
+    type: [],
+    minNumIng: 6,
+    maxNumNewIng: 3,
+    maxCookTime: 120,
+    dificultyLevel: "easy",
+    spice: "1",
+    description:
+      "Create a delicious and nutritious meal with this Hearty Beef and Vegetable Bake recipe. This dish combines tender beef with a variety of colorful vegetables including potatoes, carrots, broccoli, and onions. The addition of cheese adds a rich and creamy texture, while a hint of cinnamon and a squeeze of lemon lift the flavors to new heights. To add an extra layer of aroma and taste, basil can be included as a basic spice. Perfect for a cozy meal with family or friends, this easy recipe is sure to become a favorite in your kitchen.",
+    recipeName: "Hearty Beef and Vegetable Bake",
+    instructions: [
+      { instruction: "Preheat the oven to 375°F (190°C)." },
+      {
+        instruction:
+          "Peel and chop the potatoes, carrots, and onions into bite-sized pieces.",
+      },
+      {
+        instruction:
+          "Cut the beef into cubes and season with salt, pepper, and a pinch of cinnamon.",
+      },
+      {
+        instruction: "Heat olive oil in a pan and brown the beef cubes.",
+      },
+      {
+        instruction:
+          "In a baking dish, layer the chopped vegetables and beef cubes.",
+      },
+      {
+        instruction:
+          "Top the mixture with grated cheese and drizzle with lemon juice.",
+      },
+      {
+        instruction:
+          "Cover the dish with foil and bake in the preheated oven for 45 minutes.",
+      },
+      {
+        instruction:
+          "Remove the foil and bake for an additional 15 minutes until the cheese is golden and bubbly.",
+      },
+      { instruction: "Serve hot and enjoy!" },
+    ],
+  };
+  recipeGenerator.buildSecondaryInfo(mockData, mockBase);
 });
 
-router.get("/test002", async (req, res) => {
-  
-  validator.forceValidRecipe(JSON.parse(
-    '{"recipeName": "Easy Beef and Vegetable Stir-Fry","ingredients": [{ "name": "potato", "quantity": "1", "unit": "" },{ "name": "carrot", "quantity": "2", "unit": "" },{ "name": "beef", "quantity": "1/4 pound", "unit": "" },{ "name": "onions", "quantity": "3", "unit": "" },{ "name": "olive oil", "quantity": "2 tablespoons", "unit": "" },{ "name": "cheese", "quantity": "1/4 cup shredded", "unit": "" },{ "name": "broccoli", "quantity": "1 cup chopped", "unit": "" },{ "name": "cinnamon", "quantity": "2 teaspoons ground", "unit": "" },{ "name": "lemon", "quantity": "1/4", "unit": "" }],"instructions": [{ "instruction": "Peel and chop the potato and carrot into small pieces." },{ "instruction": "Heat 1 tablespoon of olive oil in a large skillet over medium-high heat. Add the beef, onions, broccoli, cinnamon, and lemon juice to the skillet and cook until the beef is browned and the vegetables are tender.", "step": 1, "startTime": 1609459200 },{ "instruction": "Add 1/4 cup of water to the skillet and bring to a boil. Reduce the heat to low and simmer for 3-5 minutes, or until all the liquid is absorbed." },{ "instruction": "Season with salt and pepper to taste. Remove from heat.", "step": 2, "startTime": 1609472800 },{ "instruction": "Serve the stir-fry over rice or noodles." }],"description": "A simple and healthy meal made with potatoes, carrots, beef, onions, olive oil, cheese, broccoli, cinnamon, lemon. Perfect for a quick dinner.","difficultyLevel": "easy","preparationTime": { "value": 20, "unit": "" },"cookingTime": { "value": 10, "unit": "" },"totalTime": {"value": 30, "unit": ""},"cuisine": "Asian","dietaryInformation": [{"name": "Gluten-free", "info": "The ingredients do not contain any gluten."}],"nutritionalInformation": {"calories": { "value": 250, "unit": "" },"proteins": {"value": 12, "unit": ""},"saturatedFats": {"value": 15, "unit": ""},"unSaturatedFats": {"value": 3, "unit": ""},"cholesterol": {"value": 10, "unit": ""},"carbohydrates": {"value": 50, "unit": ""},"sugar": {"value": 5, "unit": ""},"vitamins": [{"name": "Vitamin C", "info": "100% of the recommended daily value."}],"minerals": [{"name": "Iron", "info": "10% of the recommended daily value."}]},"notes": { "type": "string", "required": true }}'
-  ));
+router.get("/test004", async (req, res) => {
+  const mockBase = {
+    recipeName: "Hearty Beef and Vegetable Bake",
+    ingredients: [
+      "potato",
+      "carrot",
+      "beef",
+      "onions",
+      "olive oil",
+      "cheese",
+      "broccoli",
+      "cinnamon",
+      "lemon",
+      "basil",
+    ],
+    instructions: [
+      { instruction: "Preheat the oven to 375°F (190°C)." },
+      {
+        instruction:
+          "Peel and chop the potatoes, carrots, and onions into bite-sized pieces.",
+      },
+      {
+        instruction:
+          "Cut the beef into cubes and season with salt, pepper, and a pinch of cinnamon.",
+      },
+      {
+        instruction: "Heat olive oil in a pan and brown the beef cubes.",
+      },
+      {
+        instruction:
+          "In a baking dish, layer the chopped vegetables and beef cubes.",
+      },
+      {
+        instruction:
+          "Top the mixture with grated cheese and drizzle with lemon juice.",
+      },
+      {
+        instruction:
+          "Cover the dish with foil and bake in the preheated oven for 45 minutes.",
+      },
+      {
+        instruction:
+          "Remove the foil and bake for an additional 15 minutes until the cheese is golden and bubbly.",
+      },
+      { instruction: "Serve hot and enjoy!" },
+    ],
+    description:
+      "Create a delicious and nutritious meal with this Hearty Beef and Vegetable Bake recipe. This dish combines tender beef with a variety of colorful vegetables including potatoes, carrots, broccoli, and onions. The addition of cheese adds a rich and creamy texture, while a hint of cinnamon and a squeeze of lemon lift the flavors to new heights. To add an extra layer of aroma and taste, basil can be included as a basic spice. Perfect for a cozy meal with family or friends, this easy recipe is sure to become a favorite in your kitchen.",
+    difficultyLevel: "easy",
+    preparationTime: 20,
+    cookingTime: 60,
+    servings: 4,
+    cuisine: "american",
+    nutritionalInformation: {
+      calories: 450,
+      proteins: 25,
+      saturated: 8,
+      unsaturated: 12,
+      cholesterol: 80,
+      carbohydrates: 30,
+      sugar: 8,
+      vitamins: [[Array], [Array]],
+      minerals: [[Array], [Array]],
+    },
+    notes:
+      "This hearty beef and vegetable bake is a comforting and satisfying meal that is perfect for cozy evenings. The addition of lemon and cinnamon adds a delightful twist to the traditional flavors.",
+    allergenInformation: [],
+    substitutions: [
+      { name: "cheese", quantity: 100, unit: "g" },
+      { name: "olive oil", quantity: 2, unit: "tbsp" },
+    ],
+    equipmentNeeded: [
+      { name: "Oven" },
+      { name: "Baking dish" },
+      { name: "Pan" },
+    ],
+    mealType: "Dinner",
+    tags: [],
+    isFeatured: false,
+    visibility: "private",
+    createTime: 1713459376118,
+    creator: "Default User",
+    isPublic: false,
+    status: "draft",
+    userRatings: [],
+    likes: 0,
+    dislikes: 0,
+    comments: [],
+  };
+
+  recipeGenerator.buildTags(mockBase);
 });
-}
+
+
+router.get("/test005", async (req, res) => {
+  const mockData = {
+    ingredients: [
+      "potato",
+      "carrot",
+      "beef",
+      "onions",
+      "olive oil",
+      "cheese",
+      "broccoli",
+      "cinnamon",
+      "lemon",
+    ],
+    methods: ["Oven"],
+    restrictions: [],
+    type: [],
+    minNumIng: 6,
+    maxNumNewIng: 3,
+    maxCookTime: 120,
+    dificultyLevel: "easy",
+    spice: "1",
+  };
+
+  recipeGenerator.newRecipe(mockData);
+});
+
 module.exports = router;

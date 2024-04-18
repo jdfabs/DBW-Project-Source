@@ -121,7 +121,7 @@ const recipeSchema = mongoose.Schema(
 );
 
 const newDefaultRecipe = function () {
-  return JSON.parse({
+  return {
     recipeName: "Default Name",
     ingredients: [],
     instructions: [],
@@ -159,9 +159,11 @@ const newDefaultRecipe = function () {
     likes: 0, // Number of upvotes
     dislikes: 0, // Number of downvotes
     comments: [], // Array of comment IDs
-  });
+  };
 };
 
-module.exports = newDefaultRecipe;
 
-module.exports = mongoose.model("recepie", recipeSchema);
+module.exports = {
+  RecipeModel: mongoose.model("recepie", recipeSchema),
+  newDefaultRecipe: newDefaultRecipe,
+}
