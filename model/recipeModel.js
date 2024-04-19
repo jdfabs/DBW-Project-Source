@@ -4,16 +4,7 @@ const recipeSchema = mongoose.Schema(
   {
     recipeName: { type: String, default: "Default Name", required: true },
     ingredients: [
-      {
-        name: { type: String, default: "Default name", required: true },
-        quantity: { type: Number, default: -1, required: true },
-        unit: {
-          type: String,
-          enum: ["kg", "g", "lb", "un"],
-          default: "un",
-          required: true,
-        },
-      },
+      { type: String, default: "Default name", required: true },
     ],
     instructions: [
       {
@@ -95,11 +86,11 @@ const recipeSchema = mongoose.Schema(
       default: "private",
     },
     createTime: { type: Date, default: Date.now }, // Creation timestamp
-    creator: {
+    /*creator: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
-    }, // Reference to the user who created the recipe
+    }, */// Reference to the user who created the recipe
     isPublic: { type: Boolean, default: true }, // Whether the recipe is public or private
 
     status: {

@@ -5,7 +5,7 @@ const debug = require("../debugTools");
 
 const CYCLE_LIMIT = 5;
 
-const isrecipeValid = async function (base) {
+const isRecipeValid = async function (base) {
   debug.log(1, "validateRecipe:");
   try {
     await recipeModel.validate(base);
@@ -67,4 +67,4 @@ const forceValidRecipe = async function (base) {
   return validRecipe;
 };*/
 
-module.exports = { isrecipeValid, isUserValid };
+module.exports = { isRecipeValid, isUserValid };

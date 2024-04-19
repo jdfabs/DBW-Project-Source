@@ -50,6 +50,15 @@
     color: #F6F5F5;
 }
 
+.saveBtn {
+    margin: 3px 3px;
+    height: 35px;
+    width: 60px;
+    border: 1px solid #4592AF;
+    border-radius: 20px;
+    background-color: #126782;
+    color: #F6F5F5;
+}
 
 select .input-sm{
     margin: 3px 3px;

@@ -1,6 +1,8 @@
 "use strict";
 
 const generator = require("../../middlewares/recipeGenerator");
+const validator = require("../../middlewares/dbValidation");
+const dbManager = require("../../middlewares/dbManager");
 
 
 
@@ -27,5 +29,20 @@ const generateRecipe = async function(req, res){
   res.send(recipeList);
 };
 
+const saveRecipe = async function(req, res){
+  
+  
 
-module.exports = {loadRecipeGenerator, generateRecipe};
+  if(validator.isRecipeValid(req.body)){
+    console.log("Saving recipe");
+    console.log(req.body);
+    await dbManager.saveRecipe(req.body);
+
+
+  }
+  
+
+
+}
+
+module.exports = {loadRecipeGenerator, generateRecipe,saveRecipe};

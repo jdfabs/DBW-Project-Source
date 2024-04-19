@@ -17,8 +17,8 @@ router.get("/settings",settings);
 
 
 router.get("/recipeGenerator", recipeGenerator.loadRecipeGenerator);
-
 router.post("/recipeGenerator", recipeGenerator.generateRecipe);
+router.post("/recipeGenerator/save", recipeGenerator.saveRecipe);
 
 
 module.exports = router;

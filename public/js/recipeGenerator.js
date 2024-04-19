@@ -6,6 +6,8 @@ const addIngredientButton = document.getElementById("moreIng");
 
 const form = document.getElementById("recipeForm");
 
+let generatedRecipe;
+
 Array.from(document.getElementsByClassName("removeBtn")).forEach((button) => {
   button.addEventListener("click", (event) => {
     event.preventDefault();
@@ -48,10 +50,10 @@ addIngredientButton.addEventListener("click", (event) => {
     <button class="removeBtn col-2">-</button> </div>`;
   ingredientList.append(newIngredient);
 
-  addEventListener(newIngredient.querySelector(".removeBtn"));
+  addEventListenerToButtons(newIngredient.querySelector(".removeBtn"));
 });
 
-const addEventListener = function addEventListenerToButtons(button) {
+const addEventListenerToButtons = function (button) {
   button.addEventListener("click", (event) => {
     event.preventDefault();
     button.parentElement.remove();
@@ -114,21 +116,25 @@ form.addEventListener("submit", (event) => {
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
-
-
+      generatedRecipe = data;
       for (let i = 0; i < Object.keys(data).length; i++) {
         console.log(i);
-        console.log(data)
+        console.log(data);
         let newRecipe = document.createElement("section");
         newRecipe.classList.add("recipeContainer");
         newRecipe.classList.add("d-flex");
 
         newRecipe.innerHTML = `<img class="recipeImage d-none d-lg-block" src="/images/PlaceholderImage.png" alt="Alternate Text" />
                               <div class="p-2">
+                              <div class="d-flex justify-content-between">
                                 <div class="d-block d-sm-flex  align-items-end">
                                   <h3>${data[i].recipeName}</h3>
                                   <h5> - creator name</h5>
                                 </div>
+                                <div class="d-flex justify-content-end">
+                                  <button id="saveBtn" class="saveBtn"><i class="bi bi-floppy2"></i></button>
+                                </div>
+                              </div>                                
                                 <div class="d-flex ">
                                   <img class="rating " src="/images/Rating.png" alt="rating" />
                                   <p class="d-none d-sm-block"> - 500 ratings</p>
@@ -150,7 +156,19 @@ form.addEventListener("submit", (event) => {
                                   <p> ${data[i].tags.join(", ")}</p>
                                 </div>
                               </div>`;
+
         document.getElementById("Recipes").append(newRecipe);
+
+        document.getElementById("saveBtn").addEventListener("click", (event) => {
+          event.preventDefault();
+          fetch("/recipeGenerator/save", {
+            method: "POST",
+            body: JSON.stringify(generatedRecipe),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+        });
       }
     });
 });
