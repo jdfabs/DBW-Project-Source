@@ -5,6 +5,93 @@ const OpenAIApi = require("openai"); //Api OpenAi
 const openai = new OpenAIApi(); //Instance of OpenAI API
 
 const newRecipe = async function (data) {
+if(config.mockData){
+  console.log("MOCK DATA!!!");
+  const recipeMock = {
+    recipeName: 'Hearty Pasta Soup',
+    ingredients: [
+      'Olive oil',    'Garlic',
+      'Onion',        'Salt',
+      'Black pepper', 'Chicken broth',
+      'Tomatoes',     'Pasta',
+      'Eggs',         'Parmesan cheese',
+      'Basil',        'Oregano'
+    ],
+    instructions: [
+      { instruction: 'Heat olive oil in a large pot over medium heat.' },
+      {
+        instruction: 'Add minced garlic and diced onion, sauté until fragrant.'
+      },
+      { instruction: 'Season with salt and black pepper to taste.' },
+      {
+        instruction: 'Pour in chicken broth and bring to a gentle simmer.'
+      },
+      {
+        instruction: 'Add chopped tomatoes and let them cook down slightly.'
+      },
+      { instruction: 'Stir in pasta and cook until al dente.' },
+      {
+        instruction: 'In a separate bowl, beat the eggs and slowly drizzle into the soup while stirring constantly.'
+      },
+      {
+        instruction: 'Sprinkle Parmesan cheese over the soup and stir to combine.'
+      },
+      {
+        instruction: 'Season with more salt and black pepper if needed.'
+      },
+      {
+        instruction: 'Serve hot, garnished with fresh basil and oregano.'
+      }
+    ],
+    description: 'A comforting and hearty pasta soup that is perfect for warming you up on a chilly day. This soup combines the richness of chicken broth with the heartiness of pasta, creating a delicious and flavorful meal. The addition of fresh tomatoes adds a burst of freshness, while the Parmesan cheese provides a creamy and cheesy finish. With a blend of basil and oregano, this soup is elevated with aromatic flavors that will leave you craving for more.',
+    difficultyLevel: 'easy',
+    preparationTime: 20,
+    cookingTime: 40,
+    servings: 4,
+    cuisine: 'Italian',
+    nutritionalInformation: {
+      calories: 320,
+      proteins: 15,
+      saturated: 5,
+      unsaturated: 8,
+      cholesterol: 100,
+      carbohydrates: 40,
+      sugar: 5,
+      vitamins: [ [Object], [Object] ],
+      minerals: [ [Object], [Object] ]
+    },
+    notes: 'This Hearty Pasta Soup is a satisfying and nutritious meal that is sure to please your taste buds. The blend of flavors from the fresh ingredients and spices creates a comforting dish perfect for any time of the year.',
+    allergenInformation: [ { name: 'Dairy', info: 'Contains Parmesan cheese' } ],
+    substitutions: [
+      { name: 'Vegetable broth', quantity: 1, unit: 'kg' },
+      { name: 'Zucchini noodles', quantity: 200, unit: 'g' }
+    ],
+    equipmentNeeded: [ { name: 'Large pot' }, { name: 'Bowl' } ],
+    mealType: 'Lunch',
+    tags: [
+      'lunch',        'italian',
+      'olive oil',    'garlic',
+      'onion',        'salt',
+      'black pepper', 'chicken broth',
+      'tomatoes',     'pasta',
+      'eggs',         'parmesan cheese',
+      'basil',        'oregano'
+    ],
+    isFeatured: false,
+    visibility: 'private',
+    createTime: 1713526494807,
+    creator: 'Default User',
+    isPublic: false,
+    status: 'draft',
+    userRatings: [],
+    likes: 0,
+    dislikes: 0,
+    comments: []
+  }
+
+  return  recipeMock;
+}
+
   let recipe = recipeModel.newDefaultRecipe();
 
   recipe = await buildBase(data, recipe);
@@ -18,6 +105,8 @@ const newRecipe = async function (data) {
 
   recipe = await buildTags(recipe);
   console.log(recipe);
+
+  return recipe;
 };
 
 const buildBase = async function (data, base) {
@@ -48,6 +137,7 @@ const buildBase = async function (data, base) {
 
     messages: [setupPrompt, instructionPrompt, dataPrompt],
     max_tokens: 1000,
+    temperature: 1,
   });
   const response = JSON.parse(request.choices[0].message.content);
 

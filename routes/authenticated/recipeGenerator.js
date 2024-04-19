@@ -1,23 +1,31 @@
 "use strict";
 
-module.exports = (req, res) => {
-    const recipes = [
-        {
-          title: "recipe 1",
-          description: "Lorem ipsum dolor sit amet consectetur",
-        },
-        {
-          title: "recipe 2",
-          description: "Lorem ipsum dolor sit amet consectetur",
-        },
-        {
-          title: "recipe 3",
-          description: "Lorem ipsum dolor sit amet consectetur",
-        },
-        {
-          title: "recipe 4",
-          description: "Lorem ipsum dolor sit amet consectetur",
-        },
-      ];
-    res.render("recipeGenerator", { title: "recipe Generator", recipes });
+const generator = require("../../middlewares/recipeGenerator");
+
+
+
+const loadRecipeGenerator = function(req, res){
+  const recipes = [];
+  res.render("recipeGenerator", { title: "recipe Generator", recipes });
 };
+
+
+
+const generateRecipe = async function(req, res){
+
+ const recipe =  await generator.newRecipe(req.body);
+ //const recipe2 =  await generator.newRecipe(req.body);
+ //const recipe3 =  await generator.newRecipe(req.body);
+
+ //const [recipe1, recipe2, recipe3] = await Promise.all([recipe1Promise, recipe2Promise, recipe3Promise]);
+
+
+ const recipeList =[ recipe];
+ 
+ 
+
+  res.send(recipeList);
+};
+
+
+module.exports = {loadRecipeGenerator, generateRecipe};

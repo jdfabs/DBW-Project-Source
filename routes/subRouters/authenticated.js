@@ -13,7 +13,12 @@ router.get("/mainPage", mainPage);
 router.get("/metrics", metrics);
 router.get("/personalGalery",personalGalery);
 router.get("/recipe",recipe);
-router.get("/recipeGenerator", recipeGenerator);
 router.get("/settings",settings);
+
+
+router.get("/recipeGenerator", recipeGenerator.loadRecipeGenerator);
+
+router.post("/recipeGenerator", recipeGenerator.generateRecipe);
+
 
 module.exports = router;

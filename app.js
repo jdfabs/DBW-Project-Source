@@ -22,9 +22,9 @@ app.set("view engine", "ejs"); //Setting up ejs
 app.use(express.json()); //Use json format
 app.use(express.static("public")); //Setting up public folder
 app.use(morgan("dev")); //Setup debug tool
-
-app.use(router); //App Router
 app.use(methodOverride("_method"));
+
+
 
 mongoose
   .connect(
@@ -41,3 +41,6 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+
+
+  app.use(router); //App Router
