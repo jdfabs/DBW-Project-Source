@@ -1,5 +1,9 @@
-"use strict";
+"use strict"
 
-module.exports = (req, res) => {
-  res.render("about", { title: "About Us" });
-};
+const express = require("express");
+const router = express.Router();
+const { renderAboutPage } = require("../../controler/publicController/aboutController");
+
+router.get("/about", renderAboutPage);
+
+module.exports = router;
