@@ -117,9 +117,14 @@ form.addEventListener("submit", (event) => {
     .then((data) => {
       generatedRecipe = data;
 
+      if (document.getElementById("recipeContainer")) {
+        document.getElementById("recipeContainer").remove();
+      }
+
       let newRecipe = document.createElement("section");
       newRecipe.classList.add("recipeContainer");
       newRecipe.classList.add("d-flex");
+      newRecipe.id = "recipeContainer";
 
       newRecipe.innerHTML = `<img class="recipeImage d-none d-lg-block" src="/images/PlaceholderImage.png" alt="Alternate Text" />
                               <div class="p-2">
@@ -142,7 +147,13 @@ form.addEventListener("submit", (event) => {
                                   <p class="d-none d-sm-block">${
                                     generatedRecipe.description
                                   }</p>
-                                  <p class="d-sm-none"> SHORT VERSION Assurance advantage belonging happiness departure so of. Now improving and one sincerity intention allowance commanded not.</p>
+                                  <p class="d-sm-none">SHORT VERSION - ${generatedRecipe.description.substring(
+                                    0,
+                                    generatedRecipe.description.lastIndexOf(
+                                      ".",
+                                      200
+                                    )
+                                  )}  </p>
                                 </div>
                                 <div class="d-block ">
                                   <h5> Ingredients -</h5>
@@ -157,6 +168,34 @@ form.addEventListener("submit", (event) => {
                               </div>`;
 
       document.getElementById("Recipes").append(newRecipe);
+
+      const filters = document
+        .getElementById("recipeForm")
+        .getElementsByClassName("row");
+      filters[0].classList.add("d-none");
+      filters[1].classList.add("d-none");
+
+      const generateButton = document.getElementById("generate-btn");
+      generateButton.classList.add("d-none");
+
+      let filterButton = document.createElement("input");  
+      filterButton.classList.add("btn-md"); 
+      filterButton.classList.add("mx-auto");
+      filterButton.classList.add("mt-3");
+      filterButton.classList.add("sumbit_btn");
+      filterButton.type = "submit";
+      filterButton.value = "Filters";      
+      filterButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        filters[0].classList.remove("d-none");
+        filters[1].classList.remove("d-none");
+        generateButton.classList.remove("d-none");
+        filterButton.remove();
+      });          
+
+      document.getElementById("recipeForm").append(filterButton);
+
+
 
       document
         .getElementById("saveBtn")

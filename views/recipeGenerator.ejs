@@ -105,45 +105,36 @@
                   <span class="d-xl-none          text-end m-1">Min num of ingredients <input name="minNumIng" type="text"></span>
                   <span class="d-none d-xl-block  text-end m-1">Maximum number of new ingredients <input name="maxNumNewIng" type="text"></span>
                   <span class="d-xl-none  text-end m-1">Max num of new ingredients <input name="maxNumNewIng" type="text"></span>
-                  <span class="d-none d-xl-block  text-end m-1">Number of recipes to generate <input name="numReciToGen" type="text" placeholder="3"></span>
                   <span class="d-xl-none  text-end m-1">Num of recipes to generate <input name="numReciToGen" type="text" placeholder="3"></span>
 
                   <span class=" text-end m-1">Maximum cooking time <input name="maxTime" type="text"></span>
                   <span class=" text-end m-1">
                     Dificulty rating
                     <select class="input-num" name="dificultyRating" id="cookingMethods">
-                      <option value="1"> 1</option>
-                      <option value="2"> 2</option>
-                      <option value="3"> 3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
+                      <option value="easy"> easy</option>
+                      <option value="medium"> medium</option>
+                      <option value="hard"> hard</option>
+                      <option value="chef">chef</option>
                     </select>
 
                   </span>
                   <span class=" text-end m-1">
                     Spice level
                     <select class="input-num" name="dificultyRating" id="cookingMethods">
-                      <option value="1"> 1</option>
-                      <option value="2"> 2</option>
-                      <option value="3"> 3</option>
-                      <option value="4">4</option>
-                      <option value="5">5</option>
+                      <option value="none"> none</option>
+                      <option value="mild"> mild</option>
+                      <option value="spicy"> spicy</option>
+                      <option value="extra">extra</option>
                     </select>
                   </span>
                 </div>
               </div>
 
             </div>
-
             <input id="generate-btn" class="btn-md mx-auto mt-3 sumbit_btn" type="submit" value="Generate" />
-
           </form>
         </div>
-
       </div>
-
-
-
 
 
       <!-- recipes container-->
@@ -172,7 +163,7 @@
             <div class="d-block  ">
               <h5> Description -</h5>
               <p class="d-none d-sm-block"><%=recipe.description %></p>
-              <p class="d-sm-none"> SHORT VERSION Assurance advantage belonging happiness departure so of. Now improving and one sincerity intention allowance commanded not.</p>
+              <p class="d-sm-none">SHORT VERSION<%=recipe.descripton.substring(0,recipe.description.lastIndexOf(".", 200))%>  </p>
             </div>
             <div class="d-block ">
               <h5> Ingredients -</h5>
@@ -185,9 +176,6 @@
           </div>
         </section>
         <%  });}%>
-
-
-
       </div>
     </div>
 
