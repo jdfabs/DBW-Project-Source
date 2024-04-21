@@ -63,7 +63,7 @@ document
       .then((res) => res.json())
       .then((data) => {
         generatedRecipe = data;
-
+        
         let newRecipe = document.createElement("section");
         newRecipe.classList.add("recipeContainer");
         newRecipe.classList.add("d-flex");
@@ -73,7 +73,7 @@ document
                             <div class="p-2">
                             <div class="d-flex justify-content-between">
                               <div class="d-block d-sm-flex  align-items-end">
-                                <h3>${generatedRecipe.recipeName}</h3>
+                                <a href="/recipe/${generatedRecipe.id}"><h3>${generatedRecipe.recipeName}</h3></a>
                                 <h5> - creator name</h5>
                               </div>
                               
@@ -192,7 +192,7 @@ document.addEventListener("scroll", async () => {
                             <div class="p-2">
                             <div class="d-flex justify-content-between">
                               <div class="d-block d-sm-flex  align-items-end">
-                                <h3>${generatedRecipe.recipeName}</h3>
+                              <a href="/recipe/${generatedRecipe._id}"><h3>${generatedRecipe.recipeName}</h3></a>
                                 <h5> - creator name</h5>
                               </div>
                               

@@ -10,13 +10,7 @@ const debug = require("../../debugTools");
 
 const getRecipes = async function () {
   debug.log(1, "Main Page Controller - getRecipes");
- 
- 
-
-
-
   const recipes = await getTopThreeRecipes();
-
   return recipes;
 };
 
