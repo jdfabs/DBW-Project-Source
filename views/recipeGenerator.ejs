@@ -139,43 +139,7 @@
 
       <!-- recipes container-->
       <div id="Recipes">
-        <% if (recipes.length > 0) { 
-          recipes.forEach(recipe => { %>
-
-        <section class="recipeContainer d-flex">
-          <img class="recipeImage d-none d-lg-block" src="/images/PlaceholderImage.png" alt="Alternate Text" />
-
-          <div class="p-2">
-            <div class="d-block">
-              <div class="d-block d-sm-flex  align-items-end">
-                <h3><%=recipe.recipeName %></h3>
-                <h5> - creator name</h5>
-              </div>
-            <div>
-              <h1> X</h1>
-              </div>
-            </div>
-            <div class="d-flex ">
-              <img class="rating " src="/images/Rating.png" alt="rating" />
-              <p class="d-none d-sm-block"> - 500 ratings</p>
-            </div>
-            <p class="d-sm-none"></p>
-            <div class="d-block  ">
-              <h5> Description -</h5>
-              <p class="d-none d-sm-block"><%=recipe.description %></p>
-              <p class="d-sm-none">SHORT VERSION<%=recipe.descripton.substring(0,recipe.description.lastIndexOf(".", 200))%>  </p>
-            </div>
-            <div class="d-block ">
-              <h5> Ingredients -</h5>
-              <p> <%=recipe.ingredients %></p>
-            </div>
-            <div class="d-none d-sm-block ">
-              <h5> tags -</h5>
-              <p> <%=recipe.tags %></p>
-            </div>
-          </div>
-        </section>
-        <%  });}%>
+       
       </div>
     </div>
 

@@ -2,8 +2,8 @@ const recipeModel = require("../model/recipeModel").RecipeModel;
 const dataValidation = require("../middlewares/dbValidation");
 
 const saveRecipe = async function (data) {
-  const recipe = new recipeModel(data);
-  console.log(recipe);
+  console.log("Saving recipe");
+  const recipe = new recipeModel(data);  
   try {
     const savedRecipe = await recipe.save();
     console.log("Recipe saved successfully");
@@ -19,4 +19,10 @@ const getRecipeById = async function(id){
     return recipe
 }
 
-module.exports = { saveRecipe,getRecipeById };
+const getRandomRecipe = async function(){
+    const recipe = await recipeModel.aggregate([{ $sample: { size: 1 } }]);
+    
+    return recipe
+};
+
+module.exports = { saveRecipe,getRecipeById,getRandomRecipe };
