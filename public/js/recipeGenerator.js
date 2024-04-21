@@ -171,7 +171,7 @@ form.addEventListener("submit", (event) => {
 
       const filters = document
         .getElementById("recipeForm")
-        .getElementsByClassName("row");
+        .getElementsByClassName("toHide");
       filters[0].classList.add("d-none");
       filters[1].classList.add("d-none");
 

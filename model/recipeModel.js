@@ -61,7 +61,7 @@ const recipeSchema = mongoose.Schema(
         quantity: { type: Number, default: -1, required: true },
         unit: {
           type: String,
-          enum: ["kg", "g", "lb", "un", "tsp", "tbs", "ml", "l", "cup", "oz", "pt", "qt", "gal"],
+          enum: ["kg", "g", "lb", "un", "tsp","tbsp", "tbs", "ml", "l","L","shot", "cup", "oz", "pt", "qt", "gal"],
           default: "un",
           required: true,
         },
