@@ -3,10 +3,10 @@ const express = require("express"); //View engine
 const router = express.Router(); //Instance of the router
 
 
-const metricController = require("../../controler/authenticatedController/metrics");
-const personalGaleryController = require("../../controler/authenticatedController/personalGalery");
-const settingsController = require("../../controler/authenticatedController/settings");
-const mainPageController = require("../../controler/authenticatedController/mainPage");
+const metricController = require("../../controllers/authenticated/metrics");
+const personalGaleryController = require("../../controllers/authenticated/personalGalery");
+const settingsController = require("../../controllers/authenticated/settings");
+const mainPageController = require("../../controllers/authenticated/mainPage");
 
 const dbManager = require("../../middlewares/dbManager");
 //Routes for authenticated users
