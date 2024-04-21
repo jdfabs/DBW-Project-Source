@@ -14,7 +14,7 @@ router.get("/personalGalery",personalGalery);
 router.get("/settings",settings);
 
 router.get("/mainPage", mainPage.loadMainPage);
-router.get("/mainPage/:index", mainPage.getNextRecipe);
+router.post("/mainPage/:index", mainPage.getNextRecipe);
 
 router.get("/recipe/:id",recipe.loadRecipeById);
 

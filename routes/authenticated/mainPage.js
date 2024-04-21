@@ -10,8 +10,9 @@ const loadMainPage = async function(req, res)  {
 
 const getNextRecipe = async function(req, res)  {
   debug.log(1, "Main Page Router - getNextRecipe");
-  const recipe = await controller.getRecipeByIndex("",req.params.index)
-  console.log(recipe);
+  console.log(req.body);
+  const recipe = await controller.getRecipeByIndex(req.body,req.params.index)
+  
   res.json(recipe);
 };
 

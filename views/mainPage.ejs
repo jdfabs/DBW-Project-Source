@@ -47,10 +47,18 @@
                 <div id="methodList">
                   <div class="row">
                     <select itemid="methods" class="col-10" name="cookingMethods" id="cookingMethods">
-                      <option value="Method 1">Method 1</option>
-                      <option value="Method 2">Method 2</option>
-                      <option value="Method 3">Method 3</option>
-                      <option value="Method 4">Method 4</option>
+                      <option value="Boiling">Boiling</option>
+                      <option value="Steaming">Steaming</option>
+                      <option value="Grilling">Grilling</option>
+                      <option value="Roasting">Roasting</option>
+                      <option value="Baking">Baking</option>
+                      <option value="Frying">Frying</option>
+                      <option value="Sautéing">Sautéing</option>
+                      <option value="Braising">Braising</option>
+                      <option value="Poaching">Poaching</option>
+                      <option value="Simmering">Simmering</option>
+                      <option value="Blanching">Blanching</option>
+                      <option value="Slow cooking">Slow cooking</option>
 
                     </select>
                     <button class="removeBtn">-</button>
@@ -104,9 +112,9 @@
             </div>
             <div class="d-block ">
               <h5> Ingredients -</h5>
-              <p>                
-                <% if (recipe.ingredients.length > 0) { %>                  
-                <% recipe.ingredients.forEach(ingredient => { %>                  
+              <p>
+                <% if (recipe.ingredients.length > 0) { %>
+                <% recipe.ingredients.forEach(ingredient => { %>
                 <%=ingredient%>,
                 <%});};%>
               </p>
