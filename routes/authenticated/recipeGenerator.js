@@ -16,9 +16,7 @@ const generateRecipe = async function (req, res) {
 
   //const [recipe1, recipe2, recipe3] = await Promise.all([recipe1Promise, recipe2Promise, recipe3Promise]);
 
-  const recipeList = [recipe];
-
-  res.send(recipeList);
+  res.send(recipe);
 };
 
 const saveRecipe = async function (req, res) {
@@ -26,7 +24,7 @@ const saveRecipe = async function (req, res) {
     console.log("Saving recipe");
     const recipeToload = req.body;
     const id = await dbManager.saveRecipe(recipeToload);
-    
+
     res.json({ id: id });
   } else {
     // Handle validation error (e.g., display error message)
