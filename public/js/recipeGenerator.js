@@ -62,7 +62,7 @@ const addEventListenerToButtons = function (button) {
 
 form.addEventListener("submit", (event) => {
   event.preventDefault(); // Prevent default form submission behavior
-
+  
   // Serialize the form data
   const formData = new FormData(form);
   // Convert formData to a plain object
@@ -115,11 +115,10 @@ form.addEventListener("submit", (event) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
-      generatedRecipe = data;
+      
+      generatedRecipe = data[0];
       for (let i = 0; i < Object.keys(data).length; i++) {
-        console.log(i);
-        console.log(data);
+        
         let newRecipe = document.createElement("section");
         newRecipe.classList.add("recipeContainer");
         newRecipe.classList.add("d-flex");
@@ -159,15 +158,22 @@ form.addEventListener("submit", (event) => {
 
         document.getElementById("Recipes").append(newRecipe);
 
-        document.getElementById("saveBtn").addEventListener("click", (event) => {
+        document.getElementById("saveBtn").addEventListener("click", async (event) => {
           event.preventDefault();
-          fetch("/recipeGenerator/save", {
+          await fetch("/recipeGenerator/save", {
             method: "POST",
-            body: JSON.stringify(generatedRecipe),
+            body: JSON.stringify(data[0]),
             headers: {
               "Content-Type": "application/json",
-            },
-          })
+            }
+          }).then((res) => res.json())
+          .then((data) => {
+            const savedRecipeId = data.id;
+            window.location.href = "localhost:3000/recipe/"+ savedRecipeId; 
+            console.log("Saved recipe ID:", savedRecipeId);
+            // Do something with the savedRecipeId if needed
+          });
+          
         });
       }
     });

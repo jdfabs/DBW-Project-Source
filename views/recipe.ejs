@@ -20,6 +20,7 @@
         <div class="front ">
           <div id="f1" class="front-content d-flex text-center p-4" style="background-color: #4592AF;">
             <div class="align-self-center d-grid ">
+              <% console.log(recipe)%>
               <h3><%=recipe.recipeName %></h3>
               <h5><%=recipe.creator%></h5>
               <h5><%=recipe.creationDate%></h5>
@@ -31,7 +32,11 @@
           <div id="b1" class="back-content d-inline-block p-4 text-justify">
             <h3><%=recipe.recipeName %></h3>
             <h5>Description</h5>
-            <p class="ingredient"><%const cutString = recipe.description.substring(0,500) ;%>
+            <p class="ingredient"><%const description = recipe.description ; %>
+              <%console.log(recipe.description);%>
+              <%const cutString = description.substring(0,500); %>
+              
+             
                 <%=cutString.substr(0, Math.min(cutString.length, cutString.lastIndexOf(".")+1));%></p>
           </div>
         </div>

@@ -12,7 +12,7 @@ const settings = require("../authenticated/settings");
 router.get("/mainPage", mainPage);
 router.get("/metrics", metrics);
 router.get("/personalGalery",personalGalery);
-router.get("/recipe",recipe);
+router.get("/recipe/:id",recipe.loadRecipeById);
 router.get("/settings",settings);
 
 
