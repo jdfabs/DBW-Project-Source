@@ -1,6 +1,6 @@
 "use strict";
 const debug = require("../../debugTools");
-const controller = require("./../../controler/mainPageController");
+const controller = require("./../../controler/authenticatedController/mainPageController");
 
 const loadMainPage = async function(req, res)  {
   debug.log(1, "Main Page Router - loadMainPage");  

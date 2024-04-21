@@ -1,9 +1,9 @@
 
 
 "use strict";
-const recipeModel = require("../model/recipeModel").RecipeModel;
-const dataValidation = require("../middlewares/dbValidation");
-const debug = require("../debugTools");
+const recipeModel = require("../../model/recipeModel").RecipeModel;
+const dataValidation = require("../../middlewares/dbValidation");
+const debug = require("../../debugTools");
 
 
 
