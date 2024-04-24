@@ -7,6 +7,8 @@ const metricController = require("../../controllers/authenticated/metrics");
 const personalGaleryController = require("../../controllers/authenticated/personalGalery");
 const settingsController = require("../../controllers/authenticated/settings");
 const mainPageController = require("../../controllers/authenticated/mainPage");
+const generator = require("../../middlewares/recipeGenerator");
+const validator = require("../../middlewares/dbValidation");
 
 const dbManager = require("../../middlewares/dbManager");
 //Routes for authenticated users
