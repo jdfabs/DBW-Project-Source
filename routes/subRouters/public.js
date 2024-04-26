@@ -8,6 +8,8 @@ const  aboutController = require("../../controllers/public/about");
 const  faqController = require("../../controllers/public/faq");
 const  siteMapController  = require("../../controllers/public/siteMap");
 const c404Controller  = require("../../controllers/public/404");
+const indexController = require("../../controllers/public/index");
+
 
 //Public Routes
 //contactUs
@@ -32,9 +34,18 @@ router.get("/faq", (req, res) => {
 router.get("/sitemap", (req, res) => {
   res.render("siteMap", { title: "Site Map" });
 });
+
+router.get("/",indexController.indexGet);
+router.post("/login", indexController.loginPost);
+router.post("/register", indexController.registerPost);
+router.get("/logout", indexController.logout);
+
 //404
 router.use((req, res) => {
   res.render("404", { title: "404 Page not found" });
 });
+
+
+
 
 module.exports = router;

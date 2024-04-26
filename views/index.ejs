@@ -17,23 +17,24 @@
         <h1 class="ui-text">Welcome</h1>
       </div>
 
-      <form id="login-zone" class="authentication-zone d-grid bg-dark w-75 p-3">
+      <form id="login-zone" action="/login" method="POST" class="authentication-zone d-grid bg-dark w-75 p-3">
         <div class="d-flex m-1">
-          <button id="login-with-google" type="button" class="btn btn-light">Login with google</button>
-          <i class="bi bi-google input-icon"></i>
+            <button id="login-with-google" type="button" class="btn btn-light">Login with Google</button>
+            <i class="bi bi-google input-icon"></i>
         </div>
         <h5>Or</h5>
         <div class="d-flex m-1">
-          <input class="text-center" name="username" type="text" placeholder="Username" />
-          <i class="bi bi-person-circle input-icon"></i>
+            <input class="text-center" name="username" type="text" placeholder="Username" />
+            <i class="bi bi-person-circle input-icon"></i>
         </div>
         <div class="d-flex m-1">
-          <input class="text-center" name="password" type="text" placeholder="Password" />
-          <i class="bi bi-lock-fill input-icon"></i>
+            <input class="text-center" name="password" type="password" placeholder="Password" />
+            <i class="bi bi-lock-fill input-icon"></i>
         </div>
-        <input id="login-button" class="btn btn-light mx-auto m-1 sumbit_btn" type="submit" value="Login" />
+        <input id="login-button" class="btn btn-light mx-auto m-1 submit_btn" type="submit" value="Login" />
         <a href="/forgot-password">Forgot password?</a>
-      </form>
+    </form>
+    
     </section>
 
     <section id="register-window" class="d-none authentication-window bg-img bg-cover mx-auto row justify-content-center " style="background-image: url('/images/ui_background.png');">
@@ -42,7 +43,7 @@
         <h4 class="ui-text">We are very happy to have you here!</h4>
         <h1 class="ui-text">SignUp</h1>
       </div>
-      <form id="register-zone" class="authentication-zone d-grid bg-dark w-75 p-3">
+      <form id="register-zone" action="/register" method="POST" class="authentication-zone d-grid bg-dark w-75 p-3">
         <div class="d-flex m-1">
           <input class="text-center" name="email" type="text" placeholder="Email" />
           <i class="bi bi-envelope-at input-icon"></i>
@@ -52,11 +53,11 @@
           <i class="bi bi-person-circle input-icon"></i>
         </div>
         <div class="d-flex m-1">
-          <input class="text-center" name="password" type="text" placeholder="Password" />
+          <input class="text-center" name="password" type="password" placeholder="Password" />
           <i class="bi bi-lock-fill input-icon"></i>
         </div>
         <div class="d-flex m-1">
-          <input class="text-center" name="password" type="text" placeholder="Confirm Password" />
+          <input class="text-center"  type="password" placeholder="Confirm Password" />
           <i class="bi bi-lock-fill input-icon"></i>
         </div>
         <div class="d-flex justify-content-between">

@@ -6,11 +6,7 @@ const devRouter = require("./subRouters/dev");
 const authenticatedRouter = require("./subRouters/authenticated");
 const publicRouter = require("./subRouters/public");
 
-const indexController = require("../controllers/public/index");
 
-router.get("/", (req, res) => {
-  res.render("index", { title: "Index" });
-});
 
 router.use(devRouter); //Sub router for Dev
 router.use(authenticatedRouter); //Sub router for authenticated users

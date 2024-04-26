@@ -2,7 +2,7 @@
 const registerWindowButton = document.getElementById("signup-button");
 
 const loginWindow = document.getElementById("login-window");
-const loginButton = document.getElementById("login-button");
+const loginForm = document.getElementById("login-zone");
 const loginWithGoogle = document.getElementById("login-with-google");
 
 const registerWindow = document.getElementById("register-window");
@@ -16,15 +16,16 @@ registerWindowButton.addEventListener("click", (event) => {
   loginWindow.classList.add("d-none");
 });
 
-loginButton.addEventListener("click", (event) => {
+/*
+loginForm.addEventListener("click", (event) => {
   event.preventDefault();
   document.location.href = "/mainPage";
-});
-
+});*/
+/*
 registerButton.addEventListener("click", (event) => {
   event.preventDefault();
   document.location.href = "/mainPage";
-});
+});*/
 
 
 

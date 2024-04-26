@@ -7,6 +7,7 @@ const config = {
    dbPassword: "2hfMiT2CJFTL9EJE",
    dbUser: "skipper",
    mockData: true,
+   sessionKey: "1234qwer=)(/asdfzxcv",
 };
 
 module.exports = config;
