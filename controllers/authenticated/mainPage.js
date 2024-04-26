@@ -50,8 +50,23 @@ const getRecipeByIndex = async function(filters, index) {
 }
 
 
+const mainPageGet = async function(req, res){
+  res.render("mainPage", {
+    title: "Main Page",
+    recipes: await getRecipes(),
+  });
+}
 
-module.exports = { getRecipes,getRecipeByIndex };
+
+const mainPageIDGet = async function (req, res) {
+  const recipe = await getRecipeByIndex(
+    req.body,
+    req.params.index
+  );
+  res.json(recipe);
+};
+
+module.exports = { mainPageGet,mainPageIDGet};
 
 
 

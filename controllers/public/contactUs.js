@@ -2,8 +2,8 @@
 
 
 const contactUsGet = function (req, res) {
-    console.log("indexGet");
-    res.render("index", { title: "Index" });
+   
+    res.render("constactUs", { title: "Constact Us" });
   };
 
 

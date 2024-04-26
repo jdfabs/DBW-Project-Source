@@ -2,7 +2,7 @@
 
 
 const aboutGet = function (req, res) {
-    res.render("404", { title: "404 Page not found" });
+    res.render("about", { title: "About" });
   };
 
 module.exports = {  aboutGet};

@@ -6,6 +6,8 @@ const metricController = require("../../controllers/authenticated/metrics");
 const personalGaleryController = require("../../controllers/authenticated/personalGalery");
 const settingsController = require("../../controllers/authenticated/settings");
 const mainPageController = require("../../controllers/authenticated/mainPage");
+const recipeController = require("../../controllers/authenticated/recepie");
+
 const generator = require("../../middlewares/recipeGenerator");
 const validator = require("../../middlewares/dbValidation");
 
@@ -13,7 +15,6 @@ const dbManager = require("../../middlewares/dbManager");
 //Routes for authenticated users
 
 //metrics
-
 
 const checkAuth = function (req, res, next) {
   if (!req.isAuthenticated()) {
@@ -25,63 +26,25 @@ const checkAuth = function (req, res, next) {
   next();
 };
 
-router.get("/metrics", checkAuth, (req, res) => {
-  // Assuming metricController is properly defined
-  const metric = metricController.metric;
-  res.render("metrics", { title: "Metrics" });
-});
-
+router.get("/metrics", checkAuth, metricController.metricsGet);
 
 //personalGalery
-router.get("/personalGalery", checkAuth, (req, res) => {
-  const personalGalery = personalGaleryController.personalGalery;
-  res.render("personalGalery", { title: "Personal Galery" });
-});
+router.get(
+  "/personalGalery",
+  checkAuth,
+  personalGaleryController.personalGaleryGet
+);
 
 //settings
-router.get("/settings", checkAuth, (req, res) => {
-  const settings = settingsController.settings;
-  res.render("settings", { title: "Settings" });
-});
+router.get("/settings", checkAuth, settingsController.settingsGet);
 
 //mainPage
-router.get("/mainPage", checkAuth, async (req, res) => {
-  res.render("mainPage", {
-    title: "Main Page",
-    recipes: await mainPageController.getRecipes(),
-  });
-});
-router.post("/mainPage/:index", checkAuth, async (req, res) => {
-  const recipe = await mainPageController.getRecipeByIndex(
-    req.body,
-    req.params.index
-  );
-  res.json(recipe);
-});
+router.get("/mainPage", checkAuth, mainPageController.mainPageGet);
+router.post("/mainPage/:index", checkAuth, mainPageController.mainPageIDGet);
 
 //recipe
-router.get("/recipe", checkAuth, async (req, res) => {
-  const result = await dbManager.getRandomRecipe();
-  const recipe = result[0];
-
-  res.render("recipe", { title: "Recipe", recipe });
-});
-router.get("/recipe/:id", checkAuth, async (req, res) => {
-  try {
-    const recipeId = req.params.id;
-    // Fetch the recipe details from the database using the recipeId
-    const recipe = await dbManager.getRecipeById(recipeId);
-    if (!recipe) {
-      // If the recipe with the given ID is not found, render an error page
-      return res.status(404).render("404");
-    }
-    // Render a page to display the recipe details
-    res.render("recipe", { title: "Recipe", recipe });
-  } catch (error) {
-    console.error(error);
-    res.status(500).render("404", { title: "Internal Server Error" });
-  }
-});
+router.get("/recipe", checkAuth, recipeController.recipeGet);
+router.get("/recipe/:id", checkAuth, recipeController.recipeIdGet);
 
 //recipeGenerator
 router.get("/recipeGenerator", checkAuth, (req, res) => {
