@@ -2,50 +2,28 @@
 const express = require("express"); //View engine
 const router = express.Router(); //Instance of the router
 
-
 const contactUsController = require("../../controllers/public/contactUs");
-const  aboutController = require("../../controllers/public/about");
-const  faqController = require("../../controllers/public/faq");
-const  siteMapController  = require("../../controllers/public/siteMap");
-const c404Controller  = require("../../controllers/public/404");
+const aboutController = require("../../controllers/public/about");
+const faqController = require("../../controllers/public/faq");
+const siteMapController = require("../../controllers/public/siteMap");
+const c404Controller = require("../../controllers/public/404");
 const indexController = require("../../controllers/public/index");
 
-
 //Public Routes
-//contactUs
-router.get("/contactUs", (req, res) => {
-  res.render("contactUs", { title: "Contact Us" });
-});
+router.get("/contactUs", contactUsController.contactUsGet);
 
-//about
-router.get("/about", (req, res) => {
-  res.render("about", { title: "About Us" });
-});
-router.get("/about-us", (req, res) => {
-  res.status(301).redirect("about");
-});//Redirect example
+router.get("/about", aboutController.aboutGet);
+router.get("/about-us", aboutController.aboutGet); //Redirect/MultipleRoutes example
 
-//faq
-router.get("/faq", (req, res) => {
-  res.render("faq", { title: "FAQ" });
-});
+router.get("/faq", faqController.faqGet);
 
-//siteMap
-router.get("/sitemap", (req, res) => {
-  res.render("siteMap", { title: "Site Map" });
-});
+router.get("/sitemap", siteMapController.siteMapGet);
 
-router.get("/",indexController.indexGet);
+router.get("/", indexController.indexGet);
 router.post("/login", indexController.loginPost);
 router.post("/register", indexController.registerPost);
 router.get("/logout", indexController.logout);
 
-//404
-router.use((req, res) => {
-  res.render("404", { title: "404 Page not found" });
-});
-
-
-
+router.use(c404Controller.indexGet);
 
 module.exports = router;
