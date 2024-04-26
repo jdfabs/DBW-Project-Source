@@ -6,7 +6,8 @@ const config = {
    openAI_API_Key: "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",
    dbPassword: "2hfMiT2CJFTL9EJE",
    dbUser: "skipper",
-   mockData: false,
+   mockData: true,
+   sessionKey: "1234qwer=)(/asdfzxcv",
 };
 
 module.exports = config;

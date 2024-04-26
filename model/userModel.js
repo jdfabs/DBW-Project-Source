@@ -1,13 +1,10 @@
 const mongoose = require("mongoose");
+const passportLocalMongoose = require("passport-local-mongoose");
 
-const UserSchema = new mongoose.Schema({
-    username: {
-      type: String,
-      required: true,
-      unique: true,
-      lowercase: true,
-    },
-    email: {
+const userSchema = new mongoose.Schema(
+  {
+    accountInfo: {
+      email: {
         type: String,
         required: true,
         unique: true,
@@ -16,53 +13,64 @@ const UserSchema = new mongoose.Schema({
           validator: (email) => {
             return /^[\w\.-]+@([\w-]+\.)+[.\w]{2,}$/g.test(email);
           },
-          message: 'Invalid email format',
+          message: "Invalid email format",
         },
       },
-    password: {
-      type: String,
-      required: true,
-    },// optional
-    firstName: {
-      type: String,          
-    },// optional
-    lastName: {
-      type: String,
-    },// optional
-    profilePicture: {
-      type: String,
-    }, // path para imagem
-    dateOfBirth: Date, // optional
-    gender: {
-      type: String,
-      enum: ['male', 'female', 'other'],
-    }, // optional
-    location: {
-      country: String,
-      city: String,
-    }, // optional
-    contactInfo: {
-      phoneNumber: String,
-      address: String,
-    }, // optional
-    registrationDate: {
-      type: Date,
-      default: Date.now,
+
+      registrationDate: {
+        type: Date,
+        default: Date.now,
+      },
+      lastLogin: {
+        type: Date,
+        default: Date.now,
+      },
+      role: {
+        type: Number, // use an enum or string for specific roles
+        default: 0, // 0- User , 1 - Mod , 2 - Admin , 3 - debug
+        required: true,
+      },
+      twoFactorAuthentication: {
+        type: Boolean,
+        default: false,
+      },
+      isBanned: {
+        type: Boolean,
+        required: true,
+        default: false,
+      },
+      profilePicture: {
+        type: String,
+      }, // path para imagem
     },
-    lastLogin: Date,
-    role: {
-      type: Number, // use an enum or string for specific roles
-      default: 0, // 0- User , 1 - Mod , 2 - Admin , 3 - debug
-      required: true,
+    personalInfo: {
+      firstName: {
+        type: String,
+      }, // optional
+      lastName: {
+        type: String,
+      }, // optional
+      gender: {
+        type: String,
+        enum: ["male", "female", "other"],
+      }, // optional
+      location: {
+        country: String,
+        city: String,
+      }, // optional
+      contactInfo: {
+        phoneNumber: String,
+        address: String,
+      }, // optional
+      dateOfBirth: Date, // optional
     },
-    twoFactorAuthentication: {
-      type: Boolean,
-      default: false,
-    },
+    recipes: [{ type: String }],
   },
   {
     timestamps: true,
-  });
-  
-  module.exports = mongoose.model('User', UserSchema);
+  }
+);
+userSchema.plugin(passportLocalMongoose);
+
+  module.exports = mongoose.model('user', userSchema);
   
