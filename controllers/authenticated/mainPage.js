@@ -35,7 +35,10 @@ const getRecipeByIndex = async function(filters, index) {
 
   // Adding filter for ingredients if available
   if (filters.ingredients.length > 0) {
-    filterQuery.ingredients = { $all: filters.ingredients };
+    // Construct an array of regex patterns for each ingredient
+    const ingredientRegexArray = filters.ingredients.map(ingredient => new RegExp(ingredient, 'i'));
+    // Use $in operator to match any of the ingredients
+    filterQuery.ingredients = { $in: ingredientRegexArray };
   }
 
   // Adding filter for methods if available
@@ -48,6 +51,7 @@ const getRecipeByIndex = async function(filters, index) {
   const recipe = await recipeModel.find(filterQuery).skip(index).limit(1);
   return recipe[0];
 }
+
 
 
 const mainPageGet = async function(req, res){
