@@ -7,11 +7,8 @@ const personalGaleryController = require("../../controllers/authenticated/person
 const settingsController = require("../../controllers/authenticated/settings");
 const mainPageController = require("../../controllers/authenticated/mainPage");
 const recipeController = require("../../controllers/authenticated/recepie");
+const recipeGeneratorController = require("../../controllers/authenticated/recepieGen");
 
-const generator = require("../../middlewares/recipeGenerator");
-const validator = require("../../middlewares/dbValidation");
-
-const dbManager = require("../../middlewares/dbManager");
 //Routes for authenticated users
 
 //metrics
@@ -48,20 +45,20 @@ router.get("/recipe", checkAuth, recipeController.recipeGet);
 router.get("/recipe/:id", checkAuth, recipeController.recipeIdGet);
 
 //recipeGenerator
-router.get("/recipeGenerator", checkAuth, (req, res) => {
-  res.render("recipeGenerator", { title: "recipe Generator",  isAuthenticated: req.body.isAuthenticated });
-});
-router.post("/recipeGenerator", checkAuth, async (req, res) => {
-  const recipe = await generator.newRecipe(req.body);
-  res.send(recipe);
-});
-router.post("/recipeGenerator/save", checkAuth, async (req, res) => {
-  if (validator.isRecipeValid(req.body)) {
-    const id = await dbManager.saveRecipe(req.body);
-    res.json({ id: id });
-  } else {
-    res.status(400).send("Invalid recipe data");
-  }
-});
+router.get(
+  "/recipeGenerator",
+  checkAuth,
+  recipeGeneratorController.recipeGenGet
+);
+router.post(
+  "/recipeGenerator",
+  checkAuth,
+  recipeGeneratorController.recipeGenPost
+);
+router.post(
+  "/recipeGenerator/save",
+  checkAuth,
+  recipeGeneratorController.recipeGenSavePost
+);
 
 module.exports = router;
