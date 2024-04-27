@@ -5,7 +5,7 @@ const recipeGet = async function (req, res) {
   const result = await dbManager.getRandomRecipe();
   const recipe = result[0];
 
-  res.render("recipe", { title: "Recipe", recipe });
+  res.render("recipe", { title: "Recipe", recipe ,  isAuthenticated: req.body.isAuthenticated });
 };
 
 const recipeIdGet = async function (req, res) {

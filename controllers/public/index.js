@@ -4,7 +4,7 @@ const passport = require("passport");
 
 const indexGet = function (req, res) {
   console.log("indexGet");
-  res.render("index", { title: "Index" });
+  res.render("index", { title: "Index", isAuthenticated: req.body.isAuthenticated });
 };
 
 const loginPost = async function (req, res, next) {

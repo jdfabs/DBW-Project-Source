@@ -23,6 +23,7 @@ const checkAuth = function (req, res, next) {
     return res.redirect("/");
   }
   // If authenticated, proceed to the next middleware/route handler
+  req.body.isAuthenticated = true;
   next();
 };
 
@@ -48,7 +49,7 @@ router.get("/recipe/:id", checkAuth, recipeController.recipeIdGet);
 
 //recipeGenerator
 router.get("/recipeGenerator", checkAuth, (req, res) => {
-  res.render("recipeGenerator", { title: "recipe Generator" });
+  res.render("recipeGenerator", { title: "recipe Generator",  isAuthenticated: req.body.isAuthenticated });
 });
 router.post("/recipeGenerator", checkAuth, async (req, res) => {
   const recipe = await generator.newRecipe(req.body);

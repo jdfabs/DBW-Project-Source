@@ -3,7 +3,7 @@
 
 const metricsGet = function (req, res) {
     
-    res.render("metrics", { title: "Metrics" });
+    res.render("metrics", { title: "Metrics",  isAuthenticated: req.body.isAuthenticated });
   };
 
 

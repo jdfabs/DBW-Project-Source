@@ -3,7 +3,7 @@
 
 const faqGet = function (req, res) {
     
-    res.render("faq", { title: "FAQ" });
+    res.render("faq", { title: "FAQ" ,  isAuthenticated: req.body.isAuthenticated });
   };
 
 

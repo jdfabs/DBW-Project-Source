@@ -53,8 +53,8 @@ const getRecipeByIndex = async function(filters, index) {
 const mainPageGet = async function(req, res){
   res.render("mainPage", {
     title: "Main Page",
-    recipes: await getRecipes(),
-  });
+    recipes: await getRecipes(),  isAuthenticated: req.body.isAuthenticated });
+
 }
 
 

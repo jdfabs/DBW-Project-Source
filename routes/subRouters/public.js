@@ -9,20 +9,26 @@ const siteMapController = require("../../controllers/public/siteMap");
 const c404Controller = require("../../controllers/public/404");
 const indexController = require("../../controllers/public/index");
 
+const checkAuth = function (req, res, next) {
+  if (req.isAuthenticated()) req.body.isAuthenticated = true;
+  else req.body.isAuthenticated = false;
+  next();
+};
+
 //Public Routes
-router.get("/contactUs", contactUsController.contactUsGet);
+router.get("/contactUs", checkAuth, contactUsController.contactUsGet);
 
-router.get("/about", aboutController.aboutGet);
-router.get("/about-us", aboutController.aboutGet); //Redirect/MultipleRoutes example
+router.get("/about", checkAuth, aboutController.aboutGet);
+router.get("/about-us", checkAuth, aboutController.aboutGet); //Redirect/MultipleRoutes example
 
-router.get("/faq", faqController.faqGet);
+router.get("/faq", checkAuth, faqController.faqGet);
 
-router.get("/sitemap", siteMapController.siteMapGet);
+router.get("/sitemap", checkAuth, siteMapController.siteMapGet);
 
-router.get("/", indexController.indexGet);
-router.post("/login", indexController.loginPost);
-router.post("/register", indexController.registerPost);
-router.get("/logout", indexController.logout);
+router.get("/", checkAuth, indexController.indexGet);
+router.post("/login", checkAuth, indexController.loginPost);
+router.post("/register", checkAuth, indexController.registerPost);
+router.get("/logout", checkAuth, indexController.logout);
 
 router.use(c404Controller.indexGet);
 
