@@ -199,7 +199,7 @@ document.addEventListener("scroll", async () => {
                             </div>                                
                               <div class="d-flex ">
                                 <img class="rating " src="/images/Rating.png" alt="rating" />
-                                <p class="d-none d-sm-block"> - 500 ratings</p>
+                                <p class="d-none d-sm-block"> - ${generatedRecipe.userRatings.length} ratings</p>
                               </div>
                               <p class="d-sm-none"></p>
                               <div class="d-block  ">

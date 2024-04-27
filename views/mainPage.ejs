@@ -96,12 +96,14 @@
           <img class="recipeImage d-none d-lg-block" src="/images/PlaceholderImage.png" alt="Alternate Text" />
           <div class="p-2">
             <div class="d-block d-sm-flex  align-items-end">
-              <a href="/recipe/<%=recipe.id%>"><h3><%=recipe.recipeName %></h3></a>
+              <a href="/recipe/<%=recipe.id%>">
+                <h3><%=recipe.recipeName %></h3>
+              </a>
               <h5> - <%=recipe.creator%></h5>
             </div>
             <div class="d-flex ">
               <img class="rating " src="/images/Rating.png" alt="rating" />
-              <p class="d-none d-sm-block"> - 500 ratings</p>
+              <p class="d-none d-sm-block"> - <%=recipe.userRatings.length%> ratings</p>
             </div>
             <p class="d-sm-none"></p>
             <div class="d-block  ">
@@ -120,6 +122,12 @@
             </div>
             <div class="d-none d-sm-block ">
               <h5> tags -</h5>
+              <p>
+                <% if (recipe.tags.length > 0) { %>
+                <% recipe.tags.forEach(tags => { %>
+                <%=tags%>,
+                <%});};%>
+              </p>
             </div>
           </div>
         </section>
