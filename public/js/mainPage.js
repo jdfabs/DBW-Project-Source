@@ -74,7 +74,7 @@ document
                             <div class="d-flex justify-content-between">
                               <div class="d-block d-sm-flex  align-items-end">
                                 <a href="/recipe/${generatedRecipe.id}"><h3>${generatedRecipe.recipeName}</h3></a>
-                                <h5> - creator name</h5>
+                                <h5>${generatedRecipe.creator}</h5>
                               </div>
                               
                             </div>                                
@@ -193,7 +193,7 @@ document.addEventListener("scroll", async () => {
                             <div class="d-flex justify-content-between">
                               <div class="d-block d-sm-flex  align-items-end">
                               <a href="/recipe/${generatedRecipe._id}"><h3>${generatedRecipe.recipeName}</h3></a>
-                                <h5> - creator name</h5>
+                                <h5> - ${generatedRecipe.creator}</h5>
                               </div>
                               
                             </div>                                
