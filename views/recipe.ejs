@@ -7,7 +7,7 @@
 </head>
 
 <body class="bg-img bg-cover">
-  <% console.log(recipe); %>
+  <% console.log(isAuthenticated); %>
 
   <!-- Main Body-->
   <div class="mainContent d-flex justify-content-center bg-img bg-cover" style="background-image: url('/images/ui_background.png');">
@@ -22,8 +22,8 @@
             <div class="align-self-center d-grid ">
 
               <h3><%=recipe.recipeName %></h3>
-              <h5><%=recipe.creator%>MISSING CREATOR NAME</h5>
-              <h5><%=recipe.createdAt%></h5>
+              <h5><%=recipe.creator%></h5>
+              <h5><%=recipe.createdAt.toString().substring(0,24)%></h5>
               <img class="recipeImage d-none d-lg-block " src="/images/PlaceholderImage.png" alt="Alternate Text" />
             </div>
           </div>

@@ -16,6 +16,7 @@ const recipeGenPost = async (req, res) => {
 };
 
 const recipeGenSavePost = async (req, res) => {
+    req.body.creator = req.user.username;
     if (validator.isRecipeValid(req.body)) {
       const id = await dbManager.saveRecipe(req.body);
       res.json({ id: id });

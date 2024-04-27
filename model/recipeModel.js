@@ -76,7 +76,7 @@ const recipeSchema = mongoose.Schema(
       enum: ["Breakfast", "Brunch", "Lunch", "Snack", "Dinner"],
       required: true,
     },
-
+    creator : {type: String, default: "default user"},
     //Params - não diretamente relacionado com cozinhar
     tags: [{ type: String, default: "Default tag" }],
     isFeatured: { type: Boolean, default: false },
