@@ -10,18 +10,13 @@ const indexGet = function (req, res) {
 const loginPost = async function (req, res, next) {
   const { username, password } = req.body;
   console.log("loginPost");
-  console.log(req.body);
-  console.log(username);
-  console.log(password);
-
   passport.authenticate("local", (err, user, info) => {
     if (err) {
       return next(err);
     }
     if (!user) {
       // Authentication failed, redirect to login page or handle it accordingly
-      console.log("Authentication failed");
-      return res.redirect("/");
+      return res.status(401).json({ message: info.message });
     }
     // Authentication successful, log the user in
     req.logIn(user, (err) => {
@@ -36,17 +31,21 @@ const loginPost = async function (req, res, next) {
 
 const registerPost = async function (req, res) {
   console.log("registerPost");
-  const { email, username, password } = req.body;
+  const { email, username, password, passwordCheck } = req.body;
+
+
+  //verificar info
+
   try {
     const user = new User({ accountInfo: { email }, username });
     // cria um novo utilizador
     await User.register(user, password);
     //guarda os dados na BD. Register() vem do “plugin” de passport-local-mongoose
-    res.redirect("/mainPage");
+    loginPost(req, res);
   } catch (err) {
     console.log("Register Error");
     console.log(err);
-    res.send();
+    return res.status(400).json({ message: err });
   }
 };
 
@@ -60,4 +59,4 @@ const logout = function (req, res, next) {
   });
 };
 
-module.exports = { indexGet, loginPost, registerPost ,logout};
+module.exports = { indexGet, loginPost, registerPost, logout };

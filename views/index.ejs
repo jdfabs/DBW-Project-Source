@@ -17,7 +17,7 @@
         <h1 class="ui-text">Welcome</h1>
       </div>
 
-      <form id="login-zone" action="/login" method="POST" class="authentication-zone d-grid bg-dark w-75 p-3">
+      <form id="login-form" class="authentication-zone d-grid bg-dark w-75 p-3">
         <div class="d-flex m-1">
             <button id="login-with-google" type="button" class="btn btn-light">Login with Google</button>
             <i class="bi bi-google input-icon"></i>
@@ -43,7 +43,7 @@
         <h4 class="ui-text">We are very happy to have you here!</h4>
         <h1 class="ui-text">SignUp</h1>
       </div>
-      <form id="register-zone" action="/register" method="POST" class="authentication-zone d-grid bg-dark w-75 p-3">
+      <form id="register-form" action="/register" method="POST" class="authentication-zone d-grid bg-dark w-75 p-3">
         <div class="d-flex m-1">
           <input class="text-center" name="email" type="text" placeholder="Email" />
           <i class="bi bi-envelope-at input-icon"></i>
@@ -57,7 +57,7 @@
           <i class="bi bi-lock-fill input-icon"></i>
         </div>
         <div class="d-flex m-1">
-          <input class="text-center"  type="password" placeholder="Confirm Password" />
+          <input class="text-center" name="passwordCheck" type="password" placeholder="Confirm Password" />
           <i class="bi bi-lock-fill input-icon"></i>
         </div>
         <div class="d-flex justify-content-between">

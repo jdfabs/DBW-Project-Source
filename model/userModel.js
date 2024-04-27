@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema(
         lowercase: true,
         validate: {
           validator: (email) => {
-            return /^[\w\.-]+@([\w-]+\.)+[.\w]{2,}$/g.test(email);
+            return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email);
           },
           message: "Invalid email format",
         },
