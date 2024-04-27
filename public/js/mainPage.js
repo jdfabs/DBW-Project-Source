@@ -63,7 +63,7 @@ document
       .then((res) => res.json())
       .then((data) => {
         generatedRecipe = data;
-        
+
         let newRecipe = document.createElement("section");
         newRecipe.classList.add("recipeContainer");
         newRecipe.classList.add("d-flex");
@@ -73,7 +73,9 @@ document
                             <div class="p-2">
                             <div class="d-flex justify-content-between">
                               <div class="d-block d-sm-flex  align-items-end">
-                                <a href="/recipe/${generatedRecipe.id}"><h3>${generatedRecipe.recipeName}</h3></a>
+                                <a href="/recipe/${generatedRecipe.id}"><h3>${
+          generatedRecipe.recipeName
+        }</h3></a>
                                 <h5>${generatedRecipe.creator}</h5>
                               </div>
                               
@@ -174,9 +176,9 @@ document.addEventListener("scroll", async () => {
           "Content-Type": "application/json",
         },
       });
-      
+
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error("Network response was not ok");
       }
 
       const data = await response.json();
@@ -192,15 +194,12 @@ document.addEventListener("scroll", async () => {
                             <div class="p-2">
                             <div class="d-flex justify-content-between">
                               <div class="d-block d-sm-flex  align-items-end">
-                              <a href="/recipe/${generatedRecipe._id}"><h3>${generatedRecipe.recipeName}</h3></a>
-                                <h5> - ${generatedRecipe.creator}</h5>
-                              </div>
+                              <a href="/recipe/${generatedRecipe._id}"><h3>${
+        generatedRecipe.recipeName
+      }</h3></a>
+                                </div>
+                              </div>                                
                               
-                            </div>                                
-                              <div class="d-flex ">
-                                <img class="rating " src="/images/Rating.png" alt="rating" />
-                                <p class="d-none d-sm-block"> - ${generatedRecipe.userRatings.length} ratings</p>
-                              </div>
                               <p class="d-sm-none"></p>
                               <div class="d-block  ">
                                 <h5> Description -</h5>

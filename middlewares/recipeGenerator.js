@@ -195,6 +195,7 @@ const buildMainInfo = async function (data, base) {
 const buildSecondaryInfo = async function (data, base) {
   //Request -- TODO promp engeneering
   let cleanDataString = generateReadableString(data);
+  console.log(data);
   console.log("Building SecondaryInfo");
 
   const setupPrompt = {
