@@ -1,10 +1,11 @@
 ﻿
-/*Page main content*/
+
 
 .filterOptions {
     margin-top: 10px;
     min-width: 150px;
 }
+
 
 .recipeContainer {
     margin: 10px 10px;
@@ -23,27 +24,74 @@
 .rating{
     height: 20px;
 }
-/*filter Img*/
 
-.input-icon {
-    margin: 0px 0px;
-    padding: 0px 0px;
-    font-size: 28px;
-    color: #023047;
-    position: absolute;
-    
-
+.input-sm {
+    margin: 3px 3px;
+    min-width: 80px;
+    height: 30px;
+    width: 80%;
 }
-.input-icon:hover{
-    color: #4592AF;
-}
-
-
-
 .addBtn {
     margin: 3px 3px;
     height: 35px;
     width: 35px;
+    border: 1px solid #4592AF;
+    border-radius: 20px;
+    background-color: #126782;
+    color: #F6F5F5;
+}
+.removeBtn {
+    margin: 3px 3px;
+    height: 35px;
+    width: 35px;
+    border: 1px solid #4592AF;
+    border-radius: 20px;
+    background-color: #126782;
+    color: #F6F5F5;
+}
+
+.saveBtn {
+    margin: 3px 3px;
+    height: 35px;
+    width: 60px;
+    border: 1px solid #4592AF;
+    border-radius: 20px;
+    background-color: #126782;
+    color: #F6F5F5;
+}
+
+select .input-sm{
+    margin: 3px 3px;
+    min-width: 80px;
+    height: 40px;
+    width: 80%;
+    padding: 10px;    
+    border: 1px solid #4592AF;
+    border-radius: 20px;
+    background-color: #126782;
+    color: #F6F5F5;
+}
+#miscOptions input {
+    width:25px; 
+    height: 25px;   
+}
+
+.input-number {
+    width: 20px;
+    height: 40px;
+    padding: 10px;
+    border: 1px solid #4592AF;
+    border-radius: 20px;
+    background-color: #126782;
+    color: #F6F5F5;
+}
+
+.input-sm{    
+    margin: 3px 3px;
+    min-width: 80px;
+    height: 40px;
+    width: 80%;
+    padding: 10px;    
     border: 1px solid #4592AF;
     border-radius: 20px;
     background-color: #126782;
@@ -57,48 +105,4 @@
     color: #F6F5F5;
     border: 1px solid #4592AF;
     background-color: #126782;
-}
-.ui-text {
-    color: #F6F5F5;
-    -webkit-text-stroke: 1px #023047;
-}
-
-
-.removeBtn {
-    margin: 3px 3px;
-    height: 35px;
-    width: 35px;
-    border: 1px solid #4592AF;
-    border-radius: 20px;
-    background-color: #126782;
-    color: #F6F5F5;
-}
-
-
-input{    
-    margin: 3px 3px;
-    min-width: 80px;
-    height: 40px;
-    width: 80%;
-    padding: 10px;    
-    border: 1px solid #4592AF;
-    border-radius: 20px;
-    background-color: #126782;
-    color: #F6F5F5;
-}
-
-select{
-    margin: 3px 3px;
-    min-width: 80px;
-    height: 40px;
-    width: 80%;
-    padding: 10px;    
-    border: 1px solid #4592AF;
-    border-radius: 20px;
-    background-color: #126782;
-    color: #F6F5F5;
-}
-
-a{
-    color: #3f4647;
 }

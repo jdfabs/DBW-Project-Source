@@ -1,0 +1,103 @@
+#recipe {
+    position: relative;
+    max-width: 350px;
+    width: 100%;
+    height: 500px;
+    transition: transform 0.5s;
+}
+.ingredient{
+    line-height: 1.2;
+}
+
+
+.paper {
+    
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    perspective: 1500px;
+}
+
+.front,
+.back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    transform-origin: left;
+    transition: transform 0.5s;
+}
+
+.front {
+    z-index: 1;
+    backface-visibility: hidden;
+    border-left:3px solid #0f404e;
+}
+
+.back {
+    z-index: 0;
+}
+
+.front-content,
+.back-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.back-content{
+    transform: rotateY(-180deg);
+}
+
+.book-btn {
+    margin: 3px 3px;
+    height: 35px;
+    width: 35px;
+    border: 1px solid #4592AF;
+    border-radius: 20px;
+    background-color: #126782;
+    color: #F6F5F5;
+    transition: transform 0.5s;
+}
+
+.book-btn:hover {
+    background-color: #0f404e;
+}
+
+.flipped .front,
+.flipped .back{
+    transform: rotateY(-180deg);
+}
+
+#p1 {
+    z-index: 5;
+}
+
+#p2 {
+    z-index: 4;
+}
+
+#p3 {
+    z-index: 3;
+}
+
+#p4 {
+    z-index: 2;
+}
+
+#p5 {
+    z-index: 1;
+}
+
+
+.recipeImage {
+    height: 200px;
+    width: 200px;
+    border-radius: 20px;
+    margin: auto;
+}
+
+

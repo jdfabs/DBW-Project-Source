@@ -1,17 +1,48 @@
 .graph{
     width:100px;
     height:100px;
-    transition: width 2s, height 2s
+    background-color: #023047;
+    opacity: 80%; 
+}
+.graph-container{
+    width:150px;
+    height:150px;
 }
 
-.graph:hover{
-    width:200px;
-    height:200px;
+h1{
+  margin-left:300px;
+  margin-right:300px;
+  text-align:center;
+  color: #F6F5F5;
+  -webkit-text-stroke: 1px #023047;
+
+}
+
+h2{
+    width:300px;
+    color: #F6F5F5;
+    -webkit-text-stroke: 1px #023047;
 
 }
 
 #showcase{
-    background-color: aqua;
-    width:60%;
-    margin: 0px 300px 300px 300px;
+    border-radius:30px;
 }
+
+.graph-container:hover{
+    width:180px;
+    height:180px;
+
+    transition: width 1s, height 1s;
+}
+
+
+/*.graph:hover{
+    width:200px;
+    height:200px;
+
+    transition: width 2s, height 4s;
+}
+*/
+
+
