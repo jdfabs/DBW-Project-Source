@@ -3,11 +3,11 @@
 
 <head>
   <%- include("./partials/head.ejs")  %>
-  <link rel="stylesheet" href="/css/recepie.css">
+  <link rel="stylesheet" href="/css/recipe.css">
 </head>
 
 <body class="bg-img bg-cover">
-
+  <% console.log(isAuthenticated); %>
 
   <!-- Main Body-->
   <div class="mainContent d-flex justify-content-center bg-img bg-cover" style="background-image: url('/images/ui_background.png');">
@@ -15,24 +15,26 @@
       <i class="bi bi-arrow-left"></i>
     </button>
 
-    <div id="recepie">
+    <div id="recipe">
       <div id="p1" class="paper  ">
         <div class="front ">
           <div id="f1" class="front-content d-flex text-center p-4" style="background-color: #4592AF;">
             <div class="align-self-center d-grid ">
-              <h3><%=recepie.recipeName %></h3>
-              <h5><%=recepie.creator%></h5>
-              <h5><%=recepie.creationDate%></h5>
-              <img class="recepieImage d-none d-lg-block " src="/images/PlaceholderImage.png" alt="Alternate Text" />
+
+              <h3><%=recipe.recipeName %></h3>
+              <h5><%=recipe.creator%></h5>
+              <h5><%=recipe.createdAt.toString().substring(0,24)%></h5>
+              <img class="recipeImage d-none d-lg-block " src="/images/PlaceholderImage.png" alt="Alternate Text" />
             </div>
           </div>
         </div>
         <div class="back bg-white">
           <div id="b1" class="back-content d-inline-block p-4 text-justify">
-            <h3><%=recepie.recipeName %></h3>
+            <h3><%=recipe.recipeName %></h3>
             <h5>Description</h5>
-            <p class="ingredient"><%const cutString = recepie.description.substring(0,500) ;%>
-                <%=cutString.substr(0, Math.min(cutString.length, cutString.lastIndexOf(".")+1));%></p>
+            <p class="ingredient"><%const description = recipe.description ; %>
+              <%const cutString = description.substring(0,500); %>
+              <%=cutString.substr(0, Math.min(cutString.length, cutString.lastIndexOf(".")+1));%></p>
           </div>
         </div>
       </div>
@@ -42,19 +44,17 @@
         <div class="front bg-white">
           <div id="f2" class="front-content d-inline-block p-4 ">
             <h6>Ingredients:</h6>
-            <%
-                recepie.ingredients.forEach(ingredient => { %>
+            <%recipe.ingredients.forEach(ingredient => { %>
             <div class="d-flex justify-content-between ingredient">
-              <div><%=ingredient.name %></div>
-              <div><%=ingredient.quantity %> </div>
+              <div><%=ingredient %></div>
             </div>
             <% });%>
 
             <p></p>
             <div class="row d-flex justify-content-between ">
-              <i class="bi bi-stopwatch col text-beggining"><%=recepie.totalTime %> </i>
-              <i class="bi bi-clipboard-data text-center col"> <%=recepie.difficultyLevel %></i>
-              <i class="bi bi-person col text-end"><%=recepie.servings %></i>
+              <i class="bi bi-stopwatch col text-beggining"><%=(recipe.preparationTime + recipe.cookingTime) %> </i>
+              <i class="bi bi-clipboard-data text-center col"> <%=recipe.difficultyLevel %></i>
+              <i class="bi bi-person col text-end"><%=recipe.servings %></i>
             </div>
           </div>
         </div>
@@ -63,77 +63,93 @@
             <h6>Per Dose:</h6>
             <div class=" d-flex justify-content-between">
               <div>Calories</div>
-              <div><%=recepie.nutritionalInformation.calories %></div>
+              <div><%=recipe.nutritionalInformation.calories %> kcal</div>
             </div>
             <div class=" d-flex justify-content-between">
               <div>Proteins</div>
-              <div><%=recepie.nutritionalInformation.proteins %> </div>
+              <div><%=recipe.nutritionalInformation.proteins %> g</div>
             </div>
             <div class=" d-flex justify-content-between">
               <div>Saturated Fats</div>
-              <div><%=recepie.nutritionalInformation.saturatedFats %> </div>
+              <div><%=recipe.nutritionalInformation.saturated %> g</div>
             </div>
             <div class=" d-flex justify-content-between">
               <div>Unsaturated Fats</div>
-              <div><%=recepie.nutritionalInformation.unSaturatedFats %> </div>
+              <div><%=recipe.nutritionalInformation.unsaturated %> g</div>
             </div>
             <div class=" d-flex justify-content-between">
               <div>Cholesterol</div>
-              <div><%=recepie.nutritionalInformation.cholesterol %> </div>
+              <div><%=recipe.nutritionalInformation.cholesterol %> g</div>
             </div>
             <div class=" d-flex justify-content-between">
               <div>Carbohydrates</div>
-              <div><%=recepie.nutritionalInformation.carbohydrates %> </div>
+              <div><%=recipe.nutritionalInformation.carbohydrates %> g</div>
             </div>
             <div class=" d-flex justify-content-between">
               <div>Sugar</div>
-              <div><%=recepie.nutritionalInformation.sugar %> </div>
+              <div><%=recipe.nutritionalInformation.sugar %> g</div>
             </div>
             <div class=" d-flex justify-content-between">
               <div>Vitamins</div>
-              <div><%=recepie.nutritionalInformation.vitamins %> </div>
+              <div>
+                <%let firstTime = true;%>
+                <%recipe.nutritionalInformation.vitamins.forEach(vitamin => { %>
+                <%if(!firstTime){%>,<%} %>
+                <%firstTime = false%>
+                <%=vitamin.name%>
+                <% });%>
+
+
+
+              </div>
             </div>
             <div class=" d-flex justify-content-between">
               <div>Minerals</div>
-              <div><%=recepie.nutritionalInformation.minerals %> </div>
+              <div>
+                <% firstTime = true;%>
+                <%recipe.nutritionalInformation.minerals.forEach(mineral => { %>
+                <%if(!firstTime){%>,<%} %>
+                <%firstTime = false%>
+                <%=mineral.name%>
+                <% });%>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-
+      <!-- Instruções -->
       <div id="p3" class="paper">
         <div class="front bg-white">
           <div id="f3" class="front-content d-grid p-4 justify-content-start align-content-start">
             <h6>Preparation:</h6>
-            <%let counter = 0;
-                recepie.instructions.forEach(instruction => { 
-                    if (counter < 8){%>
-                    
-
-            <i class="bi bi-dot ingredient m-1"><%=instruction %></i>
-
-            <% counter++;}} );%>
-       
+            <%let lineCounter = 0;
+              const maxLines = 16;
+                recipe.instructions.forEach(instruction => { 
+                  lineCounter += Math.ceil(instruction.instruction.length/42);
+                  console.log(lineCounter);
+                  if(lineCounter > maxLines){
+                    console.log("new page");%>
 
           </div>
         </div>
         <div class="back bg-white">
           <div id="b3" class="back-content d-grid p-4 justify-content-start align-content-start">
-            <% let auxCounter = 0;
-            recepie.instructions.forEach(instruction => { 
-                if(auxCounter >= counter){
-                    if (counter < 16){
-                    %>               
-                    
-            <i class="bi bi-dot ingredient  m-1"><%=instruction %></i>
-      
-            <% counter++;}} 
-            auxCounter++} );%>
+
+
+
+            <%lineCounter = Math.ceil(instruction.instruction.length/42);%>
+            <i class="bi bi-dot ingredient m-1"><%=instruction.instruction %></i>
+
+            <%} else {%>
+            <i class="bi bi-dot ingredient m-1"><%=instruction.instruction %></i>
+            <%}})%>
           </div>
         </div>
       </div>
 
+
+      <!-- Comments -->
       <div id="p4" class="paper">
         <div class="front bg-white ">
           <div id="f4" class="front-content d-grid p-4 justify-content-start">
@@ -169,7 +185,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-  <script src="/js/recepie.js"></script>
+  <script src="/js/recipe.js"></script>
 </body>
 
 </html>ml>

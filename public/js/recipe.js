@@ -1,7 +1,7 @@
 "use strict";
 const prevBtn = document.querySelector("#prev-btn");
 const nextBtn = document.querySelector("#next-btn");
-const recepie = document.querySelector("#recepie");
+const recipe = document.querySelector("#recipe");
 
 const pages = document.querySelectorAll(".paper");
 
@@ -15,16 +15,16 @@ let numOfPages = pages.length;
 let maxLocation = numOfPages + 1;
 
 function openBook() {
-  recepie.style.transform = "translateX(50%)";
+  recipe.style.transform = "translateX(50%)";
   prevBtn.style.transform = "translateX(-175px)";
   nextBtn.style.transform = "translateX(175px)";
 }
 
 function closeBook(isAtBeggining) {
   if (isAtBeggining) {
-    recepie.style.transform = "translateX(0%)";
+    recipe.style.transform = "translateX(0%)";
   } else {
-    recepie.style.transform = "translateX(100%)";
+    recipe.style.transform = "translateX(100%)";
   }
 
   prevBtn.style.transform = "translateX(0px)";

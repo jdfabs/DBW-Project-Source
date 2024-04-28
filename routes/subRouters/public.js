@@ -2,22 +2,34 @@
 const express = require("express"); //View engine
 const router = express.Router(); //Instance of the router
 
-const about = require("../public/about");
-const contactUs = require("../public/contactUs");
-const faq = require("../public/faq");
-const siteMap = require("../public/siteMap");
-const notFound = require("../public/404");
+const contactUsController = require("../../controllers/public/contactUs");
+const aboutController = require("../../controllers/public/about");
+const faqController = require("../../controllers/public/faq");
+const siteMapController = require("../../controllers/public/siteMap");
+const c404Controller = require("../../controllers/public/404");
+const indexController = require("../../controllers/public/index");
 
-router.get("/contactUs", contactUs);
+const checkAuth = function (req, res, next) {
+  if (req.isAuthenticated()) req.body.isAuthenticated = true;
+  else req.body.isAuthenticated = false;
+  next();
+};
 
-router.get("/about", about);
-router.get("/about-us", (req, res) => {
-  res.status(301).redirect("about");
-});//Redirect example
+//Public Routes
+router.get("/contactUs", checkAuth, contactUsController.contactUsGet);
 
-router.get("/faq", faq);
-router.get("/sitemap", siteMap);
+router.get("/about", checkAuth, aboutController.aboutGet);
+router.get("/about-us", checkAuth, aboutController.aboutGet); //Redirect/MultipleRoutes example
 
-router.use(notFound);
+router.get("/faq", checkAuth, faqController.faqGet);
+
+router.get("/sitemap", checkAuth, siteMapController.siteMapGet);
+
+router.get("/", checkAuth, indexController.indexGet);
+router.post("/login", checkAuth, indexController.loginPost);
+router.post("/register", checkAuth, indexController.registerPost);
+router.get("/logout", checkAuth, indexController.logout);
+
+router.use(c404Controller.indexGet);
 
 module.exports = router;
