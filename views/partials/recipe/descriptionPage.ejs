@@ -1,0 +1,9 @@
+<div class="back bg-white">
+    <div id="b1" class="back-content d-inline-block p-4 text-justify">
+      <h3><%=recipe.recipeName %></h3>
+      <h5>Description</h5>
+      <p class="ingredient"><%const description = recipe.description ; %>
+        <%const cutString = description.substring(0,500); %>
+        <%=cutString.substr(0, Math.min(cutString.length, cutString.lastIndexOf(".")+1));%></p>
+    </div>
+  </div>

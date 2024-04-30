@@ -9,7 +9,11 @@
     line-height: 1.2;
 }
 
-
+#book {
+    max-width: 500px;
+    width: 100%;
+    height: 500px;
+}
 .paper {
     
     position: absolute;

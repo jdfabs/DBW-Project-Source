@@ -1,0 +1,39 @@
+<%
+
+currentPaper = currentPaperWrap.paper;
+isFrontPage = isFrontPageWrap.frontPage;
+
+let pageSide;
+if(isFrontPage) {
+  pageSide= "front";
+%>
+
+<div id="p<%=currentPaper%>" class="paper">
+  <div class="<%=pageSide%> bg-white" >
+    <div id="<%=pageSide[0]%><%=currentPaper_%>" class="<%=pageSide%>-content d-inline-block p-4">
+    </div>
+  </div>
+
+
+
+  <%  isFrontPage = !isFrontPage;
+pageSide = "back";
+}
+else pageSide = "back";
+%>
+
+
+
+  <div class="<%=pageSide%>" style="background-color: #4592AF;">
+    <div id="<%=pageSide[0]%><%=currentPaper_%>" class="<%=pageSide%> -content d-inline-block p-4">
+
+    </div>
+  </div>
+
+  <% if(! isFrontPage){%>
+
+
+
+
+</div>
+<%  } %>

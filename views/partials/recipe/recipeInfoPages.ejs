@@ -1,0 +1,211 @@
+<%
+
+currentPaper = currentPaperWrap.paper;
+isFrontPage = isFrontPageWrap.frontPage;
+
+let pageSide;
+if(isFrontPage) pageSide= "front";
+else pageSide = "back";
+
+let lineCounter = 0;
+const MAX_LINES = 19;
+%>
+
+<div id="p<%=currentPaper%>" class="paper">
+  <div class="<%=pageSide%> bg-white">
+    <div id="<%=pageSide[0]%><%=currentPaper%>" class="<%=pageSide%>-content d-inline-block p-4 ">
+      <h5>Ingredients:</h5>
+      <%
+        lineCounter++;
+        recipe.ingredients.forEach(ingredient => { 
+            if(lineCounter >= MAX_LINES){ //new page
+                lineCounter = 1;  
+                isFrontPage = !isFrontPage;
+                if(isFrontPage){
+                    pageSide= "front";
+                    currentPaper++;
+                    %>
+    </div>
+  </div>
+</div>
+<div id="p<%=currentPaper%>" class="paper">
+  <div class="<%=pageSide%> bg-white">
+    <div id="<%=pageSide[0]%><%=currentPaper%>" class="<%=pageSide%>-content d-inline-block p-4 ">
+
+      <%  } else  pageSide = "back"; %>
+
+
+    </div>
+  </div>
+  <div class="<%=pageSide%> bg-white">
+    <div id="<%=pageSide[0]%><%=currentPaper%>" class="<%=pageSide%>-content d-inline-block p-4">
+
+
+      <%}
+            else { /*continue in this page*/%>
+      <div class="d-flex justify-content-between ingredient mx-3">
+        <li><%=ingredient.charAt(0).toUpperCase() + ingredient.slice(1);%></li>
+      </div>
+
+      <% lineCounter++;
+        }
+    });%>
+
+      <p></p>
+      <div class="row d-flex justify-content-between ">
+        <i class="bi bi-stopwatch col text-beggining"><%=(recipe.preparationTime + recipe.cookingTime) %> </i>
+        <i class="bi bi-clipboard-data text-center col"> <%=recipe.difficultyLevel %></i>
+        <i class="bi bi-person col text-end"><%=recipe.servings %></i>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!--nutritionalInformation - nova pagina (talvez papel)-->
+  <% //New page/paper nutritionalInformation substitutions,
+  lineCounter = 0;
+  isFrontPage = !isFrontPage;
+    console.log("isFrontPage: "+isFrontPage);
+if(isFrontPage){
+        pageSide= "front";
+        currentPaper++;
+        %>
+</div>
+<div id="p<%=currentPaper%>" class="paper">
+  <div class="<%=pageSide%> bg-white">
+    <div id="<%=pageSide[0]%><%=currentPaper%>" class="<%=pageSide%>-content d-inline-block p-4 ">
+
+
+      <%  } else {  pageSide = "back"; %>
+      <div class="<%=pageSide%> bg-white">
+        <div id="<%=pageSide[0]%><%=currentPaper%>" class="<%=pageSide%>-content d-inline-block p-4">
+
+
+          <%} %>
+
+
+          <h6>Per Dose:</h6>
+          <div class=" d-flex justify-content-between">
+            <div>Calories</div>
+            <div><%=recipe.nutritionalInformation.calories %> kcal</div>
+          </div>
+          <div class=" d-flex justify-content-between">
+            <div>Proteins</div>
+            <div><%=recipe.nutritionalInformation.proteins %> g</div>
+          </div>
+          <div class=" d-flex justify-content-between">
+            <div>Saturated Fats</div>
+            <div><%=recipe.nutritionalInformation.saturated %> g</div>
+          </div>
+          <div class=" d-flex justify-content-between">
+            <div>Unsaturated Fats</div>
+            <div><%=recipe.nutritionalInformation.unsaturated %> g</div>
+          </div>
+          <div class=" d-flex justify-content-between">
+            <div>Cholesterol</div>
+            <div><%=recipe.nutritionalInformation.cholesterol %> g</div>
+          </div>
+          <div class=" d-flex justify-content-between">
+            <div>Carbohydrates</div>
+            <div><%=recipe.nutritionalInformation.carbohydrates %> g</div>
+          </div>
+          <div class=" d-flex justify-content-between">
+            <div>Sugar</div>
+            <div><%=recipe.nutritionalInformation.sugar %> g</div>
+          </div>
+          <div class=" d-flex justify-content-between">
+            <div>Vitamins</div>
+            <div>
+              <%let firstTime = true;%>
+              <%recipe.nutritionalInformation.vitamins.forEach(vitamin => { %>
+              <%if(!firstTime){%>,<%} %>
+              <%firstTime = false%>
+              <%=vitamin.name.replace('Vitamin'||'vitamin','');%>
+              <% });%>
+            </div>
+          </div>
+          <div class=" d-flex justify-content-between">
+            <div>Minerals</div>
+            <div>
+              <% firstTime = true;%>
+              <%recipe.nutritionalInformation.minerals.forEach(mineral => { %>
+              <%if(!firstTime){%>,<%} %>
+              <%firstTime = false%>
+              <%=mineral.name%>
+              <% });%>
+            </div>
+          </div>
+          <p></p>
+          <h5>Substitutions</h5>
+          <%recipe.substitutions.forEach(ingredient => { %>
+          <li class="mx-4"><%=ingredient.name.charAt(0).toUpperCase() + ingredient.name.slice(1);%></li>
+          <%})%>
+        </div>
+      </div>
+      <%
+//new page
+isFrontPage = !isFrontPage;
+if(isFrontPage){
+    console.log("isFrontPage: " +isFrontPage);
+        pageSide= "front";
+        currentPaper++;
+        %>
+    </div>
+    <div id="p<%=currentPaper%>" class="paper">
+      <div class="<%=pageSide%> bg-white">
+        <div id="<%=pageSide[0]%><%=currentPaper%>" class="<%=pageSide%>-content d-inline-block p-4 ">
+
+
+          <%  } else {  pageSide = "back"; %>
+          <div class="<%=pageSide%> bg-white">
+            <div id="<%=pageSide[0]%><%=currentPaper%>" class="<%=pageSide%>-content d-inline-block p-4">
+
+
+              <%}// notes,allergenInformation, equipmentNeeded - nova pagina (talvez papel) %>
+
+              <div>
+                <h5>Notes:</h5> <%=recipe.notes%>
+              </div>
+              <p></p>
+              <div>
+                <h5>Allergens:</h5>
+                <%recipe.allergenInformation.forEach(ingredient => { %>
+                <li class="mx-4"><%=ingredient.name.charAt(0).toUpperCase() + ingredient.name.slice(1);%></li>
+                <%})%>
+              </div>
+              <p></p>
+              <div>
+                <h5>Equipment:</h5>
+                <%recipe.equipmentNeeded.forEach(ingredient => { %>
+                <li class="mx-4"><%=ingredient.name.charAt(0).toUpperCase() + ingredient.name.slice(1);%></li>
+                <%})%>
+              </div>
+
+
+
+            </div>
+          </div>
+          <%
+
+          isFrontPage = !isFrontPage;
+          if(isFrontPage){
+        pageSide= "front";
+        currentPaper++;
+
+        %> </div><%
+          }
+          else{
+            pageSide= "back";
+            
+          }
+
+
+
+
+
+           currentPaperWrap.paper= currentPaper ;
+           isFrontPageWrap.frontPage = isFrontPage ;
+//instructions - nova pagina (talvez papel)
+
+%>

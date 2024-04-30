@@ -1,0 +1,72 @@
+<!-- Instruções -->
+
+
+<% 
+const MAX_LINES = 19;
+currentPaper = currentPaperWrap.paper;
+isFrontPage = isFrontPageWrap.frontPage;
+
+
+let pageSide;
+if(isFrontPage) pageSide= "front";
+else pageSide = "back";
+
+
+if(isFrontPage){ %>
+<div id="p<%=currentPaper%>" class="paper">
+  <%}  %>
+  <div class="<%=pageSide%> bg-white">
+    <div id="<%=pageSide[0]%><%=currentPaper%>" class="<%=pageSide%>-content d-grid p-4 justify-content-start align-content-start">
+      <h6>Preparation:</h6>
+
+      <%let lineCounter = 0;
+        
+          recipe.instructions.forEach(instruction => { 
+            lineCounter += Math.ceil(instruction.instruction.length/42);
+            if(lineCounter > MAX_LINES){
+              //new page
+              isFrontPage = !isFrontPage;
+              if(isFrontPage) pageSide= "front";
+              else pageSide = "back";
+      %>
+    </div>
+  </div>
+  <%  if(isFrontPage){ 
+    currentPaper++%>
+</div>
+<div id="p<%=currentPaper%>" class="paper">
+
+  <%}%>
+  
+  <div class="<%=pageSide%> bg-white">
+  <div id="<%=pageSide[0]%><%=currentPaper%>" class="<%=pageSide%>-content d-grid p-4 justify-content-start align-content-start">
+
+
+
+    <%lineCounter = Math.ceil(instruction.instruction.length/42);%>
+    <i class="bi bi-dot ingredient m-1"><%=instruction.instruction %></i>
+
+    <%} 
+      else { //continua       
+      %>
+
+    <i class="bi bi-dot ingredient m-1"><%=instruction.instruction %></i>
+    <%}})%>
+  </div>
+</div>
+
+
+
+
+<%
+  isFrontPage = !isFrontPage
+  if(isFrontPage) {currentPaper++;
+  
+    %></div><%
+  
+  }
+
+
+
+           currentPaperWrap.paper= currentPaper ;
+           isFrontPageWrap.frontPage = isFrontPage ;%>
