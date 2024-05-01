@@ -84,7 +84,7 @@ document.getElementById("commentForm").addEventListener("submit", (event) => {
             <strong class="mx-2">${data.user}: </strong>
             ${data.comment}
           </div>`;
-        commentList.appendChild(newCommentElement);
+        commentList.prepend(newCommentElement);
         document.getElementById("comment").value = "";
       });
     } else {
