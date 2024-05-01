@@ -10,49 +10,84 @@
 
   <%- include("./partials/nav.ejs")  %>
   <%- include("./partials/footer.ejs")  %>
-<div>
-  <h1 class="ui-text"> Repecie Gallery </h1>
-</div>
-  <div id="personalG" class="mainContent bg-img bg-cover mx-auto row justify-content-center text-center d-flex"
-    style="background-image: url('/images/ui_background.png')">
-    <!-- Main Body-->
-    <div class="windowContent row">
-      <div class="col-12 col-md-6 col-lg-4 p-3">
-        <div class="recipeSquare">
-          <img class="recipeImage d-none d-lg-block" src="/images/PlaceholderImage.png" alt="Alternate Text" />
-          <h2>Nome da Receita</h2>
-          <p>Descrição da receita.</p>
-          <a href="/recipe/" class="btn btn-primary">Ver Receita</a>
-          <a href="/editar-receita" class="btn btn-secondary">Editar Receita</a>
+
+
+
+  <div class="mainContent bg-img bg-cover" style="background-image: url('/images/ui_background.png');">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="window-header d-flex justify-content-between align-items-end">
+            <h1 class="titulo0">Bem-Vindo a sua Galeria Pessoal </h1>
+          </div>
         </div>
       </div>
 
-      <div class="col-12 col-md-6 col-lg-4 p-3">
-        <div class="recipeSquare">
-          <img class="recipeImage d-none d-lg-block" src="/images/PlaceholderImage.png" alt="Alternate Text" />
-          <h2>Nome da Receita</h2>
-          <p>Descrição da receita.</p>
-          <a href="/recipe/" class="btn btn-primary">Ver Receita</a>
-          <a href="/editar-receita" class="btn btn-secondary">Editar Receita</a>
-        </div>
-      </div>
+      <div  id="recipes" class="row">
+       
+          <% if (recipes.length > 0) { 
+                      
+                      recipes.forEach(recipe => {
+                        
+                        %>
 
-      <div class="col-12 col-md-6 col-lg-4 p-3">
-        <div class="recipeSquare">
-          <img class="recipeImage d-none d-lg-block" src="/images/PlaceholderImage.png" alt="Alternate Text" />
-          <h2>Nome da Receita</h2>
-          <p>Descrição da receita.</p>
-          <a href="/recipe/" class="btn btn-primary">Ver Receita</a>
-          <a href="/editar-receita" class="btn btn-secondary">Editar Receita</a>
+        <div class="col-xl-4 col-lg-6">
+          <section class="recipeContainer">
+            <img class="recipeImage d-none d-lg-block" src="/images/PlaceholderImage.png" alt="Alternate Text" />
+            <div class="p-2">
+              <div class="d-flex ">
+                <img class="rating " src="/images/Rating.png" alt="rating" />
+                <p class="d-none d-sm-block"> <%=recipe.userRatings.length%> -Ratings</p>
+              </div>
+              <div class="d-block d-sm-flex  align-items-end">
+                <a href="/recipe/<%=recipe.id%>">
+                  <h3 class="text-center"><%=recipe.recipeName %></h3>
+                </a>
+              </div>
+              <h5> <%=recipe.creator%></h5>
+              <p class="d-sm-none"></p>
+              <div class="d-block  ">
+                <h5> Description :</h5>
+                <p class="d-none d-sm-block">  <%=recipe.description %> </p>
+                <p class="d-sm-none">SHORT VERSION <%=recipe.description %></p>
+              </div>
+              <div class="d-block ">
+                <h5> Ingredients :</h5>
+                <p>
+                  <% if (recipe.ingredients.length > 0) { %>
+                    <% recipe.ingredients.forEach(ingredient => { %>
+                    <%=ingredient%>,
+                    <%});};%>
+                </p>
+              </div>
+              <div class="d-none d-sm-block ">
+                <h5> tags :</h5>
+                <p>
+                  <% if (recipe.tags.length > 0) { %>
+                    <% recipe.tags.forEach(tags => { %>
+                    <%=tags%>,
+                    <%});};%>
+                </p>
+               
+                  <a href="/recipe/:id" class="btn btn-primary">Ver Receita</a>
+                  <a href="/editar-receita/:id" class="btn btn-secondary">Editar Receita</a>
+                
+              </div>
+            </div>
+          </section>
         </div>
+      <% }) } ;%>
+
       </div>
     </div>
+  </div>
 
-  
- 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+  <script src="/js/personalGaleryJS.js"></script>
+
 </body>
 
 </html>
+
