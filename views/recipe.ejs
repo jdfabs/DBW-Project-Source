@@ -17,8 +17,8 @@
   %>
 
   <!-- Main Body-->
-  <div class="mainContent d-flex justify-content-center bg-img bg-cover" style="background-image: url('/images/ui_background.png');">
-    <div id="book" class="d-flex justify-self-center">
+  <div class="mainContent d-grid mx-auto  bg-img bg-cover" style="background-image: url('/images/ui_background.png');">
+    <div id="book" class="d-flex mx-auto justify-content-center ">
       <button id="prev-btn" class="book-btn align-self-center">
         <i class="bi bi-arrow-left"></i>
       </button>
@@ -33,8 +33,8 @@
           %>
         </div>
 
-        <% let currentPaperWrap = { paper: currentPaper };
- let isFrontPageWrap= { frontPage: isFrontPage }; %>
+        <% let currentPaperWrap = { paper: currentPaper }; //So the variables are passed by reference! do not change
+           let isFrontPageWrap= { frontPage: isFrontPage }; %>
 
         <%- include("./partials/recipe/recipeInfoPages.ejs", {currentPaperWrap,isFrontPageWrap  }) %>
         <%- include("./partials/recipe/instructionPages.ejs",{currentPaperWrap,isFrontPageWrap })%>
@@ -44,6 +44,23 @@
       <button id="next-btn" class="book-btn align-self-center">
         <i class="bi bi-arrow-right"></i>
       </button>
+    </div>
+    <div id="commentBox" class="mx-auto">
+      <h1>Comments:</h1>
+      <form id="commentForm" class="d-flex">
+        <textarea name="comment" id="comment" placeholder="Write a comment..." required></textarea>
+        <button type="submit" class="mx-2">Submit</button>
+      </form>
+      <ul id="commentList">
+
+        <% console.log( Object.keys(recipe.comments).length);
+        for (let i = Object.keys(recipe.comments).length-1; i >= 0; i--){ %>
+        <div class="d-flex">
+          <strong class="mx-2"><%=recipe.comments[i].user%>: </strong>
+          <%=recipe.comments[i].comment%>
+        </div>
+        <% } %>
+      </ul>
     </div>
 
     <!-- Scripts -->
