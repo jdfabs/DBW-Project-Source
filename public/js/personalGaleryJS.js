@@ -1,6 +1,8 @@
+
 let fetchingData = false;
 
 document.addEventListener("scroll", async () => {
+    console.log("scrooljgv");
   if (
     window.scrollY + window.innerHeight >= document.body.scrollHeight &&
     !fetchingData
