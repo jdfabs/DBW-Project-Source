@@ -1,0 +1,20 @@
+<div class="back bg-white">
+  <div id="b1" class="back-content d-inline-block p-4 text-justify">
+    <h3><%=recipe.recipeName %></h3>
+    <div class="d-flex justify-content-between ">
+      <h5 class="my-auto">Description</h5>
+      <button id="likeBtn" class="likeBtn my-auto">
+        <%if(recipe.userRatings.some((rating) => rating.user == clientUsername)){%>
+        <i id="likeIcon" class="bi bi-hand-thumbs-up-fill"></i>
+        <%}else{         
+          %>
+        <i id="likeIcon" class="bi bi-hand-thumbs-up"></i>
+        <%}%>
+          </button>
+      </div>
+      <p></p>
+      <p class="ingredient"><%const description = recipe.description ; %>
+        <%const cutString = description.substring(0,500); %>
+        <%=cutString.substr(0, Math.min(cutString.length, cutString.lastIndexOf(".")+1));%></p>
+    </div>
+  </div>

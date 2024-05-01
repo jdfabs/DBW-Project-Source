@@ -3,9 +3,7 @@ const mongoose = require("mongoose");
 const recipeSchema = mongoose.Schema(
   {
     recipeName: { type: String, default: "Default Name", required: true },
-    ingredients: [
-      { type: String, default: "Default name", required: true },
-    ],
+    ingredients: [{ type: String, default: "Default name", required: true }],
     instructions: [
       {
         instruction: {
@@ -61,7 +59,25 @@ const recipeSchema = mongoose.Schema(
         quantity: { type: Number, default: -1, required: true },
         unit: {
           type: String,
-          enum: ["kg", "g", "lb", "un", "tsp","tbsp", "tbs", "ml", "l","L","shot", "cup", "oz", "pt", "qt", "gal", "can"],
+          enum: [
+            "kg",
+            "g",
+            "lb",
+            "un",
+            "tsp",
+            "tbsp",
+            "tbs",
+            "ml",
+            "l",
+            "L",
+            "shot",
+            "cup",
+            "oz",
+            "pt",
+            "qt",
+            "gal",
+            "can",
+          ],
           default: "un",
           required: true,
         },
@@ -76,7 +92,7 @@ const recipeSchema = mongoose.Schema(
       enum: ["Breakfast", "Brunch", "Lunch", "Snack", "Dinner"],
       required: true,
     },
-    creator : {type: String, default: "default user"},
+    creator: { type: String, default: "default user" },
     //Params - não diretamente relacionado com cozinhar
     tags: [{ type: String, default: "Default tag" }],
     isFeatured: { type: Boolean, default: false },
@@ -90,7 +106,7 @@ const recipeSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
-    }, */// Reference to the user who created the recipe
+    }, */ // Reference to the user who created the recipe
     isPublic: { type: Boolean, default: true }, // Whether the recipe is public or private
 
     status: {
@@ -100,13 +116,26 @@ const recipeSchema = mongoose.Schema(
     }, // Recipe status
     userRatings: [
       {
-        userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-        rating: { type: Number, default: -1 },
+        user: {
+          type: String,
+          required: true,
+        }
       },
     ], // Array of user ratings
     likes: { type: Number, default: 0 }, // Number of upvotes
     dislikes: { type: Number, default: 0 }, // Number of downvotes
-    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }], // Array of comment IDs
+    comments: [
+      {
+        user: {
+          type: String,
+          required: true,
+        },
+        comment: {
+          type: String,
+          required: true,
+        },
+      },
+    ], // Array of comment IDs
   },
   { timestamps: true }
 );
@@ -153,8 +182,7 @@ const newDefaultRecipe = function () {
   };
 };
 
-
 module.exports = {
   RecipeModel: mongoose.model("recipe", recipeSchema),
   newDefaultRecipe: newDefaultRecipe,
-}
+};

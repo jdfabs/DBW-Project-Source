@@ -14,6 +14,23 @@ const saveRecipe = async function (data) {
   }
 };
 
+const updateRecipe = async function(data) {
+  try {
+    const updatedRecipe = await recipeModel.findByIdAndUpdate(data._id, data, { new: true });
+    if (updatedRecipe) {
+      console.log("Recipe updated successfully");
+      return updatedRecipe._id;
+    } else {
+      console.log("Recipe not found");
+      return null;
+    }
+  } catch (error) {
+    console.log("Updating recipe failed");
+    console.error(error);
+  }
+};
+
+
 const getRecipeById = async function(id){
     const recipe = await recipeModel.findById(id).limit(1);
     return recipe
@@ -27,4 +44,4 @@ const getRandomRecipe = async function(){
 
 
 
-module.exports = { saveRecipe,getRecipeById,getRandomRecipe };
+module.exports = { saveRecipe,getRecipeById,getRandomRecipe,updateRecipe };
