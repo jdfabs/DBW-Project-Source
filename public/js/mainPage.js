@@ -159,6 +159,7 @@ const addEventListener = function addEventListenerToButtons(button) {
   });
 };
 
+/*i*/
 let fetchingData = false;
 
 document.addEventListener("scroll", async () => {

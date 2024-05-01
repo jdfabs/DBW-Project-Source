@@ -2,7 +2,7 @@
 const config = require("../config");
 const recipeModel = require("../model/recipeModel");
 const OpenAIApi = require("openai"); //Api OpenAi
-const openai = new OpenAIApi(); //Instance of OpenAI API
+//const openai = new OpenAIApi(); //Instance of OpenAI API
 
 const newRecipe = async function (data) {
 if(config.mockData){
@@ -91,7 +91,7 @@ if(config.mockData){
 
   return  recipeMock;
 }
-
+/*
   let recipe = recipeModel.newDefaultRecipe();
 
   recipe = await buildBase(data, recipe);
@@ -106,9 +106,9 @@ if(config.mockData){
   recipe = await buildTags(recipe);
   console.log(recipe);
 
-  return recipe;
+  return recipe; */
 };
-
+/*
 const buildBase = async function (data, base) {
   console.log("Building Base");
 
@@ -195,7 +195,6 @@ const buildMainInfo = async function (data, base) {
 const buildSecondaryInfo = async function (data, base) {
   //Request -- TODO promp engeneering
   let cleanDataString = generateReadableString(data);
-  console.log(data);
   console.log("Building SecondaryInfo");
 
   const setupPrompt = {
@@ -256,7 +255,7 @@ module.exports = {
   buildSecondaryInfo,
   buildTags,
 };
-
+*/
 //AUX
 
 function generateReadableString(object) {

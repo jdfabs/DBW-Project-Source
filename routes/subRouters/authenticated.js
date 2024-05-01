@@ -27,11 +27,10 @@ const checkAuth = function (req, res, next) {
 router.get("/metrics", checkAuth, metricController.metricsGet);
 
 //personalGalery
-router.get(
-  "/personalGalery",
-  checkAuth,
-  personalGaleryController.personalGaleryGet
-);
+router.get( "/personalGalery",
+checkAuth,
+  personalGaleryController.personalGaleryGet);
+router.post("/personalGalery/:index", checkAuth, personalGaleryController.personalGaleryIDGet);
 
 //settings
 router.get("/settings", checkAuth, settingsController.settingsGet);
