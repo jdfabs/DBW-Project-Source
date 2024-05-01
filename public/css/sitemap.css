@@ -12,20 +12,16 @@
     padding-top: 2%;
     padding-bottom: 1%;
     width: 100%;
-    max-width: 700px;
-    height: 60vh;
+    max-width: 1200px;
+
     border-radius: 50px;
     border: 5px solid #023047;
     min-height: 450px;
 
 }
 
-#sitemap{
 
-    margin-bottom: auto;
-    padding-top: 2%;
-    padding-bottom: 1%;
-    width: 100%;
-    max-width: 700px;
-    height: 80%;
+#siteMapImg{
+    min-width: 200px;
+    width: 80%;
 }

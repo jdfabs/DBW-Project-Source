@@ -3,7 +3,7 @@
 
 const contactUsGet = function (req, res) {
    
-    res.render("constactUs", { title: "Constact Us",  isAuthenticated: req.body.isAuthenticated });
+    res.render("contactUs", { title: "Constact Us",  isAuthenticated: req.body.isAuthenticated });
   };
 
 
