@@ -1,8 +1,8 @@
-
+let nextRecipe = 3;
 let fetchingData = false;
 
 document.addEventListener("scroll", async () => {
-    console.log("scrooljgv");
+  console.log("scroll event trigger");
   if (
     window.scrollY + window.innerHeight >= document.body.scrollHeight &&
     !fetchingData
@@ -10,67 +10,90 @@ document.addEventListener("scroll", async () => {
     console.log("fetching data");
     fetchingData = true;
     try {
-      const response = await fetch("/mainPage/" + nextRecipe, {
+      console.log("999");
+      const response = await fetch("/personalGalery/" + nextRecipe, {
         method: "POST",
-        body: JSON.stringify(filters),
+        body: JSON.stringify({}),
         headers: {
           "Content-Type": "application/json",
         },
       });
-
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
-
       const data = await response.json();
 
-      generatedRecipe = data;
+      const recipeContainer = document.getElementById("recipes");
 
-      let newRecipe = document.createElement("section");
-      newRecipe.classList.add("recipeContainer");
-      newRecipe.classList.add("d-flex");
-      newRecipe.id = "recipeContainer";
+      data.forEach((recipe) => {
+        console.log(recipe.recipeName);
 
-      newRecipe.innerHTML = `<img class="recipeImage d-none d-lg-block" src="/images/PlaceholderImage.png" alt="Alternate Text" />
-                            <div class="p-2">
-                            <div class="d-flex justify-content-between">
-                              <div class="d-block d-sm-flex  align-items-end">
-                              <a href="/recipe/${generatedRecipe._id}"><h3>${
-        generatedRecipe.recipeName
-      }</h3></a>
-                                </div>
-                              </div>                                
-                              
-                              <p class="d-sm-none"></p>
-                              <div class="d-block  ">
-                                <h5> Description -</h5>
-                                <p class="d-none d-sm-block">${
-                                  generatedRecipe.description
-                                }</p>
-                                <p class="d-sm-none">SHORT VERSION - ${generatedRecipe.description.substring(
-                                  0,
-                                  generatedRecipe.description.lastIndexOf(
-                                    ".",
-                                    200
-                                  )
-                                )}  </p>
-                              </div>
-                              <div class="d-block ">
-                                <h5> Ingredients -</h5>
-                                <p> ${generatedRecipe.ingredients.join(
-                                  ", "
-                                )}</p>
-                              </div>
-                              <div class="d-none d-sm-block ">
-                                <h5> tags -</h5>
-                                <p> ${generatedRecipe.tags.join(", ")}</p>
-                              </div>
-                            </div>`;
+        let newRecipe = document.createElement("div");
+        newRecipe.classList.add("col-xl-4");
+        newRecipe.classList.add("col-lg-6");
 
-      document.getElementById("recipes").append(newRecipe);
-      nextRecipe++;
+        let ingredientHTML ="" ;
+
+        recipe.ingredients.forEach(ingridient => {
+          ingredientHTML += ingridient + ", ";
+
+        });
+        ingredientHTML = ingredientHTML.substring(0, ingredientHTML.length - 2);
+
+
+        let tagsHTML="";
+
+        recipe.tags.forEach(tag => {
+          tagsHTML += tag + ", ";
+
+        });
+        tagsHTML = tagsHTML.substring(0, tagsHTML.length - 2);
+
+
+        newRecipe.innerHTML = `<section class="recipeContainer">
+            <img class="recipeImage d-none d-lg-block" src="/images/PlaceholderImage.png" alt="Alternate Text" />
+            <div class="p-2">
+              <div class="d-flex ">
+                <img class="rating " src="/images/Rating.png" alt="rating" />
+                <p class="d-none d-sm-block"> ${recipe.userRatings.length} -Ratings</p>
+              </div>
+              <div class="d-block d-sm-flex  align-items-end">
+                <a href="/recipe/${recipe._id}">
+                  <h3 class="text-center">${recipe.recipeName}</h3>
+                </a>
+              </div>
+              <h5> ${recipe.creator}</h5>
+              <p class="d-sm-none"></p>
+              <div class="d-block  ">
+                <h5> Description :</h5>
+                <p class="d-none d-sm-block">  ${recipe.description} </p>
+                <p class="d-sm-none">SHORT VERSION ${recipe.description}</p>
+              </div>
+              <div class="d-block ">
+                <h5> Ingredients :</h5>
+                <p>${ingredientHTML}
+                </p>
+              </div>
+              <div class="d-none d-sm-block ">
+                <h5> tags :</h5>
+                <p>
+                ${tagsHTML}
+                </p>
+               
+                  <a href="/recipe/${recipe._id}" class="btn btn-primary">Ver Receita</a>
+                  <a href="/editar-receita/${recipe._id}" class="btn btn-secondary">Editar Receita</a>
+                
+              </div>
+            </div>
+          </section>`
+
+          recipeContainer.append(newRecipe);
+          nextRecipe++;
+
+      });
       fetchingData = false;
     } catch (error) {
+      console.log(error);
       //console.error('Error fetching data:', error);
       // Handle error as needed, e.g., show an error message to the user
     }
