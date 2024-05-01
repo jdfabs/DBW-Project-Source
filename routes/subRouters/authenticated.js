@@ -44,6 +44,7 @@ router.post("/mainPage/:index", checkAuth, mainPageController.mainPageIDGet);
 router.get("/recipe", checkAuth, recipeController.recipeGet);
 router.get("/recipe/:id", checkAuth, recipeController.recipeIdGet);
 router.post("/recipe/:id/comment", checkAuth, recipeController.recipeCommentPost);
+router.post("/recipe/:id/like", checkAuth, recipeController.recipeIdLike);
 
 
 //recipeGenerator

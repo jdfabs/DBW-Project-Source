@@ -148,3 +148,13 @@
     margin-bottom: 10px;
     background-color: #fff;
   }
+
+  .likeBtn{
+    margin: 3px 3px;
+    height: 30px;
+    width: 40px;
+    border: 1px solid #4592AF;
+    border-radius: 5px;
+    background-color: #126782;
+    color: #F6F5F5;
+  }

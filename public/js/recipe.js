@@ -63,35 +63,67 @@ function goPrevPage() {
 document.getElementById("commentForm").addEventListener("submit", (event) => {
   event.preventDefault();
 
-
   const newComment = { comment: document.getElementById("comment").value };
- 
-  fetch(window.location.pathname+"/comment", {
+
+  fetch(window.location.pathname + "/comment", {
     method: "POST",
     body: JSON.stringify(newComment), // Convert the object to JSON string
     headers: {
       "Content-Type": "application/json",
     },
-  }).then((res) => {
-    console.log("Comment response");
-    if (res.status == 200) {      
-      res.json().then((data) => {
-        console.log(data);
-        const commentList = document.getElementById("commentList");
-        const newCommentElement = document.createElement("div");
-        newCommentElement.innerHTML = `
+  })
+    .then((res) => {
+      console.log("Comment response");
+      if (res.status == 200) {
+        res.json().then((data) => {
+          console.log(data);
+          const commentList = document.getElementById("commentList");
+          const newCommentElement = document.createElement("div");
+          newCommentElement.innerHTML = `
           <div class="d-flex"> 
             <strong class="mx-2">${data.user}: </strong>
             ${data.comment}
           </div>`;
-        commentList.prepend(newCommentElement);
-        document.getElementById("comment").value = "";
-      });
+          commentList.prepend(newCommentElement);
+          document.getElementById("comment").value = "";
+        });
+      } else {
+        // Handle other status codes if needed
+        console.log("Failed to add comment");
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+});
+
+document.getElementById("likeBtn").addEventListener("click", (event) => {
+  event.preventDefault();
+  console.log("000")
+  fetch(window.location.pathname + "/like", {
+    method: "POST",
+    body: JSON.stringify({}),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }).then((res) => {
+    console.log("Like response");
+    if (res.status == 200) {
+      const icon = document.getElementById("likeIcon");
+      if(icon.classList[1] == "bi-hand-thumbs-up"){
+        icon.classList.remove("bi-hand-thumbs-up");
+        icon.classList.add("bi-hand-thumbs-up-fill");
+      }
+      else {
+        icon.classList.remove("bi-hand-thumbs-up-fill");
+        icon.classList.add("bi-hand-thumbs-up");
+      }
     } else {
       // Handle other status codes if needed
       console.log("Failed to add comment");
     }
-  }).catch((error) => {
+  })
+  .catch((error) => {
     console.error("Error:", error);
   });
 });

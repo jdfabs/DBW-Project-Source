@@ -116,8 +116,10 @@ const recipeSchema = mongoose.Schema(
     }, // Recipe status
     userRatings: [
       {
-        userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-        rating: { type: Number, default: -1 },
+        user: {
+          type: String,
+          required: true,
+        }
       },
     ], // Array of user ratings
     likes: { type: Number, default: 0 }, // Number of upvotes

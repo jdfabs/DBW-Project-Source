@@ -9,8 +9,12 @@ const recipeGet = async function (req, res) {
   if (recipe.creator == req.user) isOwner = true;
   else isOwner = false;
 
+  const reqUser = req.user.username;
+
+
   res.render("recipe", {
     title: "Recipe",
+    clientUsername: reqUser,
     recipe,
     isAuthenticated: req.body.isAuthenticated,
     isOwner,
@@ -20,12 +24,14 @@ const recipeGet = async function (req, res) {
 const recipeIdGet = async function (req, res) {
   try {
     const recipeId = req.params.id;
+    const reqUser = req.user.username;
     // Fetch the recipe details from the database using the recipeId
     const recipe = await dbManager.getRecipeById(recipeId);
     if (!recipe) {
       // If the recipe with the given ID is not found, render an error page
       return res.status(404).render("404", {
         title: "Not Found",
+        
         isAuthenticated: req.body.isAuthenticated,
       });
     }
@@ -38,6 +44,7 @@ const recipeIdGet = async function (req, res) {
     res.render("recipe", {
       title: "Recipe",
       recipe,
+      clientUsername: reqUser,
       isAuthenticated: req.body.isAuthenticated,
       isOwner,
     });
@@ -59,12 +66,42 @@ const recipeCommentPost = async function (req, res) {
       comment: req.body.comment,
     };
     recipe.comments.push(newComment);
-    await dbManager.updateRecipe(recipe)
-    res.status(200).json(recipe.comments[recipe.comments.length-1]);
-
-  } catch(error) {
+    await dbManager.updateRecipe(recipe);
+    res.status(200).json(recipe.comments[recipe.comments.length - 1]);
+  } catch (error) {
     console.log(error);
-    res.status(500) //internal error
+    res.status(500); //internal error
   }
 };
-module.exports = { recipeGet, recipeIdGet, recipeCommentPost };
+
+const recipeIdLike = async function (req, res) {
+  const recipeId = req.params.id;
+  console.log("000");
+
+  try {
+    const recipe = await dbManager.getRecipeById(recipeId);
+    const userRatingIndex = recipe.userRatings.findIndex((rating) => rating.user === req.user.username);
+
+    if (userRatingIndex !== -1) {
+      console.log("Found like from this user");
+      // Remove like
+      recipe.userRatings.splice(userRatingIndex, 1);
+      await dbManager.updateRecipe(recipe);
+      res.status(200).json({ message: "Like removed successfully" });
+    } else {
+      // Add like
+      const newRating = {
+        user: req.user.username,
+      };
+      recipe.userRatings.push(newRating);
+      await dbManager.updateRecipe(recipe);
+      res.status(200).json({ message: "Like added successfully" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+
+module.exports = { recipeGet, recipeIdGet, recipeCommentPost, recipeIdLike };
