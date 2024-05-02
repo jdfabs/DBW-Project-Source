@@ -1,12 +1,7 @@
-
-
 "use strict";
 const recipeModel = require("../../model/recipeModel").RecipeModel;
 const dataValidation = require("../../middlewares/dbValidation");
 const debug = require("../../debugTools");
-
-
-
 
 const getRecipes = async function () {
   debug.log(1, "Main Page Controller - getRecipes");
@@ -22,55 +17,51 @@ const getTopThreeRecipes = async function (filters) {
   return recipes;
 };
 
-const getRecipeByIndex = async function(filters, index) {
-  debug.log(1, "Main Page Controller - getRecipeByIndex");
+const getRecipeByIndex = async function (filters, index) {
+  let filterArray = filters.searchBar.split(" ");
 
-  // Constructing the filter query based on the provided filters
-  const filterQuery = {};
+  filters.ingredients.forEach((filter) => {
+    filterArray.push(filter);
+  });
+  filters.methods.forEach((filter) => {
+    filterArray.push(filter);
+  });
 
-  // Adding filter for search bar text if available
-  if (filters.searchBar) {
-    filterQuery.$text = { $search: filters.searchBar };
+  const filterQueries = filterArray.map((filter) => {
+    const regex = new RegExp(filter.trim(), "i");
+    return {
+      $or: [
+        { recipeName: { $regex: regex } },
+        { ingredients: { $regex: regex } },
+        { tags: { $regex: regex } },
+      ],
+    };
+  });
+
+  // Combine individual filter queries using logical OR
+  const combinedQuery = { $or: filterQueries };
+
+  try {
+    // Search the database for recipes matching any of the filters
+    const recipe = await recipeModel.find(combinedQuery).skip(index).limit(1);
+    return recipe[0];
+  } catch (error) {
+    console.error("Error while fetching recipes:", error);
+    throw error;
   }
+};
 
-  // Adding filter for ingredients if available
-  if (filters.ingredients.length > 0) {
-    // Construct an array of regex patterns for each ingredient
-    const ingredientRegexArray = filters.ingredients.map(ingredient => new RegExp(ingredient, 'i'));
-    // Use $in operator to match any of the ingredients
-    filterQuery.ingredients = { $in: ingredientRegexArray };
-  }
-
-  // Adding filter for methods if available
-  if (filters.methods.length > 0) {
-    filterQuery.methods = { $all: filters.methods };
-  }
-
-  console.log(filterQuery);
-  // Executing the query with filters applied
-  const recipe = await recipeModel.find(filterQuery).skip(index).limit(1);
-  return recipe[0];
-}
-
-
-
-const mainPageGet = async function(req, res){
+const mainPageGet = async function (req, res) {
   res.render("mainPage", {
     title: "Main Page",
-    recipes: await getRecipes(),  isAuthenticated: req.body.isAuthenticated });
-
-}
-
+    recipes: await getRecipes(),
+    isAuthenticated: req.body.isAuthenticated,
+  });
+};
 
 const mainPageIDGet = async function (req, res) {
-  const recipe = await getRecipeByIndex(
-    req.body,
-    req.params.index
-  );
+  const recipe = await getRecipeByIndex(req.body, req.params.index);
   res.json(recipe);
 };
 
-module.exports = { mainPageGet,mainPageIDGet};
-
-
-
+module.exports = { mainPageGet, mainPageIDGet };
