@@ -13,16 +13,31 @@ const router = require("./routes/router");
 const user = require("./model/userModel");
 
 const app = express(); //Instance of the app
+
+//socket
+const http = require("http");
+const server = http.createServer(app);
+const{Server} = require("socket.io");
+const io = new Server(server);
+
 /*
 const openai = new OpenAIApi({
   api_key: config.openAI_API_Key,
 });//Instance of OpenAI API
 */
 //Setup
-app.listen(config.port, () => {
+/*app.listen(config.port, () => {
   console.log("Server listening on port " + config.port);
 }); //Listening port set on config file
+*/
 app.set("view engine", "ejs"); //Setting up ejs
+
+
+//Setup do socket
+server.listen(config.port, function (err) {
+  if (err) console.log(err);
+  console.log("Server listening on PORT", 3000);
+});
 
 app.use(express.json()); //Use json format
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -73,3 +88,28 @@ passport.deserializeUser(user.deserializeUser());
 
 app.use(router); //App Router
 
+//socket conection
+io.on("connection", (socket) => {
+  console.log("a user connected");
+  socket.join("DefaultRoom");
+  socket.on("joinRoom", (room) => {
+      socket.join(room);
+      console.log(`User joined room: ${room}`);
+  });
+
+  socket.on("leaveRoom", (room) => {
+      socket.leave(room);
+      console.log(`User left room: ${room}`);
+  });
+
+  socket.on("chat", (paraCliente) => {
+      io.to(paraCliente.room).emit("clientChat", {
+          socketID: socket.id,
+          message: paraCliente.message,
+      });
+  });
+
+  socket.on("disconnect", () => {
+      console.log("user disconnected");
+  });
+});

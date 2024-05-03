@@ -8,6 +8,7 @@ const settingsController = require("../../controllers/authenticated/settings");
 const mainPageController = require("../../controllers/authenticated/mainPage");
 const recipeController = require("../../controllers/authenticated/recepie");
 const recipeGeneratorController = require("../../controllers/authenticated/recepieGen");
+const supportChatController = require("../../controllers/authenticated/supportChat");
 
 //Routes for authenticated users
 
@@ -60,5 +61,8 @@ router.post(
   checkAuth,
   recipeGeneratorController.recipeGenSavePost
 );
+
+//supportChat
+router.get("/supportChat", checkAuth, supportChatController.supportChatGet);
 
 module.exports = router;
