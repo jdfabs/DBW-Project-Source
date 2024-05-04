@@ -17,6 +17,7 @@ const checkAuth = function (req, res, next) {
 
 //Public Routes
 router.get("/contactUs", checkAuth, contactUsController.contactUsGet);
+router.post("/contactUs", checkAuth, contactUsController.contactUsPost)
 
 router.get("/about", checkAuth, aboutController.aboutGet);
 router.get("/about-us", checkAuth, aboutController.aboutGet); //Redirect/MultipleRoutes example
