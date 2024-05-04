@@ -122,3 +122,17 @@ registerButton.addEventListener("click", (event) => {
   event.preventDefault();
   document.location.href = "/mainPage";
 });*/
+
+
+document.getElementById("forgotPassword").addEventListener("click", (event) => {
+  event.preventDefault();  
+  jsonString = JSON.stringify({username : document.getElementById("username").value});
+  
+fetch("/forgotPassword", {
+    method: "POST",
+    body: jsonString,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  })
+});

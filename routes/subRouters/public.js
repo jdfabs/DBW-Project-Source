@@ -29,6 +29,7 @@ router.get("/", checkAuth, indexController.indexGet);
 router.post("/login", checkAuth, indexController.loginPost);
 router.post("/register", checkAuth, indexController.registerPost);
 router.get("/logout", checkAuth, indexController.logout);
+router.post("/forgotPassword", checkAuth, indexController.forgotPassword)
 
 router.use(c404Controller.indexGet);
 

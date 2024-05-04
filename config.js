@@ -8,6 +8,8 @@ const config = {
    dbUser: "skipper",
    mockData: false,
    sessionKey: "1234qwer=)(/asdfzxcv",
+   supportEmail : "RecipeGeneratorHelp@gmail.com",
+   supportEmailPassword:'qjvrfuyoljlhyhcj'
 };
 
 module.exports = config;
