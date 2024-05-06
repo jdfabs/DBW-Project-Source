@@ -5,6 +5,8 @@ let socket=io();
 
 let currentRoom = "DefaultRoom";
 
+
+
 export function submitUserInputToServer(){
     if(mensagem.value){
         socket.emit("chat",{message: mensagem.value, room: currentRoom});
