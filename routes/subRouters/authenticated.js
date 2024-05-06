@@ -65,4 +65,18 @@ router.post(
 //supportChat
 router.get("/supportChat", checkAuth, supportChatController.supportChatGet);
 
+
+
+router.post("/supportChat",function(req,res){
+    console.log("Updating username");
+    let userName = req.user.username;
+    console.log("variable defined")
+    console.log("username "+userName);
+    console.log(req.user)
+    console.log(req.body)
+    console.log("Username updated");
+    res.send(userName)
+});
+
+
 module.exports = router;

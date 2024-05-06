@@ -1,5 +1,6 @@
 import{mensagem,chtbox}from"./ui.js";
 
+
 let socket=io();
 
 let currentRoom = "DefaultRoom";
@@ -27,6 +28,10 @@ export function receiveFromServer(){
 export function changeRoom(room) {
     console.log("joining " + room);
     socket.emit("leaveRoom", currentRoom); 
-    socket.emit("joinRoom", room); 
+    socket.emit("joinRoom", room);
+    chtbox.innerHTML =
+    "<h3>"+
+    "Bem vindo ao chat!"+
+    "</h3>"; 
     currentRoom = room;
 }

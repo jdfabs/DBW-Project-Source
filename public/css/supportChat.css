@@ -16,17 +16,21 @@ h1{
     border: 5px solid #023047;
 }
 
+#chatFrame{
+  padding: 10px;
+}
+
 textarea{
   width:100%;
 }
 
 #chatbox{
   background-color:#F6F5F5;
-  width:100%;
   border-radius: 30px;
   border: 5px solid darkgray;
-  width:100%;
   height:300px;
   overflow-x: hidden;
   overflow-y: auto;
+  padding: 10px;
+  
 }

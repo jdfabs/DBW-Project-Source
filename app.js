@@ -18,6 +18,7 @@ const app = express(); //Instance of the app
 const http = require("http");
 const server = http.createServer(app);
 const{Server} = require("socket.io");
+const { loginPost } = require("./controllers/public");
 const io = new Server(server);
 
 /*
@@ -84,13 +85,13 @@ passport.deserializeUser(user.deserializeUser());
 //retira um utilizador na sessão
 
 
-
-
 app.use(router); //App Router
+
 
 //socket conection
 io.on("connection", (socket) => {
   console.log("a user connected");
+  console.log("000")
   socket.join("DefaultRoom");
   socket.on("joinRoom", (room) => {
       socket.join(room);
@@ -104,7 +105,7 @@ io.on("connection", (socket) => {
 
   socket.on("chat", (paraCliente) => {
       io.to(paraCliente.room).emit("clientChat", {
-          socketID: socket.id,
+          socketID: "Someone",
           message: paraCliente.message,
       });
   });
@@ -113,3 +114,4 @@ io.on("connection", (socket) => {
       console.log("user disconnected");
   });
 });
+
