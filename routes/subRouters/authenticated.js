@@ -45,6 +45,10 @@ router.get("/recipe/:id", checkAuth, recipeController.recipeIdGet);
 router.post("/recipe/:id/comment", checkAuth, recipeController.recipeCommentPost);
 router.post("/recipe/:id/like", checkAuth, recipeController.recipeIdLike);
 
+//para editar a receita
+
+router.get("/recipe/:id/editar-receita", checkAuth, personalGaleryController.editarReceita);
+router.patch("/recipe/:id ", checkAuth,  personalGaleryController.atlreceita )
 
 //recipeGenerator
 router.get(
