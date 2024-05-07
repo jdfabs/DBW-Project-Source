@@ -7,12 +7,23 @@ let currentRoom = "DefaultRoom";
 
 
 
-export function submitUserInputToServer(){
+export function submitUserInputToServer(username){
+    console.log( " CLIENTE mensagem.value " + mensagem.value);
+    if(mensagem.value){
+        console.log( " CLIENTE username:username " + username);
+
+        socket.emit("chat",{username:username, message: mensagem.value, room: currentRoom});
+        mensagem.value="";
+    }
+}
+
+
+/*export function submitUserInputToServer(){
     if(mensagem.value){
         socket.emit("chat",{message: mensagem.value, room: currentRoom});
         mensagem.value="";
     }
-}
+}*/
 
 export function receiveFromServer(){
     socket.on("clientChat", function(paraCliente){

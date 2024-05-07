@@ -21,6 +21,7 @@ const{Server} = require("socket.io");
 const { loginPost } = require("./controllers/public");
 const io = new Server(server);
 
+
 /*
 const openai = new OpenAIApi({
   api_key: config.openAI_API_Key,
@@ -104,8 +105,10 @@ io.on("connection", (socket) => {
   });
 
   socket.on("chat", (paraCliente) => {
+
+    console.log(" paraCliente.username" + paraCliente.username)
       io.to(paraCliente.room).emit("clientChat", {
-          socketID: "Someone",
+          socketID: paraCliente.username,
           message: paraCliente.message,
       });
   });

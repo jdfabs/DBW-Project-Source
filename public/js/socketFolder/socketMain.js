@@ -10,8 +10,9 @@ console.log(username); // Now you can use the username variable here
 
 form[0].addEventListener("submit", function(event){
     event.preventDefault();
-    submitUserInputToServer();
+    submitUserInputToServer(username);
 });
 
 topic.onchange = function () { changeRoom(topic.value) };
 receiveFromServer();    
+
