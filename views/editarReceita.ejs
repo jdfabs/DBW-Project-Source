@@ -16,7 +16,7 @@
     <div class="mainContent bg-img bg-cover mx-auto row justify-content-center text-center d-flex" style="background-image: url('/images/ui_background.png')">
         <div class="container">
             <h1>Editar Receita</h1>
-            <form action="/editar-receita/<%= receita._id %>" method="POST">
+            <form action="/editar-receita/<%= receita._id %>" method="/resource?_method=PACH">
                 <div class="mb-3">
                     <label for="recipeName" class="form-label">Título da Receita</label>
                     <input type="text" class="form-control" id="recipeName" name="recipeName" value="<%= receita.titulo %>">
