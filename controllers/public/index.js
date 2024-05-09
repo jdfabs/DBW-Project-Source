@@ -2,6 +2,7 @@
 const User = require("../../model/userModel");
 const passport = require("passport");
 const nodemailer = require("nodemailer");
+const config = require("../../config");
 
 const indexGet = function (req, res) {
   console.log("indexGet");
@@ -65,7 +66,8 @@ const logout = function (req, res, next) {
 const forgotPassword = async function (req, res, next) {
   try {
     // Find the user by their username
-    const user = await User.findOne({ username: req.body.username });
+    const user = await User.findByUsername(req.body.username);
+    console.log(user);
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
@@ -75,15 +77,14 @@ const forgotPassword = async function (req, res, next) {
     const newPassword = generateNewPassword();
 
     // Update user's password in the database
-    user.password = newPassword;
-    await user.save();
-
-    // Send an email containing the new password to the user's email address
-    await sendPasswordRecoveryEmail(user.accountInfo.email, newPassword);
-
-    res
-      .status(200)
-      .json({ message: "Password recovery email sent successfully" });
+    user.setPassword(newPassword, async function () {
+      user.save();
+      
+      // Send an email containing the new password to the user's email address
+      await sendPasswordRecoveryEmail(user.accountInfo.email, newPassword);
+      console.log("User new password: " + newPassword);
+      res.status(200).json({ message: "password reset successful" });
+    });
   } catch (err) {
     console.error("Error recovering password:", err);
     res.status(500).json({ message: "Internal server error" });
