@@ -16,7 +16,7 @@
     <div class="mainContent bg-img bg-cover mx-auto row justify-content-center text-center d-flex" style="background-image: url('/images/ui_background.png')">
         <div class="container">
             <h1>Editar Receita</h1>
-            <form action="/editar-receita/<%= receita._id %>" method="/resource?_method=PACH">
+            <form id="updateForm">
                 <div class="mb-3">
                     <label for="recipeName" class="form-label">Título da Receita</label>
                     <input type="text" class="form-control" id="recipeName" name="recipeName" value="<%= receita.titulo %>">
@@ -32,7 +32,6 @@
             -->
                <!--aqui ainda vou por os outros parametros a alterar-->
                 <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-
             </form>
         </div>
     </div>
@@ -42,6 +41,7 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="/js/recipeUpdate.js"></script>
 </body>
 
 </html>

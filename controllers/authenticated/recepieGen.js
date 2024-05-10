@@ -16,6 +16,7 @@ const recipeGenPost = async (req, res) => {
 };
 
 const recipeGenSavePost = async (req, res) => {
+  // Alterar para _id
     req.body.creator = req.user.username;
     if (validator.isRecipeValid(req.body)) {
       const id = await dbManager.saveRecipe(req.body);

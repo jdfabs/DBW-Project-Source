@@ -25,6 +25,7 @@ app.listen(config.port, () => {
 app.set("view engine", "ejs"); //Setting up ejs
 
 app.use(express.json()); //Use json format
+app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public")); //Setting up public folder
 app.use(morgan("dev")); //Setup debug tool

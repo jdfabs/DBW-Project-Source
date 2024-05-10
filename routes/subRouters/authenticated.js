@@ -48,7 +48,12 @@ router.post("/recipe/:id/like", checkAuth, recipeController.recipeIdLike);
 //para editar a receita
 
 router.get("/recipe/:id/editar-receita", checkAuth, personalGaleryController.editarReceita);
-router.patch("/recipe/:id ", checkAuth,  personalGaleryController.atlreceita )
+//router.patch("/recipe/update/:id ", personalGaleryController.atlreceita);
+router.patch("/recipe/update/:id", async (req, res) => {
+  console.log('PATCH');
+  await personalGaleryController.atlreceita(req, res)
+});
+
 
 //recipeGenerator
 router.get(

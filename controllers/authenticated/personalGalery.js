@@ -6,6 +6,7 @@ const debug = require("../../debugTools");
 
 const getTopThreeRecipes = async function (req, res ) {
     debug.log(1, "Personal Galery Controller - getTopThreeRecipes");
+    // Alterar para _id & Ver o caso de devolver as mesmas 3 receitas.
     const recipes = await recipeModel.find({creator:req.user.username}).limit(3);
     console.log(recipes);
     console.log(req.user.username);
@@ -77,13 +78,18 @@ const editarReceita = async (req, res) => {
 
 
 const atlreceita = async (req, res) => {
+    console.log("TESTE!!!!")
     try {
         //  ID para ver se atualizou
         const { id } = req.params;
+        console.log(req.body);
         //  findByIdAndUpdate para atualizar a receita daquele ID
         const queryResult = await recipeModel.findByIdAndUpdate(id, req.body, { new: true });
+
+        console.log(queryResult);
         if (queryResult) {
             
+
             res.redirect(`/receita/${id}`);
         } else {
             // Se a receita não for encontrada da erro
