@@ -10,7 +10,7 @@
 
 <body class="bg-img bg-cover">
 
-    <% include("./partials/nav.ejs") %>
+    <%- include("./partials/nav.ejs") %>
 
     <!-- Main Body -->
     <div class="mainContent bg-img bg-cover mx-auto row justify-content-center text-center d-flex" style="background-image: url('/images/ui_background.png')">
@@ -18,16 +18,16 @@
             <h1>Editar Receita</h1>
             <form id="updateForm">
                 <div class="mb-3">
-                    <label for="recipeName" class="form-label">Título da Receita</label>
+                    <label for="recipeName"  class="form-label">Título da Receita</label>
                     <input type="text" class="form-control" id="recipeName" name="recipeName" value="<%= receita.titulo %>">
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Descrição</label>
-                    <textarea class="form-control" id="description" name="description" rows="4"><%= receita.descricao %></textarea>
+                    <textarea class="form-control" id="description" name="description" rows="3"><%= receita.descricao %></textarea>
                 </div>
               <!-- <div class="mb-3">
-                    <label for="descricao" class="form-label">Descrição</label>
-                    <textarea class="form-control" id="descricao" name="descricao" rows="2"><%= receita.descricao %></textarea>
+                    <label for="imagem" class="form-label">foto da sua receita</label>
+                    <textarea class="form-control" id="image" name="imagem" rows="2"><%= receita.image %></textarea>
                 </div>
             -->
                <!--aqui ainda vou por os outros parametros a alterar-->
@@ -36,7 +36,7 @@
         </div>
     </div>
 
-    <% include("./partials/footer.ejs") %>
+    <%- include("./partials/footer.ejs") %>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
