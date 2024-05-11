@@ -120,29 +120,7 @@ document
   .addEventListener("change", searchFuntion);
 
 //setup event listeners for add buttons
-addMethodButton.addEventListener("click", (event) => {
-  event.preventDefault();
-  const newMethod = document.createElement("div");
-  newMethod.classList.add("row");
-  newMethod.innerHTML = `<select itemid="methods" class="col-10" name="cookingMethods" id="cookingMethods">
-  <option value="Boiling">Boiling</option>
-  <option value="Steaming">Steaming</option>
-  <option value="Grilling">Grilling</option>
-  <option value="Roasting">Roasting</option>
-  <option value="Baking">Baking</option>
-  <option value="Frying">Frying</option>
-  <option value="Sautéing">Sautéing</option>
-  <option value="Braising">Braising</option>
-  <option value="Poaching">Poaching</option>
-  <option value="Simmering">Simmering</option>
-  <option value="Blanching">Blanching</option>
-  <option value="Slow cooking">Slow cooking</option>
 
-</select>
-<button class="removeBtn">-</button>`;
-  methodList.append(newMethod);
-  addEventListener(newMethod.querySelector(".removeBtn"));
-});
 
 addIngredientButton.addEventListener("click", (event) => {
   event.preventDefault();
