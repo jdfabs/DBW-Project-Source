@@ -27,7 +27,7 @@ const getRecipeByIndex = async function (filters, index) {
     filterArray.push(filter);
   });
 
-  const filterQueries = filterArray.map((filter) => {
+  let filterQueries = filterArray.map((filter) => {
     const regex = new RegExp(filter.trim(), "i");
     return {
       $or: [
