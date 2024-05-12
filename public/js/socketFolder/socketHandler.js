@@ -1,6 +1,7 @@
 import{mensagem,chtbox}from"./ui.js";
 
 
+
 let socket=io();
 
 let currentRoom = "DefaultRoom";
@@ -30,21 +31,38 @@ export function receiveFromServer(){
     chtbox.innerHTML=
     chtbox.innerHTML + 
     "<br>" + 
-    "ID:"+
+    "user :"+
     paraCliente.socketID+
     "<br>"+
-    "Message:"+
-    paraCliente.message;
+    "message :"+
+    paraCliente.message+
+    "<br>"+
+    "date: "+Date()
     }); 
 }
 
-export function changeRoom(room) {
+export async function changeRoom(room) {
     console.log("joining " + room);
     socket.emit("leaveRoom", currentRoom); 
     socket.emit("joinRoom", room);
-    chtbox.innerHTML =
-    "<h3>"+
-    "Bem vindo ao chat!"+
-    "</h3>"; 
+    chtbox.innerHTML = "";
+    await fetch("/supportChat/" + room, {
+        method: "POST",
+        body: JSON.stringify({roomname:room}),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) =>{
+            var a = res.json().then((value)=>{value.forEach(element => {
+                console.log(element)
+                chtbox.innerHTML = chtbox.innerHTML + "user: "+ element.user + "<br>"
+                chtbox.innerHTML = chtbox.innerHTML + "message: " + element.message + "<br>"
+                chtbox.innerHTML = chtbox.innerHTML + "date: " + element.timestamp + "<br>"
+                chtbox.innerHTML = chtbox.innerHTML + "<br>";
+
+            });})
+            console.log(a)
+        })
     currentRoom = room;
 }

@@ -8,6 +8,7 @@ console.log("conected");
 const username = window.username;
 console.log(username); // Now you can use the username variable here
 
+
 form[0].addEventListener("submit", function(event){
     event.preventDefault();
     submitUserInputToServer(username);

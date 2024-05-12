@@ -73,10 +73,10 @@ router.post("/supportChat",function(req,res){
     console.log("variable defined")
     console.log("username "+userName);
     console.log(req.user)
-    console.log(req.body)
     console.log("Username updated");
     res.send(userName)
 });
 
+router.post("/supportChat/:room",  checkAuth, supportChatController.supportChatPost)
 
 module.exports = router;

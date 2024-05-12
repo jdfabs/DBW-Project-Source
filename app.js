@@ -11,6 +11,7 @@ const bodyParser = require('body-parser');
 const config = require("./config"); //App Config File
 const router = require("./routes/router");
 const user = require("./model/userModel");
+const message = require("./model/messageModel")
 
 const app = express(); //Instance of the app
 
@@ -105,12 +106,19 @@ io.on("connection", (socket) => {
   });
 
   socket.on("chat", (paraCliente) => {
-
+    var dt = new Date();
     console.log(" paraCliente.username" + paraCliente.username)
       io.to(paraCliente.room).emit("clientChat", {
           socketID: paraCliente.username,
           message: paraCliente.message,
       });
+
+    message.create({
+      room:paraCliente.room,
+      user:paraCliente.username,
+      message:paraCliente.message,
+      timestamp:dt,
+    });
   });
 
   socket.on("disconnect", () => {
