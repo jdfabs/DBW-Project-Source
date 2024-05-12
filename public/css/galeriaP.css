@@ -4,6 +4,10 @@
   border-radius: 20px;
   background-color: #c9a561;
 }
+#perso{
+  border-radius: 50px;
+  border: 5px solid #023047;
+}
 
 .recipeContainer .recipeImage {
 height: 200px;
