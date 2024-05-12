@@ -11,18 +11,36 @@ const bodyParser = require('body-parser');
 const config = require("./config"); //App Config File
 const router = require("./routes/router");
 const user = require("./model/userModel");
+const message = require("./model/messageModel")
 
 const app = express(); //Instance of the app
+
+//socket
+const http = require("http");
+const server = http.createServer(app);
+const{Server} = require("socket.io");
+const { loginPost } = require("./controllers/public");
+const io = new Server(server);
+
+
 /*
 const openai = new OpenAIApi({
   api_key: config.openAI_API_Key,
 });//Instance of OpenAI API
 */
 //Setup
-app.listen(config.port, () => {
+/*app.listen(config.port, () => {
   console.log("Server listening on port " + config.port);
 }); //Listening port set on config file
+*/
 app.set("view engine", "ejs"); //Setting up ejs
+
+
+//Setup do socket
+server.listen(config.port, function (err) {
+  if (err) console.log(err);
+  console.log("Server listening on PORT", 3000);
+});
 
 app.use(express.json()); //Use json format
 app.use(bodyParser.json())
@@ -70,7 +88,42 @@ passport.deserializeUser(user.deserializeUser());
 //retira um utilizador na sessão
 
 
-
-
 app.use(router); //App Router
+
+
+//socket conection
+io.on("connection", (socket) => {
+  console.log("a user connected");
+  console.log("000")
+  socket.join("DefaultRoom");
+  socket.on("joinRoom", (room) => {
+      socket.join(room);
+      console.log(`User joined room: ${room}`);
+  });
+
+  socket.on("leaveRoom", (room) => {
+      socket.leave(room);
+      console.log(`User left room: ${room}`);
+  });
+
+  socket.on("chat", (paraCliente) => {
+    var dt = new Date();
+    console.log(" paraCliente.username" + paraCliente.username)
+      io.to(paraCliente.room).emit("clientChat", {
+          socketID: paraCliente.username,
+          message: paraCliente.message,
+      });
+
+    message.create({
+      room:paraCliente.room,
+      user:paraCliente.username,
+      message:paraCliente.message,
+      timestamp:dt,
+    });
+  });
+
+  socket.on("disconnect", () => {
+      console.log("user disconnected");
+  });
+});
 

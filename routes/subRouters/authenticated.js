@@ -8,6 +8,7 @@ const settingsController = require("../../controllers/authenticated/settings");
 const mainPageController = require("../../controllers/authenticated/mainPage");
 const recipeController = require("../../controllers/authenticated/recepie");
 const recipeGeneratorController = require("../../controllers/authenticated/recepieGen");
+const supportChatController = require("../../controllers/authenticated/supportChat");
 
 //Routes for authenticated users
 
@@ -71,5 +72,22 @@ router.post(
   checkAuth,
   recipeGeneratorController.recipeGenSavePost
 );
+
+//supportChat
+router.get("/supportChat", checkAuth, supportChatController.supportChatGet);
+
+
+
+router.post("/supportChat",function(req,res){
+    console.log("Updating username");
+    let userName = req.user.username;
+    console.log("variable defined")
+    console.log("username "+userName);
+    console.log(req.user)
+    console.log("Username updated");
+    res.send(userName)
+});
+
+router.post("/supportChat/:room",  checkAuth, supportChatController.supportChatPost)
 
 module.exports = router;
