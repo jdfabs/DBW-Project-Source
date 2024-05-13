@@ -102,16 +102,12 @@
     z-index: 1;
 }
 
-
 .recipeImage {
     height: 200px;
     width: 200px;
     border-radius: 20px;
     margin: auto;
 }
-
-
-
 
 #commentBox {
     width: 50vw;

@@ -2,63 +2,54 @@
 <html lang="pt-PT">
 
 <head>
-<%- include("./partials/head.ejs")  %>
+  <%- include("./partials/head.ejs")  %>
 </head>
 
-<body class="bg-img bg-cover"  >
+<body class="bg-img bg-cover">
+  <%- include("./partials/nav.ejs")  %>
+  <%- include("./partials/footer.ejs")  %>
+  <!-- Main Body-->
+  <div id="fqa" class=" mainContent bg-img bg-cover mx-auto row justify-content-center text-center d-flex " style="background-image: url('/images/ui_background.png')" ;>
+    <link rel="stylesheet" href="/css/faq.css">
+    <h1 class="h1">FAQ - Perguntas Frequentes</h1>
 
+    <div class="faq-item box ">
+      <div class="question">1. De que trata o site ? </div>
+      <div class="answer">O site trata-se de um gerador de receitas onde podes introduzir os teus ingredientes e a API da OpenAI irá gerar uma receita com base nessas informações.</div>
+    </div>
 
-    
-    <%- include("./partials/nav.ejs")  %>
-    <%- include("./partials/footer.ejs")  %>
-    <!-- Main Body-->
-    
-    <div id="fqa" class=" mainContent bg-img bg-cover mx-auto row justify-content-center text-center d-flex " style="background-image: url('/images/ui_background.png')"; >
-       
+    <div class="faq-item box ">
+      <div class="question">2. Como posso encontrar receitas específicas?</div>
+      <div class="answer">Podes encontrar receitas específicas utilizando a barra de pesquisa e inserindo os ingredientes ou o nome da receita que desejas encontrar.</div>
+    </div>
 
-        <link rel="stylesheet" href="/css/faq.css" >
-    
-        
-    
-            <h1 class="h1" >FAQ - Perguntas Frequentes</h1>
-        
-            <div class="faq-item box ">
-                <div class="question">1. De que trata o site ? </div>
-                <div class="answer">O site trata-se de um gerador de receitas onde podes introduzir os teus ingredientes e a API da OpenAI irá gerar uma receita com base nessas informações.</div>
-            </div>
-        
-            <div class="faq-item box ">         
-                <div class="question">2. Como posso encontrar receitas específicas?</div>
-                <div class="answer">Podes encontrar receitas específicas utilizando a barra de pesquisa e inserindo os ingredientes ou o nome da receita que desejas encontrar.</div>
-            </div>
-    
-            <div class="faq-item box ">
-                <div class="question">3. Como usar a minha galeria pessoal de receitas?</div>
-                <div class="answer">Para usar a tua galeria pessoal de receitas, primeiro tens que criar uma conta no site. Depois de criares uma conta e fazeres login, poderás guardar as receitas que mais gostas na tua galeria pessoal para acederes facilmente mais tarde.</div>
-            </div>
-        
-            <div class="faq-item box ">
-                <div class="question">4. Como posso entrar em contato com a equipe do site em caso de problemas técnicos?</div>
-                <div class="answer">Para entrares em contacto com a equipa do site em caso de problemas técnicos, podes enviar um email para o nosso suporte técnico em [inserir endereço de email] ou preencher o formulário de contacto disponível na página "Contacto" do site.</div>
-            </div>
-    
-            <div class="faq-item box ">
-                <div class="question">5. Posso guardar as receitas que encontrei no site?</div>
-                <div class="answer">Sim, após fazer login na sua conta, você pode salvar as receitas que encontrou na sua galeria pessoal para acessá-las facilmente mais tarde.</div>
-            </div>
-        
-            <div class="faq-item box ">
-                <div class="question">6. O site oferece sugestões de substituições de ingredientes?</div>
-                <div class="answer">Sim, o site oferece sugestões de substituições de ingredientes caso não tenha algum dos ingredientes necessários para a receita. Basta clicar no botão "Sugestões de Substituição" na página da receita.</div>
-            </div>
-          </div>
-        </div>
+    <div class="faq-item box ">
+      <div class="question">3. Como usar a minha galeria pessoal de receitas?</div>
+      <div class="answer">Para usar a tua galeria pessoal de receitas, primeiro tens que criar uma conta no site. Depois de criares uma conta e fazeres login, poderás guardar as receitas que mais gostas na tua galeria pessoal para acederes facilmente mais tarde.</div>
+    </div>
 
-   
-    <!-- Scripts -->
+    <div class="faq-item box ">
+      <div class="question">4. Como posso entrar em contato com a equipe do site em caso de problemas técnicos?</div>
+      <div class="answer">Para entrares em contacto com a equipa do site em caso de problemas técnicos, podes enviar um email para o nosso suporte técnico em [inserir endereço de email] ou preencher o formulário de contacto disponível na página "Contacto" do site.</div>
+    </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <div class="faq-item box ">
+      <div class="question">5. Posso guardar as receitas que encontrei no site?</div>
+      <div class="answer">Sim, após fazer login na sua conta, você pode salvar as receitas que encontrou na sua galeria pessoal para acessá-las facilmente mais tarde.</div>
+    </div>
+
+    <div class="faq-item box ">
+      <div class="question">6. O site oferece sugestões de substituições de ingredientes?</div>
+      <div class="answer">Sim, o site oferece sugestões de substituições de ingredientes caso não tenha algum dos ingredientes necessários para a receita. Basta clicar no botão "Sugestões de Substituição" na página da receita.</div>
+    </div>
+  </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 </body>
 
-</html></html>
+</html>
+
+</html>

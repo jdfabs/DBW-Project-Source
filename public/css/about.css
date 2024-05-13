@@ -1,28 +1,26 @@
-﻿.mainContent{
-    
-        border: 5px solid #023047;
-    
-    
+﻿.mainContent {
+    border: 5px solid #023047;
     border-radius: 50px;
 }
 
 .window-header {
     height: auto;
-    text-justify:auto;
-    margin-bottom:20px;
+    text-justify: auto;
+    margin-bottom: 20px;
 }
 
 .windowContent {
     height: auto;
     display: flex;
 }
+
 p {
     text-align: justify;
     word-break: break-word;
 }
 
-.personalPhoto{
-width: 100%;
+.personalPhoto {
+    width: 100%;
 }
 
 .container-custom {
@@ -30,5 +28,5 @@ width: 100%;
     padding: 10px 10px;
     border-radius: 20px;
     background-color: #c9a561;
-    
+
 }

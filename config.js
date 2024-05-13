@@ -1,5 +1,5 @@
 const config = {
-   devMode: true,
+   devMode: false,
    devModeLevel: 1, //0 - 5, 0 com prints gerails , 5 com todos os prints
    port: 3000,
    dbUrlMongoDb: "tbd",

@@ -1,7 +1,6 @@
 body {
     background: url('../images/Background.png') no-repeat center center fixed;
-    background-size: cover;
-    
+    background-size: cover;    
 }
 
 .mainContent {
@@ -15,13 +14,6 @@ body {
     min-height: 70vh;
     border-radius: 50px;
 }
-
-
-
-
-
-
-
 
 /*Aux ao bootstrap /Custom */
 .w-45 {

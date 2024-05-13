@@ -1,15 +1,13 @@
 ﻿/*Contact window Specific*/
 
-#cu{
+#cu {
     border-radius: 50px;
     border: 5px solid #023047;
-  }
-  
+}
+
 .contact-window {
     width: 100%;
     min-width: 280px;
-
-
 }
 
 .contact-window form * {
@@ -37,7 +35,6 @@
     border-radius: 50px;
 }
 
-
 /*Common*/
 .window-title {
     height: 40px;
@@ -45,5 +42,4 @@
 
 #windowContent {
     height: calc(100% - 40px);
-
 }

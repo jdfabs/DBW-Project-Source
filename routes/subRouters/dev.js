@@ -7,14 +7,10 @@ const recipeModel = require("../../model/recipeModel");
 const router = express.Router(); //Instance of the router
 const recipeGenerator = require("../../middlewares/recipeGenerator");
 
-
-/*
-const openai = new OpenAIApi({
-  api_key: config.openAI_API_Key,
-}); //Instance of OpenAI API
-*/
+//Test routes -- Not functional in production
 
 if (config.devMode) {
+  //if in developement mode - open these routes
   //only work if in dev mode in config file
   console.log("@@@@@ Development Routes are Open @@@@@");
   /* 
@@ -494,7 +490,6 @@ router.get("/test004", async (req, res) => {
 
   recipeGenerator.buildTags(mockBase);
 });
-
 
 router.get("/test005", async (req, res) => {
   const mockData = {
