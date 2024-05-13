@@ -1,3 +1,12 @@
+# DBW-Project-Source
+Recipe Regenerator Web App
+
+Welcome to the Recipe Regenerator Web App! This application helps users generate recipes based on their preferences.
+Installation
+
+To run this application, you need to have Node.js, npm installed on your system. Also requires an Atlas dataBase and OpenAI API key!
+
+1) Clone this repository to your local machine:
 
 2) Install dependencies using npm: "npm i" at the root folder
 
