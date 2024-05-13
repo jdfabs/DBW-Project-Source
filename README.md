@@ -2,6 +2,7 @@
 Recipe Regenerator Web App
 
 Welcome to the Recipe Regenerator Web App! This application helps users generate recipes based on their preferences.
+
 Installation
 
 To run this application, you need to have Node.js, npm installed on your system. Also requires an Atlas dataBase and OpenAI API key!
@@ -26,7 +27,7 @@ To run this application, you need to have Node.js, npm installed on your system.
 
 "nodemon app"
 
-This will start the server and make the app accessible at http://localhost:3000.
+This will start the server and make the app accessible at http://localhost:3000
 
 
 Dependencies
