@@ -5,7 +5,7 @@ const debug = require("../debugTools");
 
 
 const isRecipeValid = async function (base) {
-  debug.log(1, "validateRecipe:");
+  console.log("DB validation Middleware - isRecipeValid");
   try {
     await recipeModel.validate(base);
     return true;
@@ -15,7 +15,7 @@ const isRecipeValid = async function (base) {
 };
 
 const isUserValid = async function (user) {
-  debug.log(1, "isUserValid:");
+  console.log("DB validation Middleware - isUserValid");
   try {
     await userModel.validate(user);
     return true;

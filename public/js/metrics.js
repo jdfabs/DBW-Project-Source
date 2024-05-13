@@ -1,10 +1,13 @@
-console.log("Hi");
+//TODO
+"use strict";
+//Mock data -- not connected to DB
+
 var xValues = [1,2,3,4,5,6,7,8,9,10,11,12,13,14];
 var yValues = [8,7,12,8,12,8,7,12,8,7,12,15,18,21];
 var barColors = ["red","orange","yellow","lime"];
 
 grf = document.getElementsByClassName("graph")
-for (let i = 0; i <grf.length; i++) {
+for (let i = 0; i <grf.length; i++) {   //Plot the data into the graphs
   new Chart(grf[i], {
     type: "bar",
     data: {
@@ -25,8 +28,8 @@ for (let i = 0; i <grf.length; i++) {
   });
   
 }
-
-function expand(id){
+ 
+function expand(id){ //make graphs bigger
       var item = document.getElementById(id);
       if(item.style.width != "500px"){
           item.style.width = "500px";

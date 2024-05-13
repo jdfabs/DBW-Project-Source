@@ -1,3 +1,4 @@
+"use strict" 
 const methodList = document.getElementById("methodList");
 const ingredientList = document.getElementById("ingredientList");
 
@@ -8,14 +9,14 @@ const form = document.getElementById("recipeForm");
 
 let generatedRecipe;
 
-Array.from(document.getElementsByClassName("removeBtn")).forEach((button) => {
+Array.from(document.getElementsByClassName("removeBtn")).forEach((button) => {  //set up field removal
   button.addEventListener("click", (event) => {
     event.preventDefault();
     button.parentElement.remove();
   });
 });
 
-addMethodButton.addEventListener("click", (event) => {
+addMethodButton.addEventListener("click", (event) => {   //add new field
   event.preventDefault();
   const newMethod = document.createElement("div");
   newMethod.classList.add("row");
@@ -39,7 +40,7 @@ addMethodButton.addEventListener("click", (event) => {
   addEventListener(newMethod.querySelector(".removeBtn"));
 });
 
-addIngredientButton.addEventListener("click", (event) => {
+addIngredientButton.addEventListener("click", (event) => { //add new field
   event.preventDefault();
   const newIngredient = document.createElement("div");
   newIngredient.classList.add("row");
@@ -53,7 +54,7 @@ addIngredientButton.addEventListener("click", (event) => {
   addEventListenerToButtons(newIngredient.querySelector(".removeBtn"));
 });
 
-const addEventListenerToButtons = function (button) {
+const addEventListenerToButtons = function (button) {   //aux
   button.addEventListener("click", (event) => {
     event.preventDefault();
     button.parentElement.remove();
@@ -74,6 +75,7 @@ form.addEventListener("submit", (event) => {
 
   let ingredients = [];
   let cookingMethods = [];
+    //data validation
   for (const key of formData.keys()) {
     if (key.startsWith("Ingredient")) {
       ingredients.push(formData.get(key));
@@ -114,7 +116,7 @@ form.addEventListener("submit", (event) => {
     },
   })
     .then((res) => res.json())
-    .then((data) => {
+    .then((data) => {       //print new recipe to window
       generatedRecipe = data;
 
       if (document.getElementById("recipeContainer")) {
@@ -199,7 +201,7 @@ form.addEventListener("submit", (event) => {
 
       document
         .getElementById("saveBtn")
-        .addEventListener("click", async (event) => {
+        .addEventListener("click", async (event) => {  //to the new button in the window add the listener for saving
           event.preventDefault();
           await fetch("/recipeGenerator/save", {
             method: "POST",
@@ -212,7 +214,7 @@ form.addEventListener("submit", (event) => {
             .then((data) => {
               const savedRecipeId = data.id;
               document.location.href =
-                "http://localhost:3000/recipe/" + savedRecipeId;
+                "http://localhost:3000/recipe/" + savedRecipeId;  //redirect to recipe page after saving
             });
         });
     });

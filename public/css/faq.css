@@ -1,14 +1,15 @@
-.box{
+.box {
     background-color: #c9a561;
     padding: 20px;
-    margin-bottom: 20px; /* Espaçamento entre as caixas */
+    margin-bottom: 20px;
+    /* Espaçamento entre as caixas */
     border-radius: 10px;
     /*border-radius: 50px;
     border: 5px solid #023047;*/
-    
+
 }
 
-#fqa{
+#fqa {
     border-radius: 50px;
     border: 5px solid #023047;
 }
@@ -27,7 +28,8 @@
 .question {
     font-weight: bold;
     color: #000305;
-    text-align: left; /* Centraliza o texto das perguntas */
+    text-align: left;
+    /* Centraliza o texto das perguntas */
 }
 
 .answer {

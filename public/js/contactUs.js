@@ -1,8 +1,9 @@
+"use strict";
 const sendButton = document.getElementById("sendButton");
 const confirmationWindow = document.getElementById("confirmationWindow");
 const confirmButton = document.getElementById("confirmButton");
 
-sendButton.addEventListener("click", (event) => {
+sendButton.addEventListener("click", (event) => {   //send message listener
   event.preventDefault();
   console.log("000")
   console.log(document.getElementById("message"));
@@ -11,7 +12,7 @@ sendButton.addEventListener("click", (event) => {
     email: document.getElementById("email").value,
     message: document.getElementById("messageBox").value,
   });
-  fetch("/contactUs", {
+  fetch("/contactUs", { //fetch send contact request
     method: "POST",
     body: jsonString,
     headers: {
@@ -19,10 +20,10 @@ sendButton.addEventListener("click", (event) => {
     },
   });
 
-  confirmationWindow.classList.remove("d-none");
+  confirmationWindow.classList.remove("d-none"); //show ok window
 });
 
-confirmButton.addEventListener("click", (event) => {
+confirmButton.addEventListener("click", (event) => {   //hide ok window
   event.preventDefault();
 
   

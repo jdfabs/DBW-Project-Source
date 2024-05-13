@@ -1,9 +1,8 @@
-
-#set{
+#set {
     border-radius: 50px;
     border: 5px solid #023047;
-  }
-  
+}
+
 .ui-text {
     color: #F6F5F5;
     -webkit-text-stroke: 1px #023047;

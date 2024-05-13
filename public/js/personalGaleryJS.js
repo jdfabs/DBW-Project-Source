@@ -1,3 +1,6 @@
+//For comments check mainPage.js - function is basically the same but with diferent html
+"use strict";
+
 let nextRecipe = 3;
 let fetchingData = false;
 
@@ -10,7 +13,6 @@ document.addEventListener("scroll", async () => {
     console.log("fetching data");
     fetchingData = true;
     try {
-      console.log("999");
       const response = await fetch("/personalGalery/" + nextRecipe, {
         method: "POST",
         body: JSON.stringify({}),
@@ -81,7 +83,7 @@ document.addEventListener("scroll", async () => {
                 </p>
                
                   <a href="/recipe/${recipe._id}" class="btn btn-primary">Ver Receita</a>
-                  <a href="/editar-receita/${recipe._id}" class="btn btn-secondary">Editar Receita</a>
+                  <a href="/recipe/${recipe._id}/editar-receita/" class="btn btn-secondary">Editar Receita</a>
                 
               </div>
             </div>
@@ -94,8 +96,7 @@ document.addEventListener("scroll", async () => {
       fetchingData = false;
     } catch (error) {
       console.log(error);
-      //console.error('Error fetching data:', error);
-      // Handle error as needed, e.g., show an error message to the user
+      console.error('Error fetching data:', error);
     }
   }
 });

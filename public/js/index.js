@@ -1,3 +1,4 @@
+"use strict";
 const registerWindowButton = document.getElementById("signup-button");
 
 const loginWindow = document.getElementById("login-window");
@@ -18,16 +19,16 @@ loginForm.addEventListener("submit", (event) => {
 
   const jsonString = JSON.stringify(formDataObject);
 
-  fetch("/login", {
+  fetch("/login", {    //request login
     method: "POST",
     body: jsonString,
     headers: {
       "Content-Type": "application/json",
     },
-  }).then((res) => {
+  }).then((res) => { //if success redired
     if (res.redirected) {
       window.location.href = res.url; // Redirect
-    } else {
+    } else {  //show message of error
       res.json().then((data) => {
         if (res.status === 401) {
           // Authentication failed
@@ -39,7 +40,7 @@ loginForm.addEventListener("submit", (event) => {
   });
 });
 
-registerForm.addEventListener("submit", (event) => {
+registerForm.addEventListener("submit", (event) => {   //register request
   event.preventDefault();
   const formData = new FormData(registerForm);
   const formDataObject = {};
@@ -49,8 +50,8 @@ registerForm.addEventListener("submit", (event) => {
 
   //Pre Check
   let isValid = true;
-  let preCheckAlert = "";
 
+  //using regular expecions to sanitize input on client side
   const usernameRegex = /^[a-zA-Z0-9_-]{5,16}$/;
   const passwordRegex = /(?=^.{6,}$)(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).*/;
   const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
@@ -87,7 +88,7 @@ registerForm.addEventListener("submit", (event) => {
     if (res.redirected) {
       window.location.href = res.url; // Redirect
     } else {
-      res.json().then((data) => {
+      res.json().then((data) => {     //is valid, lets register
         if (res.status === 400) {
           // Register failed
           alert(data.message.message);
@@ -96,13 +97,13 @@ registerForm.addEventListener("submit", (event) => {
     }
   });
 });
-
-registerWindowButton.addEventListener("click", (event) => {
+ 
+registerWindowButton.addEventListener("click", (event) => {   //show register
   event.preventDefault();
   registerWindow.classList.remove("d-none");
   loginWindow.classList.add("d-none");
 });
-registerBackButton.addEventListener("click", (event) => {
+registerBackButton.addEventListener("click", (event) => {     //login with google - not implemented
   event.preventDefault();
   registerWindow.classList.add("d-none");
   loginWindow.classList.remove("d-none");
@@ -112,19 +113,9 @@ loginWithGoogle.addEventListener("click", (event) => {
   document.location.href = "/mainPage";
 });
 
-/*
-loginForm.addEventListener("click", (event) => {
-  event.preventDefault();
-  document.location.href = "/mainPage";
-});*/
-/*
-registerButton.addEventListener("click", (event) => {
-  event.preventDefault();
-  document.location.href = "/mainPage";
-});*/
 
 
-document.getElementById("forgotPassword").addEventListener("click", (event) => {
+document.getElementById("forgotPassword").addEventListener("click", (event) => {   //forgot password request - shit implementation
   event.preventDefault();  
   jsonString = JSON.stringify({username : document.getElementById("username").value});
   

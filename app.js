@@ -23,16 +23,6 @@ const { loginPost } = require("./controllers/public");
 const io = new Server(server);
 
 
-/*
-const openai = new OpenAIApi({
-  api_key: config.openAI_API_Key,
-});//Instance of OpenAI API
-*/
-//Setup
-/*app.listen(config.port, () => {
-  console.log("Server listening on port " + config.port);
-}); //Listening port set on config file
-*/
 app.set("view engine", "ejs"); //Setting up ejs
 
 
@@ -49,7 +39,7 @@ app.use(express.static("public")); //Setting up public folder
 app.use(morgan("dev")); //Setup debug tool
 app.use(methodOverride("_method"));
 
-mongoose
+mongoose //DB connection
   .connect(
     "mongodb+srv://" +
       config.dbUser +
@@ -69,7 +59,7 @@ mongoose
 //Express-session middleware. Guarda a sessão do utilizador no lado do servidor
 app.use(
   session({
-    secret: "your-secret-key",
+    secret:  config.sessionKey,
     //é usado para encriptar dados da sessão
     resave: false,
     saveUninitialized: false,
@@ -93,8 +83,6 @@ app.use(router); //App Router
 
 //socket conection
 io.on("connection", (socket) => {
-  console.log("a user connected");
-  console.log("000")
   socket.join("DefaultRoom");
   socket.on("joinRoom", (room) => {
       socket.join(room);

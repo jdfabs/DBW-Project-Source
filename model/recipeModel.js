@@ -1,6 +1,8 @@
+"use strict";
 const mongoose = require("mongoose");
 
-const recipeSchema = mongoose.Schema(
+const recipeSchema = mongoose.Schema(//Some variables are not being used/ doubled, clean up is needed
+
   {
     recipeName: { type: String, default: "Default Name", required: true },
     ingredients: [{ type: String, default: "Default name", required: true }],
@@ -93,28 +95,25 @@ const recipeSchema = mongoose.Schema(
       required: true,
     },
     creator: { type: String, default: "default user" },
-    //Params - não diretamente relacionado com cozinhar
+    
+
+    //Params - not cooking related
     tags: [{ type: String, default: "Default tag" }],
-    isFeatured: { type: Boolean, default: false },
-    visibility: {
+    isFeatured: { type: Boolean, default: false },  //-- unused
+    visibility: {  //-- unused
       type: String,
       enum: ["public", "private"],
       default: "private",
     },
     createTime: { type: Date, default: Date.now }, // Creation timestamp
-    /*creator: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    }, */ // Reference to the user who created the recipe
-    isPublic: { type: Boolean, default: true }, // Whether the recipe is public or private
+    isPublic: { type: Boolean, default: true }, // Whether the recipe is public or private  //-- unused
 
-    status: {
+    status: {  //-- unused
       type: String,
       enum: ["draft", "published", "archived"],
       default: "draft",
     }, // Recipe status
-    userRatings: [
+    userRatings: [ 
       {
         user: {
           type: String,
@@ -122,8 +121,8 @@ const recipeSchema = mongoose.Schema(
         }
       },
     ], // Array of user ratings
-    likes: { type: Number, default: 0 }, // Number of upvotes
-    dislikes: { type: Number, default: 0 }, // Number of downvotes
+    likes: { type: Number, default: 0 }, // Number of upvotes  //-- unused
+    dislikes: { type: Number, default: 0 }, // Number of downvotes  //-- unused
     comments: [
       {
         user: {
@@ -135,12 +134,13 @@ const recipeSchema = mongoose.Schema(
           required: true,
         },
       },
-    ], // Array of comment IDs
+    ], 
   },
   { timestamps: true }
 );
 
-const newDefaultRecipe = function () {
+const newDefaultRecipe = function () { 
+  //generate a Base Recipe
   return {
     recipeName: "Default Name",
     ingredients: [],

@@ -5,7 +5,8 @@ const nodemailer = require("nodemailer");
 const config = require("../../config");
 
 const indexGet = function (req, res) {
-  console.log("indexGet");
+  //render and send
+  console.log("Index Controller - indexGet");
   res.render("index", {
     title: "Index",
     isAuthenticated: req.body.isAuthenticated,
@@ -13,39 +14,41 @@ const indexGet = function (req, res) {
 };
 
 const loginPost = async function (req, res, next) {
+  //Login request
+  console.log("Index Controller - loginPost");
   const { username, password } = req.body;
   console.log("loginPost");
   passport.authenticate("local", (err, user, info) => {
+    //Use password to authenticate the user
     if (err) {
       return next(err);
     }
     if (!user) {
-      // Authentication failed, redirect to login page or handle it accordingly
+      // Authentication failed - send message
       return res.status(401).json({ message: info.message });
     }
-    // Authentication successful, log the user in
+    // Authentication successful, log the user
     req.logIn(user, (err) => {
       if (err) {
         return next(err);
       }
       console.log("User authenticated:", user);
-      res.redirect("/mainPage");
+      res.redirect("/mainPage"); //redirect
     });
   })(req, res, next);
 };
 
 const registerPost = async function (req, res) {
-  console.log("registerPost");
+  //Register request
+  console.log("Index Controller - registerPost");
   const { email, username, password, passwordCheck } = req.body;
 
   //verificar info
 
   try {
-    const user = new User({ accountInfo: { email }, username });
-    // cria um novo utilizador
-    await User.register(user, password);
-    //guarda os dados na BD. Register() vem do “plugin” de passport-local-mongoose
-    loginPost(req, res);
+    const user = new User({ accountInfo: { email }, username }); //new User
+    await User.register(user, password); //register user into DB passport-local-mongoose
+    loginPost(req, res); //if success also login
   } catch (err) {
     console.log("Register Error");
     console.log(err);
@@ -55,6 +58,8 @@ const registerPost = async function (req, res) {
 
 //FAZER LOGOUT DA PÁGINA
 const logout = function (req, res, next) {
+  //logout
+  console.log("Index Controller - logout");
   req.logout(function (err) {
     if (err) {
       return next(err);
@@ -64,6 +69,7 @@ const logout = function (req, res, next) {
 };
 
 const forgotPassword = async function (req, res, next) {
+  console.log("Index Controller - forgotPassword");
   try {
     // Find the user by their username
     const user = await User.findByUsername(req.body.username);
@@ -73,16 +79,16 @@ const forgotPassword = async function (req, res, next) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Generate a new password (you can use any method you prefer)
+    // Generate a new password
     const newPassword = generateNewPassword();
 
-    // Update user's password in the database
+    //save new password
     user.setPassword(newPassword, async function () {
       user.save();
-      
-      // Send an email containing the new password to the user's email address
-      await sendPasswordRecoveryEmail(user.accountInfo.email, newPassword);
-      console.log("User new password: " + newPassword);
+
+      await sendPasswordRecoveryEmail(user.accountInfo.email, newPassword); //send mail with new password to account's email -- this is not same at all
+      console.log("User new password: " + newPassword); //for easy debug, since it's a shit approach
+
       res.status(200).json({ message: "password reset successful" });
     });
   } catch (err) {
@@ -91,17 +97,17 @@ const forgotPassword = async function (req, res, next) {
   }
 };
 
-// Function to generate a new random password
 function generateNewPassword() {
-  // Logic to generate a random password
-  return Math.random().toString(36).slice(-8); // Generate an 8-character random string
+  //password generation aux fucntion
+  return Math.random().toString(36).slice(-8); // random 8 char
 }
 
-// Function to send password recovery email
 async function sendPasswordRecoveryEmail(email, newPassword) {
+  // send email aux function
+  console.log("Index Controller - forgotPassword");
   try {
     const transporter = nodemailer.createTransport({
-      // Configure your email service here
+      //set mail options
       service: "gmail",
       auth: {
         user: config.supportEmail,
@@ -116,7 +122,7 @@ async function sendPasswordRecoveryEmail(email, newPassword) {
       text: `Your new password is: ${newPassword}`,
     };
 
-    await transporter.sendMail(mailOptions);
+    await transporter.sendMail(mailOptions); //send and wait
   } catch (err) {
     console.error("Error sending password recovery email:", err);
     throw err;

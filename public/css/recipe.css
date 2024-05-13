@@ -1,9 +1,8 @@
-
-#rec{
+#rec {
     border-radius: 50px;
     border: 5px solid #023047;
-  }
-  
+}
+
 #recipe {
     position: relative;
     max-width: 350px;
@@ -11,7 +10,8 @@
     height: 500px;
     transition: transform 0.5s;
 }
-.ingredient{
+
+.ingredient {
     line-height: 1.2;
 }
 
@@ -20,8 +20,9 @@
     width: 100%;
     height: 500px;
 }
+
 .paper {
-    
+
     position: absolute;
     width: 100%;
     height: 100%;
@@ -42,7 +43,7 @@
 .front {
     z-index: 1;
     backface-visibility: hidden;
-    border-left:3px solid #0f404e;
+    border-left: 3px solid #0f404e;
 }
 
 .back {
@@ -58,7 +59,7 @@
     align-items: center;
 }
 
-.back-content{
+.back-content {
     transform: rotateY(-180deg);
 }
 
@@ -78,7 +79,7 @@
 }
 
 .flipped .front,
-.flipped .back{
+.flipped .back {
     transform: rotateY(-180deg);
 }
 
@@ -120,21 +121,25 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;
-  }
-  #commentBox h1 {
+}
+
+#commentBox h1 {
     font-size: 24px;
     margin-top: 0;
-  }
-  #commentForm {
+}
+
+#commentForm {
     margin-bottom: 20px;
-  }
-  #commentForm textarea {
+}
+
+#commentForm textarea {
     width: 100%;
     height: 50px;
     resize: none;
     margin-bottom: 10px;
-  }
-  #commentForm button {
+}
+
+#commentForm button {
     padding: 10px 20px;
     height: 50px;
     background-color: #007bff;
@@ -142,20 +147,22 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-  }
-  #commentList {
+}
+
+#commentList {
     list-style-type: none;
     padding: 0;
-  }
-  .comment {
+}
+
+.comment {
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 10px;
     background-color: #fff;
-  }
+}
 
-  .likeBtn{
+.likeBtn {
     margin: 3px 3px;
     height: 30px;
     width: 40px;
@@ -163,4 +170,4 @@
     border-radius: 5px;
     background-color: #126782;
     color: #F6F5F5;
-  }
+}

@@ -1,11 +1,10 @@
-﻿
-/*Page main content*/
+﻿/*Page main content*/
 
-#MP{
+#MP {
     border-radius: 50px;
     border: 5px solid #023047;
-  }
-  
+}
+
 .filterOptions {
     margin-top: 10px;
     min-width: 150px;
@@ -16,18 +15,20 @@
     padding: 10px 10px;
     border-radius: 20px;
     background-color: #c9a561;
-    
+
 }
-    .recipeContainer .recipeImage {
-        height: 200px;
-        width: 200px;
-        border-radius: 20px;
-    }
+
+.recipeContainer .recipeImage {
+    height: 200px;
+    width: 200px;
+    border-radius: 20px;
+}
 
 /*Rating img - to be implemented*/
-.rating{
+.rating {
     height: 20px;
 }
+
 /*filter Img*/
 
 .input-icon {
@@ -36,10 +37,11 @@
     font-size: 28px;
     color: #023047;
     position: absolute;
-    
+
 
 }
-.input-icon:hover{
+
+.input-icon:hover {
     color: #4592AF;
 }
 
@@ -63,6 +65,7 @@
     border: 1px solid #4592AF;
     background-color: #126782;
 }
+
 .ui-text {
     color: #F6F5F5;
     -webkit-text-stroke: 1px #023047;
@@ -80,30 +83,30 @@
 }
 
 
-input{    
+input {
     margin: 3px 3px;
     min-width: 80px;
     height: 40px;
     width: 80%;
-    padding: 10px;    
+    padding: 10px;
     border: 1px solid #4592AF;
     border-radius: 20px;
     background-color: #126782;
     color: #F6F5F5;
 }
 
-select{
+select {
     margin: 3px 3px;
     min-width: 80px;
     height: 40px;
     width: 80%;
-    padding: 10px;    
+    padding: 10px;
     border: 1px solid #4592AF;
     border-radius: 20px;
     background-color: #126782;
     color: #F6F5F5;
 }
 
-a{
+a {
     color: #3f4647;
 }

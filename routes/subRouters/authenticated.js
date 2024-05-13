@@ -12,9 +12,7 @@ const supportChatController = require("../../controllers/authenticated/supportCh
 
 //Routes for authenticated users
 
-//metrics
-
-const checkAuth = function (req, res, next) {
+const checkAuth = function (req, res, next) { //Auth checking -- should be in the middlewares
   if (!req.isAuthenticated()) {
     // If not authenticated, redirect to the login page
     console.log("Unauthorized access detected!");
@@ -25,6 +23,7 @@ const checkAuth = function (req, res, next) {
   next();
 };
 
+//metrics
 router.get("/metrics", checkAuth, metricController.metricsGet);
 
 //personalGalery

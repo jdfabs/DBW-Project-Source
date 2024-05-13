@@ -2,73 +2,66 @@
 <html lang="pt-PT">
 
 <head>
-    <%- include("./partials/head.ejs")  %>
+  <%- include("./partials/head.ejs")  %>
 
-    <link rel="stylesheet" href="/css/supportChat.css">
+  <link rel="stylesheet" href="/css/supportChat.css">
 
 
 
 </head>
 
-<body class="bg-img bg-cover"  >
+<body class="bg-img bg-cover">
 
-    <%- include("./partials/logo.ejs")  %>
-    <%- include("./partials/nav.ejs")  %>
-    <%- include("./partials/footer.ejs")  %>
+  <%- include("./partials/logo.ejs")  %>
+  <%- include("./partials/nav.ejs")  %>
+  <%- include("./partials/footer.ejs")  %>
 
 
-    <!-- Main Body-->
-    <div class="mainContent d-flex justify-content-center">
-         <div style="background-image: url('/images/ui_background.png');" id="wndw">
-            <div id="title">
-                <h1>Support Chat</h1>
-            </div>
-            <div>
-                <form class="chatForm" action="">
-                    <select name="Topicos" class="formElmnts" id="tpcos">
-                        <option value="Informações">Informações</option>
-                        <option value="Tips and Tricks">Tips and Tricks</option>
-                        <option value="Events">Events</option>
-                        <option value="General Chat">General Chat</option>
-                    </select>
-                    <p>
-                        <textarea
-                          id="msg"
-                          name="mensagem"
-                          rows="3"
-                          cols="100"
-                          placeholder="Escreve alguma coisa"
-                          class="formElmnts"
-                        ></textarea>
-                    </p>
-                    <button id="submeter" class="formElmnts" >Submeter comentário</button>
-                </form>
-            </div>
-            <div id = "chatFrame">
-                <div id="chatbox">
-                    <h3>Bem vindo ao chat!</h3>
-                </div>
-            </div>
-
-           
+  <!-- Main Body-->
+  <div class="mainContent d-flex justify-content-center">
+    <div style="background-image: url('/images/ui_background.png');" id="wndw">
+      <div id="title">
+        <h1>Support Chat</h1>
+      </div>
+      <div>
+        <form class="chatForm" action="">
+          <select name="Topicos" class="formElmnts" id="tpcos">
+            <option value="Informações">Informações</option>
+            <option value="Tips and Tricks">Tips and Tricks</option>
+            <option value="Events">Events</option>
+            <option value="General Chat">General Chat</option>
+          </select>
+          <p>
+            <textarea id="msg" name="mensagem" rows="3" cols="100" placeholder="Escreve alguma coisa" class="formElmnts"></textarea>
+          </p>
+          <button id="submeter" class="formElmnts">Submeter comentário</button>
+        </form>
+      </div>
+      <div id="chatFrame">
+        <div id="chatbox">
+          <h3>Bem vindo ao chat!</h3>
         </div>
+      </div>
+
+
     </div>
+  </div>
 
 
 
 
-    <!-- Scripts -->
+  <!-- Scripts -->
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    
-    <script>
-        // Set the username in the global scope
-        window.username = '<%= username %>';
-      </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
 
-    <script type='module'src='/js/socketFolder/socketMain.js'></script>
+  <script>
+    // Set the username in the global scope
+    window.username = '<%= username %>';
+  </script>
+
+  <script type='module' src='/js/socketFolder/socketMain.js'></script>
 </body>
 
 </html>
