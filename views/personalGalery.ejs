@@ -13,7 +13,7 @@
 
 
 
-  <div id ="perso" class="mainContent bg-img bg-cover" style="background-image: url('/images/ui_background.png');">
+  <div id="perso" class="mainContent bg-img bg-cover" style="background-image: url('/images/ui_background.png');">
     <div class="container">
       <div class="row">
         <div class="col">
@@ -23,9 +23,9 @@
         </div>
       </div>
 
-      <div  id="recipes" class="row">
-       
-          <% if (recipes.length > 0) { 
+      <div id="recipes" class="row">
+
+        <% if (recipes.length > 0) { 
                       
                       recipes.forEach(recipe => {
                         
@@ -48,35 +48,35 @@
               <p class="d-sm-none"></p>
               <div class="d-block  ">
                 <h5> Description :</h5>
-                <p class="d-none d-sm-block">  <%=recipe.description %> </p>
+                <p class="d-none d-sm-block"> <%=recipe.description %> </p>
                 <p class="d-sm-none">SHORT VERSION <%=recipe.description %></p>
               </div>
               <div class="d-block ">
                 <h5> Ingredients :</h5>
                 <p>
                   <% if (recipe.ingredients.length > 0) { %>
-                    <% recipe.ingredients.forEach(ingredient => { %>
-                    <%=ingredient%>,
-                    <%});};%>
+                  <% recipe.ingredients.forEach(ingredient => { %>
+                  <%=ingredient%>,
+                  <%});};%>
                 </p>
               </div>
               <div class="d-none d-sm-block ">
                 <h5> tags :</h5>
                 <p>
                   <% if (recipe.tags.length > 0) { %>
-                    <% recipe.tags.forEach(tags => { %>
-                    <%=tags%>,
-                    <%});};%>
+                  <% recipe.tags.forEach(tags => { %>
+                  <%=tags%>,
+                  <%});};%>
                 </p>
-               
-                  <a href="/recipe/<%=recipe.id%>" class="btn btn-primary">Ver Receita</a>
-                  <a href="/recipe/<%=recipe.id%>/editar-receita/" class="btn btn-secondary">Editar Receita</a>
-                
+
+                <a href="/recipe/<%=recipe.id%>" class="btn btn-primary">Ver Receita</a>
+                <a href="/recipe/<%=recipe.id%>/editar-receita/" class="btn btn-secondary">Editar Receita</a>
+
               </div>
             </div>
           </section>
         </div>
-      <% }) } ;%>
+        <% }) } ;%>
 
       </div>
     </div>
@@ -90,4 +90,3 @@
 </body>
 
 </html>
-

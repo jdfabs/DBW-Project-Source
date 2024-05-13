@@ -1,27 +1,20 @@
-
-.h1sm{
+.h1sm {
     text-align: center;
-    
-    
-     
 }
 
-#stmap{
+#stmap {
     margin-top: 150px;
     margin-bottom: auto;
     padding-top: 2%;
     padding-bottom: 1%;
     width: 100%;
     max-width: 1200px;
-
     border-radius: 50px;
     border: 5px solid #023047;
     min-height: 450px;
-
 }
 
-
-#siteMapImg{
+#siteMapImg {
     min-width: 200px;
     width: 80%;
 }

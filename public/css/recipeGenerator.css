@@ -1,27 +1,23 @@
-﻿
-
-
-.filterOptions {
+﻿.filterOptions {
     margin-top: 10px;
     min-width: 150px;
 }
-
 
 .recipeContainer {
     margin: 10px 10px;
     padding: 10px 10px;
     border-radius: 20px;
     background-color: #c9a561;
-    
 }
-    .recipeContainer .recipeImage {
-        height: 200px;
-        width: 200px;
-        border-radius: 20px;
-    }
+
+.recipeContainer .recipeImage {
+    height: 200px;
+    width: 200px;
+    border-radius: 20px;
+}
 
 /*Rating img - to be implemented*/
-.rating{
+.rating {
     height: 20px;
 }
 
@@ -31,6 +27,7 @@
     height: 30px;
     width: 80%;
 }
+
 .addBtn {
     margin: 3px 3px;
     height: 35px;
@@ -40,6 +37,7 @@
     background-color: #126782;
     color: #F6F5F5;
 }
+
 .removeBtn {
     margin: 3px 3px;
     height: 35px;
@@ -60,20 +58,21 @@
     color: #F6F5F5;
 }
 
-select .input-sm{
+select .input-sm {
     margin: 3px 3px;
     min-width: 80px;
     height: 40px;
     width: 80%;
-    padding: 10px;    
+    padding: 10px;
     border: 1px solid #4592AF;
     border-radius: 20px;
     background-color: #126782;
     color: #F6F5F5;
 }
+
 #miscOptions input {
-    width:25px; 
-    height: 25px;   
+    width: 25px;
+    height: 25px;
 }
 
 .input-number {
@@ -86,12 +85,12 @@ select .input-sm{
     color: #F6F5F5;
 }
 
-.input-sm{    
+.input-sm {
     margin: 3px 3px;
     min-width: 80px;
     height: 40px;
     width: 80%;
-    padding: 10px;    
+    padding: 10px;
     border: 1px solid #4592AF;
     border-radius: 20px;
     background-color: #126782;

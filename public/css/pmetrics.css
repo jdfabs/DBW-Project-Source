@@ -1,5 +1,3 @@
-
-
 #met{
     border-radius: 50px;
     border: 5px solid #023047;
@@ -43,14 +41,4 @@ h2{
 
     transition: width 1s, height 1s;
 }
-
-
-/*.graph:hover{
-    width:200px;
-    height:200px;
-
-    transition: width 2s, height 4s;
-}
-*/
-
 
