@@ -112,3 +112,4 @@ io.on("connection", (socket) => {
   });
 });
 
+app.use(router);
