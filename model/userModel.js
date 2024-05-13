@@ -1,4 +1,3 @@
-"use strict";
 const mongoose = require("mongoose");
 const passportLocalMongoose = require("passport-local-mongoose");
 
@@ -12,7 +11,7 @@ const userSchema = new mongoose.Schema(
         lowercase: true,
         validate: {
           validator: (email) => {
-            return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email); //email regex validation
+            return /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email);
           },
           message: "Invalid email format",
         },
@@ -27,8 +26,7 @@ const userSchema = new mongoose.Schema(
         default: Date.now,
       },
       role: {
-        //--unused
-        type: Number,
+        type: Number, // use an enum or string for specific roles
         default: 0, // 0- User , 1 - Mod , 2 - Admin , 3 - debug
         required: true,
       },
@@ -37,7 +35,6 @@ const userSchema = new mongoose.Schema(
         default: false,
       },
       isBanned: {
-        //--unused
         type: Boolean,
         required: true,
         default: false,
@@ -47,7 +44,6 @@ const userSchema = new mongoose.Schema(
       }, // path para imagem
     },
     personalInfo: {
-      //--unused
       firstName: {
         type: String,
       }, // optional
@@ -76,4 +72,5 @@ const userSchema = new mongoose.Schema(
 );
 userSchema.plugin(passportLocalMongoose);
 
-module.exports = mongoose.model("user", userSchema);
+  module.exports = mongoose.model('user', userSchema);
+  

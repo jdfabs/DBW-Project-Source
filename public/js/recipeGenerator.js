@@ -1,5 +1,6 @@
 const methodList = document.getElementById("methodList");
 const ingredientList = document.getElementById("ingredientList");
+
 const addMethodButton = document.getElementById("moreMethod");
 const addIngredientButton = document.getElementById("moreIng");
 
@@ -8,7 +9,6 @@ const form = document.getElementById("recipeForm");
 let generatedRecipe;
 
 Array.from(document.getElementsByClassName("removeBtn")).forEach((button) => {
-  //set up field removal
   button.addEventListener("click", (event) => {
     event.preventDefault();
     button.parentElement.remove();
@@ -16,7 +16,6 @@ Array.from(document.getElementsByClassName("removeBtn")).forEach((button) => {
 });
 
 addMethodButton.addEventListener("click", (event) => {
-  //add new field
   event.preventDefault();
   const newMethod = document.createElement("div");
   newMethod.classList.add("row");
@@ -41,7 +40,6 @@ addMethodButton.addEventListener("click", (event) => {
 });
 
 addIngredientButton.addEventListener("click", (event) => {
-  //add new field
   event.preventDefault();
   const newIngredient = document.createElement("div");
   newIngredient.classList.add("row");
@@ -56,7 +54,6 @@ addIngredientButton.addEventListener("click", (event) => {
 });
 
 const addEventListenerToButtons = function (button) {
-  //aux
   button.addEventListener("click", (event) => {
     event.preventDefault();
     button.parentElement.remove();
@@ -77,7 +74,6 @@ form.addEventListener("submit", (event) => {
 
   let ingredients = [];
   let cookingMethods = [];
-  //data validation
   for (const key of formData.keys()) {
     if (key.startsWith("Ingredient")) {
       ingredients.push(formData.get(key));
@@ -119,7 +115,6 @@ form.addEventListener("submit", (event) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      //print new recipe to window
       generatedRecipe = data;
 
       if (document.getElementById("recipeContainer")) {
@@ -183,27 +178,28 @@ form.addEventListener("submit", (event) => {
       const generateButton = document.getElementById("generate-btn");
       generateButton.classList.add("d-none");
 
-      let filterButton = document.createElement("input");
-      filterButton.classList.add("btn-md");
+      let filterButton = document.createElement("input");  
+      filterButton.classList.add("btn-md"); 
       filterButton.classList.add("mx-auto");
       filterButton.classList.add("mt-3");
       filterButton.classList.add("sumbit_btn");
       filterButton.type = "submit";
-      filterButton.value = "Filters";
+      filterButton.value = "Filters";      
       filterButton.addEventListener("click", (event) => {
         event.preventDefault();
         filters[0].classList.remove("d-none");
         filters[1].classList.remove("d-none");
         generateButton.classList.remove("d-none");
         filterButton.remove();
-      });
+      });          
 
       document.getElementById("recipeForm").append(filterButton);
+
+
 
       document
         .getElementById("saveBtn")
         .addEventListener("click", async (event) => {
-          //to the new button in the window add the listener for saving
           event.preventDefault();
           await fetch("/recipeGenerator/save", {
             method: "POST",
@@ -216,7 +212,7 @@ form.addEventListener("submit", (event) => {
             .then((data) => {
               const savedRecipeId = data.id;
               document.location.href =
-                "http://localhost:3000/recipe/" + savedRecipeId; //redirect to recipe page after saving
+                "http://localhost:3000/recipe/" + savedRecipeId;
             });
         });
     });

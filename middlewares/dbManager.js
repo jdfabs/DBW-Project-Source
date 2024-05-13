@@ -1,10 +1,9 @@
-
-"use strict";
 const recipeModel = require("../model/recipeModel").RecipeModel;
+const dataValidation = require("../middlewares/dbValidation");
 
-const saveRecipe = async function (data) { //save recipe to DB
-  console.log("DB manager Middleware - saveRecipe");
-  const recipe = new recipeModel(data);  //new recipe
+const saveRecipe = async function (data) {
+  console.log("Saving recipe");
+  const recipe = new recipeModel(data);  
   try {
     const savedRecipe = await recipe.save();
     console.log("Recipe saved successfully");
@@ -15,10 +14,8 @@ const saveRecipe = async function (data) { //save recipe to DB
   }
 };
 
-const updateRecipe = async function(data) { //update recipe to DB
-  console.log("DB manager Middleware - updateRecipe");
+const updateRecipe = async function(data) {
   try {
-    //find recipe with id
     const updatedRecipe = await recipeModel.findByIdAndUpdate(data._id, data, { new: true });
     if (updatedRecipe) {
       console.log("Recipe updated successfully");
@@ -35,14 +32,12 @@ const updateRecipe = async function(data) { //update recipe to DB
 
 
 const getRecipeById = async function(id){
-  console.log("DB manager Middleware - getRecipeById");
     const recipe = await recipeModel.findById(id).limit(1);
     return recipe
 }
 
 const getRandomRecipe = async function(){
-  console.log("DB manager Middleware - getRandomRecipe");
-    const recipe = await recipeModel.aggregate([{ $sample: { size: 1 } }]); //random recipe
+    const recipe = await recipeModel.aggregate([{ $sample: { size: 1 } }]);
     
     return recipe
 };

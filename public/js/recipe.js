@@ -15,16 +15,16 @@ let numOfPages = pages.length;
 let maxLocation = numOfPages + 1;
 
 function openBook() {
-  recipe.style.transform = "translateX(50%)"; //move book to center
+  recipe.style.transform = "translateX(50%)";
   prevBtn.style.transform = "translateX(-175px)";
   nextBtn.style.transform = "translateX(175px)";
 }
 
 function closeBook(isAtBeggining) {
   if (isAtBeggining) {
-    recipe.style.transform = "translateX(0%)"; //move book to center
+    recipe.style.transform = "translateX(0%)";
   } else {
-    recipe.style.transform = "translateX(100%)"; 
+    recipe.style.transform = "translateX(100%)";
   }
 
   prevBtn.style.transform = "translateX(0px)";
@@ -73,6 +73,7 @@ document.getElementById("commentForm").addEventListener("submit", (event) => {
     },
   })
     .then((res) => {
+      console.log("Comment response");
       if (res.status == 200) {
         res.json().then((data) => {
           console.log(data);
@@ -87,6 +88,7 @@ document.getElementById("commentForm").addEventListener("submit", (event) => {
           document.getElementById("comment").value = "";
         });
       } else {
+        // Handle other status codes if needed
         console.log("Failed to add comment");
       }
     })
@@ -97,6 +99,7 @@ document.getElementById("commentForm").addEventListener("submit", (event) => {
 
 document.getElementById("likeBtn").addEventListener("click", (event) => {
   event.preventDefault();
+  console.log("000")
   fetch(window.location.pathname + "/like", {
     method: "POST",
     body: JSON.stringify({}),
@@ -116,6 +119,7 @@ document.getElementById("likeBtn").addEventListener("click", (event) => {
         icon.classList.add("bi-hand-thumbs-up");
       }
     } else {
+      // Handle other status codes if needed
       console.log("Failed to add comment");
     }
   })

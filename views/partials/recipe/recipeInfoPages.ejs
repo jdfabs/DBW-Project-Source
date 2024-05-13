@@ -1,4 +1,5 @@
 <%
+
 currentPaper = currentPaperWrap.paper;
 isFrontPage = isFrontPageWrap.frontPage;
 
@@ -31,25 +32,23 @@ const MAX_LINES = 19;
   <div class="<%=pageSide%> bg-white">
     <div id="<%=pageSide[0]%><%=currentPaper%>" class="<%=pageSide%>-content d-inline-block p-4 ">
 
-      <% 
-     } else  pageSide = "back"; 
-     %>
+      <%  } else  pageSide = "back"; %>
+
+
     </div>
   </div>
   <div class="<%=pageSide%> bg-white">
     <div id="<%=pageSide[0]%><%=currentPaper%>" class="<%=pageSide%>-content d-inline-block p-4">
 
 
-      <%
-    } else { /*continue in this page*/
-      %>
+      <%}
+            else { /*continue in this page*/%>
       <div class="d-flex justify-content-between ingredient mx-3">
         <li><%=ingredient.charAt(0).toUpperCase() + ingredient.slice(1);%></li>
       </div>
 
-      <%
-       lineCounter++;
-      }
+      <% lineCounter++;
+        }
     });%>
 
       <p></p>
@@ -78,15 +77,14 @@ if(isFrontPage){
     <div id="<%=pageSide[0]%><%=currentPaper%>" class="<%=pageSide%>-content d-inline-block p-4 ">
 
 
-      <%  
-    } else {  
-      pageSide = "back"; 
-      %>
+      <%  } else {  pageSide = "back"; %>
       <div class="<%=pageSide%> bg-white">
         <div id="<%=pageSide[0]%><%=currentPaper%>" class="<%=pageSide%>-content d-inline-block p-4">
-          <%
-        } 
-        %>
+
+
+          <%} %>
+
+
           <h6>Per Dose:</h6>
           <div class=" d-flex justify-content-between">
             <div>Calories</div>
@@ -142,7 +140,7 @@ if(isFrontPage){
           <h5>Substitutions</h5>
           <% let counter =0 ;%>
           <%recipe.substitutions.forEach(ingredient => { %>
-          <% if(counter <= 7) {%>
+            <% if(counter <= 7) {%>
           <li class="mx-4"><%=ingredient.name.charAt(0).toUpperCase() + ingredient.name.slice(1);%></li>
           <% }
           counter ++;
@@ -167,9 +165,9 @@ if(isFrontPage){
           <%  } else {  pageSide = "back"; %>
           <div class="<%=pageSide%> bg-white">
             <div id="<%=pageSide[0]%><%=currentPaper%>" class="<%=pageSide%>-content d-inline-block p-4">
-              <%
-            }// notes,allergenInformation, equipmentNeeded - nova pagina (talvez papel) 
-            %>
+
+
+              <%}// notes,allergenInformation, equipmentNeeded - nova pagina (talvez papel) %>
 
               <div>
                 <h5>Notes:</h5> <%=recipe.notes%>
@@ -188,6 +186,9 @@ if(isFrontPage){
                 <li class="mx-4"><%=ingredient.name.charAt(0).toUpperCase() + ingredient.name.slice(1);%></li>
                 <%})%>
               </div>
+
+
+
             </div>
           </div>
           <%
@@ -197,13 +198,17 @@ if(isFrontPage){
         pageSide= "front";
         currentPaper++;
 
-        %>
-        </div><%
+        %> </div><%
           }
           else{
             pageSide= "back";
             
           }
+
+
+
+
+
            currentPaperWrap.paper= currentPaper ;
            isFrontPageWrap.frontPage = isFrontPage ;
 //instructions - nova pagina (talvez papel)

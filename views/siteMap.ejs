@@ -2,29 +2,37 @@
 <html lang="pt-PT">
 
 <head>
-  <%- include("./partials/head.ejs")  %>
+<%- include("./partials/head.ejs")  %>
 </head>
 
-<body class="bg-img bg-cover">
+<body class="bg-img bg-cover"  >
+    
+    <%- include("./partials/nav.ejs")  %>
+    <%- include("./partials/footer.ejs")  %>
 
-  <%- include("./partials/nav.ejs")  %>
-  <%- include("./partials/footer.ejs")  %>
+
+    <!-- Main Body-->
+
+    <div id="stmap" class="mainContent bg-img bg-cover mx-auto row justify-content-center text-center d-flex " style="background-image: url('/images/ui_background.png');">
+
+        <link rel="stylesheet" href="/css/sitemap.css " >
+
+        <h1 class="h1sm" >Site Map</h1>
+
+        
+            <img id="siteMapImg" src="../images/sitemap.png" alt="bean" >
 
 
-  <!-- Main Body-->
+        
 
-  <div id="stmap" class="mainContent bg-img bg-cover mx-auto row justify-content-center text-center d-flex " style="background-image: url('/images/ui_background.png');">
 
-    <link rel="stylesheet" href="/css/sitemap.css ">
-    <h1 class="h1sm">Site Map</h1>
+    </div>
 
-    <img id="siteMapImg" src="../images/sitemap.png" alt="bean">
 
-  </div>
-  <!-- Scripts -->
+    <!-- Scripts -->
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 </body>
 
 </html>

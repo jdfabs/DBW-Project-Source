@@ -1,0 +1,57 @@
+﻿
+/*Page main content*/
+.mainContent {
+    margin-left: 200px;
+    margin-right: 200px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    height: auto;
+    padding: 40px 40px;
+    min-width: 480px;
+}
+.filterOptions {
+    margin-top: 10px;
+    min-width: 330px;
+}
+
+.recepieContainer {
+    margin: 10px 10px;
+    padding: 10px 10px;
+    width: auto;
+    height: auto;
+    
+}
+    .recepieContainer .recepieImage {
+        height: 200px;
+        width: 200px;
+    }
+
+/*Rating img - to be implemented*/
+.rating{
+    height: 20px;
+    width: auto;
+}
+/*filter Img*/
+#filter{
+    width: 30px;
+    height: 30px;
+}
+
+.input-sm {
+    margin: 3px 3px;
+    min-width: 170px;
+    height: 30px;
+    width: 80%;
+}
+
+.addBtn {
+    margin: 3px 3px;
+    height: 30px;
+    width: 30px;
+}
+.removeBtn {
+    margin: 3px 3px;
+    height: 30px;
+    width: 30px;
+}
+

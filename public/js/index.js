@@ -1,4 +1,3 @@
-"use strict";
 const registerWindowButton = document.getElementById("signup-button");
 
 const loginWindow = document.getElementById("login-window");
@@ -10,7 +9,6 @@ const registerForm = document.getElementById("register-form");
 const loginWithGoogle = document.getElementById("login-with-google");
 
 loginForm.addEventListener("submit", (event) => {
-  //login submit
   event.preventDefault();
   const formData = new FormData(loginForm);
   const formDataObject = {};
@@ -21,18 +19,15 @@ loginForm.addEventListener("submit", (event) => {
   const jsonString = JSON.stringify(formDataObject);
 
   fetch("/login", {
-    //request login
     method: "POST",
     body: jsonString,
     headers: {
       "Content-Type": "application/json",
     },
   }).then((res) => {
-    //if success redired
     if (res.redirected) {
-      window.location.href = res.url;
+      window.location.href = res.url; // Redirect
     } else {
-      //show message of error
       res.json().then((data) => {
         if (res.status === 401) {
           // Authentication failed
@@ -45,7 +40,6 @@ loginForm.addEventListener("submit", (event) => {
 });
 
 registerForm.addEventListener("submit", (event) => {
-  //register request
   event.preventDefault();
   const formData = new FormData(registerForm);
   const formDataObject = {};
@@ -55,31 +49,26 @@ registerForm.addEventListener("submit", (event) => {
 
   //Pre Check
   let isValid = true;
+  let preCheckAlert = "";
 
-  //using regular expecions to sanitize input on client side
   const usernameRegex = /^[a-zA-Z0-9_-]{5,16}$/;
-  const passwordRegex =
-    /(?=^.{6,}$)(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).*/;
+  const passwordRegex = /(?=^.{6,}$)(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[^A-Za-z0-9]).*/;
   const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
 
-  if (!usernameRegex.test(formDataObject.username)) {
-    alert(
-      "Username must be between 5 and 16 characters long and can only contain letters, numbers, underscores, or hyphens."
-    );
+  if(!usernameRegex.test(formDataObject.username)){
+    alert("Username must be between 5 and 16 characters long and can only contain letters, numbers, underscores, or hyphens.");
     isValid = false;
   }
-  if (!passwordRegex.test(formDataObject.password)) {
-    alert(
-      "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character."
-    );
+  if(!passwordRegex.test(formDataObject.password)){
+    alert("Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.");
     isValid = false;
     alert(formDataObject.password);
   }
-  if (!emailRegex.test(formDataObject.email)) {
+  if(!emailRegex.test(formDataObject.email)){
     alert("Please enter a valid email address.");
     isValid = false;
   }
-  if (formDataObject.password != formDataObject.passwordCheck) {
+  if(formDataObject.password != formDataObject.passwordCheck) {
     alert("Passwords don't match.");
     isValid = false;
   }
@@ -89,7 +78,6 @@ registerForm.addEventListener("submit", (event) => {
   const jsonString = JSON.stringify(formDataObject);
 
   fetch("/register", {
-    //is valid, lets register
     method: "POST",
     body: jsonString,
     headers: {
@@ -110,35 +98,41 @@ registerForm.addEventListener("submit", (event) => {
 });
 
 registerWindowButton.addEventListener("click", (event) => {
-  //show register
   event.preventDefault();
   registerWindow.classList.remove("d-none");
   loginWindow.classList.add("d-none");
 });
 registerBackButton.addEventListener("click", (event) => {
-  //show login
   event.preventDefault();
   registerWindow.classList.add("d-none");
   loginWindow.classList.remove("d-none");
 });
 loginWithGoogle.addEventListener("click", (event) => {
-  //login with google - not implemented
   event.preventDefault();
   document.location.href = "/mainPage";
 });
 
-document.getElementById("forgotPassword").addEventListener("click", (event) => {
-  //forgot password request - shit implementation
+/*
+loginForm.addEventListener("click", (event) => {
   event.preventDefault();
-  jsonString = JSON.stringify({
-    username: document.getElementById("username").value,
-  });
+  document.location.href = "/mainPage";
+});*/
+/*
+registerButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  document.location.href = "/mainPage";
+});*/
 
-  fetch("/forgotPassword", {
+
+document.getElementById("forgotPassword").addEventListener("click", (event) => {
+  event.preventDefault();  
+  jsonString = JSON.stringify({username : document.getElementById("username").value});
+  
+fetch("/forgotPassword", {
     method: "POST",
     body: jsonString,
     headers: {
       "Content-Type": "application/json",
     },
-  });
+  })
 });

@@ -12,7 +12,9 @@ const supportChatController = require("../../controllers/authenticated/supportCh
 
 //Routes for authenticated users
 
-const checkAuth = function (req, res, next) { //Auth checking -- should be in the middlewares
+//metrics
+
+const checkAuth = function (req, res, next) {
   if (!req.isAuthenticated()) {
     // If not authenticated, redirect to the login page
     console.log("Unauthorized access detected!");
@@ -26,16 +28,10 @@ const checkAuth = function (req, res, next) { //Auth checking -- should be in th
 router.get("/metrics", checkAuth, metricController.metricsGet);
 
 //personalGalery
-router.get(
-  "/personalGalery",
-  checkAuth,
-  personalGaleryController.personalGaleryGet
-);
-router.post(
-  "/personalGalery/:index",
-  checkAuth,
-  personalGaleryController.personalGaleryIDGet
-);
+router.get( "/personalGalery",
+checkAuth,
+  personalGaleryController.personalGaleryGet);
+router.post("/personalGalery/:index", checkAuth, personalGaleryController.personalGaleryIDGet);
 
 //settings
 router.get("/settings", checkAuth, settingsController.settingsGet);
@@ -47,22 +43,18 @@ router.post("/mainPage/:index", checkAuth, mainPageController.mainPageIDGet);
 //recipe
 router.get("/recipe", checkAuth, recipeController.recipeGet);
 router.get("/recipe/:id", checkAuth, recipeController.recipeIdGet);
-router.post(
-  "/recipe/:id/comment",
-  checkAuth,
-  recipeController.recipeCommentPost
-);
+router.post("/recipe/:id/comment", checkAuth, recipeController.recipeCommentPost);
 router.post("/recipe/:id/like", checkAuth, recipeController.recipeIdLike);
 
 //para editar a receita
-router.get(
-  "/recipe/:id/editar-receita",
-  checkAuth,
-  personalGaleryController.editarReceita
-);
+
+router.get("/recipe/:id/editar-receita", checkAuth, personalGaleryController.editarReceita);
+//router.patch("/recipe/update/:id ", personalGaleryController.atlreceita);
 router.patch("/recipe/update/:id", async (req, res) => {
-  await personalGaleryController.atlreceita(req, res);
+  console.log('PATCH');
+  await personalGaleryController.atlreceita(req, res)
 });
+
 
 //recipeGenerator
 router.get(
@@ -83,14 +75,19 @@ router.post(
 
 //supportChat
 router.get("/supportChat", checkAuth, supportChatController.supportChatGet);
-router.post("/supportChat", function (req, res) {
-  let userName = req.user.username;
-  res.send(userName);
+
+
+
+router.post("/supportChat",function(req,res){
+    console.log("Updating username");
+    let userName = req.user.username;
+    console.log("variable defined")
+    console.log("username "+userName);
+    console.log(req.user)
+    console.log("Username updated");
+    res.send(userName)
 });
-router.post(
-  "/supportChat/:room",
-  checkAuth,
-  supportChatController.supportChatPost
-);
+
+router.post("/supportChat/:room",  checkAuth, supportChatController.supportChatPost)
 
 module.exports = router;

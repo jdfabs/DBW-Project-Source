@@ -1,5 +1,3 @@
-//For comments check mainPage.js - function is basically the same but with diferent html
-"use strict";
 let nextRecipe = 3;
 let fetchingData = false;
 
@@ -34,19 +32,23 @@ document.addEventListener("scroll", async () => {
         newRecipe.classList.add("col-xl-4");
         newRecipe.classList.add("col-lg-6");
 
-        let ingredientHTML = "";
+        let ingredientHTML ="" ;
 
-        recipe.ingredients.forEach((ingridient) => {
+        recipe.ingredients.forEach(ingridient => {
           ingredientHTML += ingridient + ", ";
+
         });
         ingredientHTML = ingredientHTML.substring(0, ingredientHTML.length - 2);
 
-        let tagsHTML = "";
 
-        recipe.tags.forEach((tag) => {
+        let tagsHTML="";
+
+        recipe.tags.forEach(tag => {
           tagsHTML += tag + ", ";
+
         });
         tagsHTML = tagsHTML.substring(0, tagsHTML.length - 2);
+
 
         newRecipe.innerHTML = `<section class="recipeContainer">
             <img class="recipeImage d-none d-lg-block" src="/images/PlaceholderImage.png" alt="Alternate Text" />
@@ -83,14 +85,17 @@ document.addEventListener("scroll", async () => {
                 
               </div>
             </div>
-          </section>`;
+          </section>`
 
-        recipeContainer.append(newRecipe);
-        nextRecipe++;
+          recipeContainer.append(newRecipe);
+          nextRecipe++;
+
       });
       fetchingData = false;
     } catch (error) {
       console.log(error);
+      //console.error('Error fetching data:', error);
+      // Handle error as needed, e.g., show an error message to the user
     }
   }
 });

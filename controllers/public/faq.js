@@ -1,8 +1,8 @@
 "use strict";
 
 
-const faqGet = function (req, res) { // render and send
-  console.log("FAQ Controller - faqGet");
+const faqGet = function (req, res) {
+    
     res.render("faq", { title: "FAQ" ,  isAuthenticated: req.body.isAuthenticated });
   };
 

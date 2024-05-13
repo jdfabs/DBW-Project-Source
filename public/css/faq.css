@@ -2,7 +2,10 @@
     background-color: #c9a561;
     padding: 20px;
     margin-bottom: 20px; /* Espaçamento entre as caixas */
-    border-radius: 10px;   
+    border-radius: 10px;
+    /*border-radius: 50px;
+    border: 5px solid #023047;*/
+    
 }
 
 #fqa{
@@ -13,6 +16,8 @@
 .h1 {
     text-align: left;
 }
+
+
 
 .faq-item {
     margin-bottom: 20px;

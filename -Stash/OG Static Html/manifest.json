@@ -1,0 +1,8 @@
+{
+  "name": "Recepie Generator",
+  "short_name": "DBW RG",
+  "start_url": "/index.html?homescreen=1",
+  "display": "standalone",
+  "background_color": "#ff0000",
+  "theme_color": "#ff0000"
+}

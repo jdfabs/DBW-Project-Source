@@ -1,4 +1,3 @@
-"use strict";
 const filterWindow = document.getElementById("filterWindow");
 const methodList = document.getElementById("methodList");
 const ingredientList = document.getElementById("ingredientList");
@@ -6,9 +5,8 @@ const ingredientList = document.getElementById("ingredientList");
 const addMethodButton = document.getElementById("moreMethod");
 const addIngredientButton = document.getElementById("moreIng");
 
-let nextRecipe = 3; //start at index 3
+let nextRecipe = 3;
 let filters = {
-  //empty filter object
   searchBar: "",
   ingredients: [],
   methods: [],
@@ -31,13 +29,14 @@ document.getElementById("filterButton").addEventListener("click", (event) => {
   else filterWindow.classList.add("d-none");
 });
 
+
+
 const searchFuntion = async function (event) {
-  //get recipes with X filters
   event.preventDefault();
-  fetchingData = true; //already fetching data - so there aren't multiple reequst at the same time
+  console.log("search-filter");
+  fetchingData = true;
 
   filters = {
-    //fill in filters
     searchBar: document.getElementById("searchBox").value,
     ingredients: Array.from(document.getElementsByName("Ingredient")).map(
       (ingredient) => ingredient.value
@@ -46,16 +45,15 @@ const searchFuntion = async function (event) {
       (method) => method.value
     ),
   };
+  console.log(filters);
 
   const recipes = document.getElementsByClassName("recipeContainer");
 
   for (let i = recipes.length - 1; i >= 0; i--) {
-    //remove all recipes rendered on screen
     recipes[i].remove();
   }
-  nextRecipe = 0; //reset index
+  nextRecipe = 0;
   await fetch("/mainPage/" + nextRecipe, {
-    //get next recipe
     method: "POST",
     body: JSON.stringify(filters),
     headers: {
@@ -66,7 +64,7 @@ const searchFuntion = async function (event) {
     .then((data) => {
       generatedRecipe = data;
 
-      let newRecipe = document.createElement("section"); //render new recipe return into window
+      let newRecipe = document.createElement("section");
       newRecipe.classList.add("recipeContainer");
       newRecipe.classList.add("d-flex");
       newRecipe.id = "recipeContainer";
@@ -107,22 +105,22 @@ const searchFuntion = async function (event) {
                           </div>
                         </div>`;
 
-      document.getElementById("recipes").append(newRecipe); //add it to window
+      document.getElementById("recipes").append(newRecipe);
       nextRecipe++;
-      fetchingData = false; //not fetching anything now
+      fetchingData = false;
     });
 };
 
 document
-  .getElementById("search-filter") //on filter button
+  .getElementById("search-filter")
   .addEventListener("click", searchFuntion);
 
-document
-  .getElementById("searchBox") //on search bar change
+  document
+  .getElementById("searchBox")
   .addEventListener("change", searchFuntion);
 
+
 addIngredientButton.addEventListener("click", (event) => {
-  //add new ingredient field
   event.preventDefault();
   const newIngredient = document.createElement("div");
   newIngredient.classList.add("row");
@@ -134,21 +132,22 @@ addIngredientButton.addEventListener("click", (event) => {
 });
 
 const addEventListener = function addEventListenerToButtons(button) {
-  //add new event listener to the buttons
   button.addEventListener("click", (event) => {
     event.preventDefault();
     button.parentElement.remove();
   });
 };
 
+/*i*/
+let fetchingData = false;
+
 document.addEventListener("scroll", async () => {
   if (
-    //if bottom of screen is near
     window.scrollY + window.innerHeight >= document.body.scrollHeight &&
     !fetchingData
   ) {
     console.log("fetching data");
-    fetchingData = true; //Similar to function above ^^^
+    fetchingData = true;
     try {
       const response = await fetch("/mainPage/" + nextRecipe, {
         method: "POST",
@@ -211,7 +210,8 @@ document.addEventListener("scroll", async () => {
       nextRecipe++;
       fetchingData = false;
     } catch (error) {
-      console.error("Error fetching data:", error);
+      //console.error('Error fetching data:', error);
+      // Handle error as needed, e.g., show an error message to the user
     }
   }
 });

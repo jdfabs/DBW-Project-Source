@@ -10,7 +10,6 @@ const c404Controller = require("../../controllers/public/404");
 const indexController = require("../../controllers/public/index");
 
 const checkAuth = function (req, res, next) {
-  //Should be in the middlewares
   if (req.isAuthenticated()) req.body.isAuthenticated = true;
   else req.body.isAuthenticated = false;
   next();
@@ -18,7 +17,7 @@ const checkAuth = function (req, res, next) {
 
 //Public Routes
 router.get("/contactUs", checkAuth, contactUsController.contactUsGet);
-router.post("/contactUs", checkAuth, contactUsController.contactUsPost);
+router.post("/contactUs", checkAuth, contactUsController.contactUsPost)
 
 router.get("/about", checkAuth, aboutController.aboutGet);
 router.get("/about-us", checkAuth, aboutController.aboutGet); //Redirect/MultipleRoutes example
@@ -31,7 +30,7 @@ router.get("/", checkAuth, indexController.indexGet);
 router.post("/login", checkAuth, indexController.loginPost);
 router.post("/register", checkAuth, indexController.registerPost);
 router.get("/logout", checkAuth, indexController.logout);
-router.post("/forgotPassword", checkAuth, indexController.forgotPassword);
+router.post("/forgotPassword", checkAuth, indexController.forgotPassword)
 
 router.use(c404Controller.indexGet);
 

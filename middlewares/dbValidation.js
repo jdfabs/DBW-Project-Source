@@ -3,8 +3,9 @@ const recipeModel = require("../model/recipeModel");
 const userModel = require("../model/userModel");
 const debug = require("../debugTools");
 
+
 const isRecipeValid = async function (base) {
-  console.log("DB validation Middleware - isRecipeValid");
+  debug.log(1, "validateRecipe:");
   try {
     await recipeModel.validate(base);
     return true;
@@ -14,11 +15,12 @@ const isRecipeValid = async function (base) {
 };
 
 const isUserValid = async function (user) {
-  console.log("DB validation Middleware - isUserValid");
+  debug.log(1, "isUserValid:");
   try {
     await userModel.validate(user);
     return true;
   } catch (error) {
+    const missingParams = Object.keys(error["errors"]);
     return false;
   }
 };

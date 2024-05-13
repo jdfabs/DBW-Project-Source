@@ -2,84 +2,84 @@
 <html lang="pt-PT">
 
 <head>
-  <%- include("./partials/head.ejs")  %>
+    <%- include("./partials/head.ejs")  %>
 
-  <link rel="stylesheet" href="/css/pmetrics.css">
+    <link rel="stylesheet" href="/css/pmetrics.css">
 
 
 
 </head>
 
-<body class="bg-img bg-cover">
+<body class="bg-img bg-cover"  >
+
+   
+    <%- include("./partials/nav.ejs")  %>
+    <%- include("./partials/footer.ejs")  %>
 
 
-  <%- include("./partials/nav.ejs")  %>
-  <%- include("./partials/footer.ejs")  %>
+    <!-- Main Body-->
+    <div class="mainContent d-flex justify-content-center">
+         <div id="met" class="row" id="showcase" style="background-image: url('/images/ui_background.png');">
+            <div id="title">
+                <h1>Estatisticas</h1>
+            </div>
 
-
-  <!-- Main Body-->
-  <div class="mainContent d-flex justify-content-center">
-    <div id="met" class="row" id="showcase" style="background-image: url('/images/ui_background.png');">
-      <div id="title">
-        <h1>Estatisticas</h1>
-      </div>
-
-      <div class="col-md-4 col-sm-1">
-        <article>
-          <h2>Grafico Receitas Criadas</h2>
-          <div class="graph-container" id="c1" onclick="expand('c1')">
-            <canvas class="graph" style="width:100%;max-width:600px"></canvas>
-          </div>
-        </article>
-      </div>
-
-      <div class="col-md-4 col-sm-1">
-        <article>
-          <h2>Grafico Receitas Publicadas</h2>
-          <div class="graph-container" id="c2" onclick="expand('c2')">
-            <canvas class="graph" style="width:100%;max-width:600px"></canvas>
-          </div>
-        </article>
-      </div>
-
-      <div class="col-md-4 col-sm-1">
-        <article>
-          <h2>Grafico de Likes</h2>
-          <div class="graph-container" id="c3" onclick="expand('c3')">
-            <canvas class="graph" style="width:100%;max-width:600px"></canvas>
-          </div>
-        </article>
-      </div>
-
-      <div class="col-md-4 col-sm-1">
-        <article>
-          <h2>Comentarios Feitos</h2>
-          <div class="graph-container" id="c4" onclick="expand('c4')">
-            <canvas class="graph" style="width:100%;max-width:600px"></canvas>
-          </div>
-        </article>
-      </div>
-
-      <div class="col-md-4 col-sm-1">
-        <article>
-          <h2>Grafico Comentarios</h2>
-          <div class="graph-container" id="c5" onclick="expand('c5')">
-            <canvas class="graph" style="width:100%;max-width:600px"></canvas>
-          </div>
-        </article>
-      </div>
+            <div class = "col-md-4 col-sm-1">
+                <article>
+                     <h2>Grafico Receitas Criadas</h2>
+                     <div class="graph-container" id="c1" onclick="expand('c1')">
+                        <canvas class="graph" style="width:100%;max-width:600px"></canvas>
+                     </div>
+                </article>
+            </div>
+    
+            <div class = "col-md-4 col-sm-1">
+                <article>
+                    <h2>Grafico Receitas Publicadas</h2>
+                    <div class="graph-container" id="c2" onclick="expand('c2')">
+                        <canvas class="graph" style="width:100%;max-width:600px"></canvas>
+                    </div>
+                </article>
+            </div>
+    
+            <div class = "col-md-4 col-sm-1">
+                <article>
+                    <h2>Grafico de Likes</h2>
+                    <div class="graph-container" id="c3" onclick="expand('c3')">
+                        <canvas class="graph" style="width:100%;max-width:600px"></canvas>
+                    </div>
+                </article>
+            </div>
+    
+            <div class = "col-md-4 col-sm-1">
+                <article>
+                    <h2>Comentarios Feitos</h2>
+                    <div class="graph-container" id="c4" onclick="expand('c4')">
+                        <canvas class="graph" style="width:100%;max-width:600px"></canvas>
+                    </div>
+                </article>
+            </div>
+    
+            <div class = "col-md-4 col-sm-1">
+                <article>
+                    <h2>Grafico Comentarios</h2>
+                    <div class="graph-container" id="c5" onclick="expand('c5')">
+                        <canvas class="graph" style="width:100%;max-width:600px"></canvas>
+                    </div>
+                </article>
+            </div>    
+        </div>
     </div>
-  </div>
 
 
 
 
-  <!-- Scripts -->
+    <!-- Scripts -->
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="/js/metrics.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/metrics.js"></script>
 </body>
 
 </html>
